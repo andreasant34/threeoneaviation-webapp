@@ -1,0 +1,27 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block title %}Not Found{% endblock title %}
+
+{% block header_portrait_class%}
+{% endblock header_portrait_class%}
+
+{% block wallpaper_image%}
+		<div class="wallpaper aurel_js_bg_image" data-src="https://threeoneaviation.fra1.cdn.digitaloceanspaces.com/wallpaper.png">
+		</div>
+
+{% endblock wallpaper_image%}
+
+{% block content %}
+<div class="home_quote">
+<p class="aurel_js_font_size aurel_js_color" data-font-size="28px" data-line-height="48px" data-color="#fff" style="color: rgb(255, 255, 255); text-align: center;">Captain, your requested  destination does not exist!</p>
+</div>
+{% endblock content %}
+
+{% block footer%}
+	<footer class="aurel_footer aurel_border_off" style="position: absolute !important; bottom: 0px !important;">
+		<div class="aurel_footer_inner aurel_container">
+			<div class="aurel_copyright">© 2021 ThreeOne Aviation. All Rights Reserved. <br/> <span style="display: block; margin-top: 10px;">Email: info@threeoneaviation.com</span> </div>
+		</div>
+	</footer>
+{% endblock footer%}

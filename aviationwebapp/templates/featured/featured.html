@@ -1,0 +1,48 @@
+{% extends 'layout.html' %}
+
+{% block title %}Featured{% endblock title %}
+
+{% block content%}
+	<div class="col col-12 aurel_pl_30 aurel_pr_30">
+		<div class="aurel_single_gallery_wrapper aurel_no_select aurel_single_gallery_slider aurel_photoswipe_wrapper" data-uniqid="0" data-pswp-uid="0">
+			<div class="single_cover_width aurel_slider_wrapper aurel_slider_title_align_left aurel_slider_004" data-header="yes" data-footer="yes" data-autoplay="on" data-interval="8000" data-id="004">
+				<div class="aurel_slider fit_always" data-autoplay="on" data-interval="8000">
+					<span class="favourite_star"><i class="fa fa-star"></i></span>
+					<!-- Item 1 -->
+					{% for item in featured %}
+						<div class="aurel_slider_slide aurel_slide2preload aurel_slider_slide1" data-count="{{ forloop.counter}}">
+							<a class=" aurel_pswp_slide aurel_grid_blog_image aurel_dp aurel_no_select cover" href="{{item.max_image_url}}" data-size="{{item.data_size}}" data-count="{{ forloop.counter|add:-1}}">
+	                            <img class="cover" src="{{item.min_image_url}}" alt="">
+	                        </a>
+							<div class="aurel_slider_overlay_gradient"></div>
+						</div>
+					{%endfor%}
+				</div>
+
+				<a href="javascript:void(0)" class="aurel_slider_btn_prev"></a>
+				<a href="javascript:void(0)" class="aurel_slider_btn_next"></a>
+
+				<div class="aurel_gallery_preloader"></div>
+			</div>
+		</div>
+
+		<div class="aurel_albums_listing_cont aurel_albums_grid aurel_albums_grid3 view_type_grid albums_titles_show" style="margin-top: 30px; position: relative;">
+			
+	            {% for item in latest_registrations %}   
+		            <div class="aurel_albums_grid_item columns_3"> 
+						<div class="aurel_inner_cont">
+							<span class="latest_icon"><i class="fa fa-bell"></i></span>
+							<a href="collection/{{item.aircraft.airline.short_name}}/{{item.short_name}}" class="aurel_grid_blog_image aurel_dp aurel_no_select cover">
+								<img class="cover" src="{{item.cover_url}}" alt="">
+
+								<span class="aurel_albums_grid_content">
+		                            <span class="aurel_albums_title">{{item.name}} <span style="float:right;"> {{item.aircraft.name}} </span></span>
+								</span>
+								</a>
+						</div>
+		            </div>
+		         {%endfor%}
+    	</div>
+	</div>
+{% endblock content%}
+

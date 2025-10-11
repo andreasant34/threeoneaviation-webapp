@@ -1,0 +1,46 @@
+{% extends 'layout.html' %}
+
+{% block title %}Collection{% endblock title %}
+
+{% block content%}
+								<div class="col col-12 aurel_pl_30 aurel_pr_30">
+									<div class="aurel_widget_pm_grid_gallery">
+										<div class="aurel_widget_container">
+											<div class="aurel_front_end_display">
+												<div class="aurel_grid_wrapper aurel_photoswipe_wrapper aurel_grid_006" data-uniqid="006" data-perload="3">
+													<div class="aurel_albums_listing_cont aurel_albums_grid aurel_albums_grid3 view_type_grid aurel_isotope_trigger albums_titles_show">
+														<div class="aurel_albums_grid_item search_bar">
+																<div class="aurel_inner_cont">
+																	<!-- Search Widget -->
+							                                        <div class="widget widget_search">
+							                                            <form id="search_form" name="search_form" method="get" action="/collection" class="aurel_search_form">
+							                                                <button type="submit" class="aurel_icon_search"><i class="fa fa-search"></i></button> 
+							                                                <input type="text" name="search" placeholder="Search our library of {{registrations_count}} registrations..." class="aurel_field_search" form="search_form">
+							                                                <div class="clear"></div>
+							                                            </form>
+							                                        </div>
+																</div>
+														</div>
+
+                                                        {% for item in airlines %}
+															<div class="aurel_albums_grid_item columns_3">
+																<div class="aurel_inner_cont">
+																	<a href="collection/{{item.short_name}}" class="aurel_dp aurel_no_select cover">
+																		<img class="cover" src="{{item.cover_url}}" alt="">
+
+																		<span class="aurel_albums_grid_content">
+																			<span class="aurel_albums_title">{{item.name}}</span>
+																		</span>
+																		</a>
+																</div>
+															</div>
+                                                        {%endfor%}
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							
+{% endblock content%}
+

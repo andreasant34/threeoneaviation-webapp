@@ -1,0 +1,156 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en" class="aurel_header_gradient_page aurel_content_under_header aurel_non_transparent_header">
+<head>
+	<title>{% block title %}{% endblock title %} - ThreeOne Aviation</title>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Plane spotting in Malta">
+	<meta name="keywords" content="plane, spotting, malta, runway 31, aircraft, boeing, airbus">
+	<meta name="author" content="ThreeOne Aviation">
+
+	<link rel="shortcut icon" type="image/png" href="https://threeoneaviation.fra1.cdn.digitaloceanspaces.com/favicon.ico"/>
+
+	<!-- CSS Files -->
+	<link rel="stylesheet" href="{% static 'css/kube.css' %}">
+	<link rel="stylesheet" href="{% static 'css/roboto.css' %}">
+	<link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+	<link rel="stylesheet" href="{% static 'css/theme.css' %}">
+	<link rel="stylesheet" href="{% static 'css/photoswipe.css' %}">
+
+	<link rel="canonical" href="https://threeoneaviation.com/" />
+</head>
+
+
+<body class="aurel_drag_protection">
+	<div class="aurel_site_wrapper static_header_footer fadeOnLoad">
+
+		
+		<!-- Header -->
+		<header class="aurel_main_header aurel_logo_left aurel_border_off aurel_header_solid_style aurel_sticky_menu_on ">
+			<div class="aurel_main_header_wrapper 
+			{% block header_portrait_class%}
+				header_portrait_class
+			{% endblock header_portrait_class%}">
+				<div class="aurel_header_left_part aurel_header_logo_part">
+					<div class="aurel_logo_cont">
+						<a class="aurel_image_logo aurel_dp aurel_no_select aurel_retina" href="/"></a>
+					</div>
+				</div>
+
+				<div class="aurel_header_middle_part aurel_header_menu_part">
+					<nav class="aurel_nav">
+						<ul class="aurel_menu">
+							<li class="menu-item-has-children">
+								<a href="/">Home</a>
+							</li>
+
+							<li class="menu-item-has-children {% if highlight_featured_menu_item %}current-menu-ancestor{% endif %}">
+								<a href="/featured">Featured</a>
+							</li>
+
+							<li class="menu-item-has-children {% if highlight_collection_menu_item %}current-menu-ancestor{% endif %}">
+								<a href="/collection">Collection</a>
+							</li>
+						</ul>
+					</nav>
+				</div>
+
+				<div class="aurel_header_right_part aurel_header_socials_part">
+					<div class="aurel_header_socials">
+						<a class="aurel_footer_social_button aurel_facebook" href="https://www.facebook.com/"><i class="fa fa-facebook"></i></a>
+						<a class="aurel_footer_social_button aurel_instagram" href="https://www.instagram.com/?hl=ru"><i class="fa fa-instagram"></i></a>
+						<!--
+					 	<a class="aurel_footer_social_button aurel_twitter" href="https://twitter.com/"><i class="fa fa-twitter"></i></a>
+						<a class="aurel_footer_social_button aurel_pinterest" href="https://pinterest.com/"><i class="fa fa-pinterest"></i></a>
+						
+						<a class="aurel_toogle_fullview" href="javascript:void(0)">
+							<span class="aurel_fullview_block01"></span>
+							<span class="aurel_fullview_block02"></span>
+							<span class="aurel_fullview_block03"></span>
+							<span class="aurel_fullview_block04"></span>
+						</a>-->
+					</div>
+				</div>
+
+				<!-- Logo Mobile -->
+				<div class="aurel_header_mobile_logo">
+					<div class="aurel_logo_cont">
+						<a href="/" class="aurel_image_logo aurel_dp aurel_no_select aurel_retina"></a>
+					</div>
+				</div>
+
+				<a class="aurel_header_mobile_menu_toggler" href="javascript:void(0)">
+					<span class="aurel_mmt_icon">
+						<span class="aurel_mmt_line01"></span>
+						<span class="aurel_mmt_line02"></span>
+						<span class="aurel_mmt_line03"></span>
+					</span>
+				</a>
+			</div>
+
+			<!-- Mobile Menu -->
+			<div class="aurel_mobile_menu_wrapper">
+				<nav class="aurel_mobile_nav">
+					<ul class="aurel_menu">
+							<li class="menu-item-has-children">
+								<a href="/">Home</a>
+							</li>
+
+							<li class="menu-item-has-children">
+								<a href="/featured">Featured</a>
+							</li>
+
+							<li class="menu-item-has-children">
+								<a href="/collection">Collection</a>
+							</li>
+					</ul>
+				</nav>
+			</div>
+		</header>
+
+		<!-- Content -->
+		{% block wallpaper_image%}
+					<div class="wallpaper aurel_js_bg_image" style="background-color: #819dc2">
+					</div>
+		{% endblock wallpaper_image%}
+
+		<div class="my_content_wrapper">
+			{% block content%}					
+			{% endblock content%}
+		</div>
+
+		<div class="aurel_verticaly_page_trigger"></div>
+		
+		<!-- Footer -->
+		{% block footer%}
+		<footer class="aurel_footer aurel_border_off">
+			<div class="aurel_footer_inner aurel_container">
+				<div class="aurel_copyright">© 2021 ThreeOne Aviation. All Rights Reserved. <br/> <span style="display: block; margin-top: 10px;">Email: info@threeoneaviation.com</span> </div>
+			</div>
+		</footer>
+		{% endblock footer%}
+
+	</div>
+
+	<!-- Preloader -->
+	<div class="aurel_preloader_wrapper">
+		<div class="aurel_preloader_content">
+			<div class="aurel_preloader_bar"></div>
+			<h6 class="aurel_preloader_text">LOADING</h6>
+		</div>
+	</div>
+
+	<!-- JS Files -->
+	
+	<script src="{% static 'js/jquery.min.js' %}"></script>
+	<script src="{% static 'js/photoswipe.min.js' %}"></script>
+	<script src="{% static 'js/photoswipe-ui-default.min.js' %}"></script>
+	<script src="{% static 'js/theme.js' %}"></script>
+	<script src="{% static 'js/pm_image_slider.js' %}"></script>
+	
+	
+</body>
+</html>

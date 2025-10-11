@@ -1,0 +1,65 @@
+{% extends 'layout.html' %}
+
+{% block title %}{{airline.name}} {{registration_name}}{% endblock title %}
+
+{% block content%}
+<div class="airline_name">
+        <a href="/collection/{{airline.short_name}}">{{airline.name}}</a>
+        <a class="registration_name_text">{{registration_name}}
+            <span style="font-size: 16px !important;text-transform: capitalize; font-weight: normal;">{{aircraft.name}}</span>
+        </a>
+</div>
+
+<div class="col col-12 aurel_pl_30 aurel_pr_30">
+	<div class="aurel_widget_pm_grid_gallery aurel_photoswipe_wrapper" data-uniqid="{{registration_name}}" data-pswp-uid="{{registration_name}}">
+		<div class="aurel_widget_container">
+			<div class="aurel_front_end_display">
+                <div class="aurel_albums_listing_cont aurel_albums_grid aurel_albums_grid3 view_type_grid albums_titles_show" style="position: relative;">
+                    <div class="aurel_albums_grid_item search_bar">
+                            <div class="aurel_inner_cont">
+                                <!-- Search Widget -->
+                                <div class="widget widget_search">
+                                    <form id="search_form" name="search_form" method="get" action="/collection" class="aurel_search_form">
+                                        <button type="submit" class="aurel_icon_search"><i class="fa fa-search"></i></button> 
+                                        <input type="text" name="search" placeholder="Search our library of {{registrations_count}} registrations..." class="aurel_field_search" form="search_form">
+                                        <div class="clear"></div>
+                                    </form>
+                                </div>
+                            </div>
+                    </div>
+
+                    <div class="single_cover_width aurel_inner_cont"> 
+                        <a class=" aurel_pswp_slide aurel_grid_blog_image aurel_dp aurel_no_select cover" href="{{cover.max_image_url}}" data-size="{{cover.data_size}}" data-count="0">
+                            <img class="cover" src="{{cover.min_image_url}}" alt="">
+                            
+                            <span class="aurel_albums_grid_content">
+                                <span class="aurel_albums_title camera_model_wrapper" style="float: left; text-align:left;"><i class="fa fa-camera" style="padding-right: 5px;"></i>{{cover.camera_model}}</span>
+                                <span class="aurel_albums_title" style="float: right; text-align:right; padding-right: 5px;"><i class="fa fa-calendar" style="padding-right: 5px;"></i>{{cover.date_taken}}</span>
+                            </span>
+                        </a>
+                    </div>
+
+                    <div class="single_flex">
+                        {% for item in registration_photos %}   
+                            <div class="aurel_albums_grid_item columns_3"> 
+    							<div class="aurel_inner_cont">
+    								<a class="aurel_pswp_slide aurel_grid_blog_image aurel_dp aurel_no_select cover" href="{{ item.max_image_url}}" data-size="{{item.data_size}}" data-count="{{ forloop.counter}}">
+    									<img class="cover" src="{{item.min_image_url}}" alt="">
+    									
+    									<span class="aurel_albums_grid_content">
+                                            <span class="aurel_albums_title camera_model_wrapper" style="float: left; text-align:left; padding-left: 5px;"><i class="fa fa-camera" style="padding-right: 5px;"></i>{{item.camera_model}}</span>
+    										<span class="aurel_albums_title" style="float: right; text-align:right; padding-right: 5px;"><i class="fa fa-calendar" style="padding-right: 5px;"></i>{{item.date_taken}}</span>
+    									</span>
+    								</a>
+    							</div>
+                            </div>
+                         {%endfor%}
+                    </div>
+                </div>
+			</div>
+		</div>
+	</div>
+</div>
+							
+{% endblock content%}
+
