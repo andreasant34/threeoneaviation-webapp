@@ -1,7 +1,8 @@
-version: '3.9'
-
 services:
   prod:
+    build:
+      context: .
+      dockerfile: Dockerfile
     image: threeoneaviation:latest
     ports:
       - "8000:8000"
@@ -10,6 +11,9 @@ services:
     container_name: threeoneaviation_prod
 
   dev:
+    build:
+      context: .
+      dockerfile: Dockerfile
     image: threeoneaviation:latest
     ports:
       - "8000:8000"
