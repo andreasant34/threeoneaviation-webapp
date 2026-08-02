@@ -2,7 +2,7 @@
 
 ## Running the app locally
 ### Via Docker
-- From the root directory of this repository, execute `docker build -t threeoneaviation`
+- From the root directory of this repository, execute `docker build -t threeoneaviation .`
 - Start the container by executing `docker run -p 8000:8000 --env-file .env.dev threeoneaviation`
 ### Via your IDE
 - Execute python manage.py migrate
