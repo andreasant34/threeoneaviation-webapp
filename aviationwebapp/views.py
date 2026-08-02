@@ -17,6 +17,9 @@ def not_found(request,exception):
 def error(request):
     return render(request, '500.html')    
 
+def privacy_policy(request):
+    return render(request, 'privacy-policy.html')
+
 def featured(request):
     featured_result = ContentServiceInstance.get_featured()
     latest_registrations = ContentServiceInstance.get_latest_registrations()

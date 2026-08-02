@@ -339,6 +339,12 @@ header.aurel_main_header.aurel_sticky_menu_on.aurel_stick_me.aurel_header_solid_
 	}
 }
 
+article a {
+    color: white;
+}
+article a:hover {
+    color: darkgreen;
+}
 
 /* ----------------------------- */
 /* ---------- General ---------- */

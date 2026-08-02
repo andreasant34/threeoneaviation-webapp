@@ -12,6 +12,7 @@ urlpatterns = [
     path('collection/<str:airline_name>', views.collection),
     path('collection/<str:airline_name>/<str:registration_name>', views.collection),
     path('competition', views.competition),
+    path('privacy-policy', views.privacy_policy),
 ]
 
 handler404 = 'aviationwebapp.views.not_found'
