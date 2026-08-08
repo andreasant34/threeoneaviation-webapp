@@ -20,6 +20,9 @@ def error(request):
 def privacy_policy(request):
     return render(request, 'privacy-policy.html')
 
+def ads_txt(request):
+    return render(request, 'ads.txt')
+
 def featured(request):
     featured_result = ContentServiceInstance.get_featured()
     latest_registrations = ContentServiceInstance.get_latest_registrations()
