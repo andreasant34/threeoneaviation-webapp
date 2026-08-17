@@ -11,6 +11,7 @@ class Settings(BaseSettings):
     CDN_URL:str|None = None
     FEATURED_FOLDER_ID:str|None = None
     GOOGLE_SERVICE_ACCOUNT_TOKEN:str|None = None
+    ADSENSE_AD_UNITS_ENABLED: bool = False
 
     class Config:
         env_file = ".env"

@@ -1,55 +1,46 @@
 {% extends 'layout.html' %}
 
-{% block title %}Collection - {{airline.name}}{% endblock title %}
+{% block title %}{{ airline.name }} Aircraft Photo Collection{% endblock title %}
+{% block meta_description %}Browse original {{ airline.name }} aircraft photographs by type and registration in the ThreeOne Aviation archive from Malta.{% endblock meta_description %}
+{% block og_title %}{{ airline.name }} Aircraft Photos | ThreeOne Aviation{% endblock og_title %}
 
-{% block content%}
-    <div class="airline_name">
-        <a href="/collection/{{airline.short_name}}">{{airline.name}}</a>
-    </div>
+{% block content %}
+<div class="site-page catalog-page">
+    <header class="catalog-header airline-catalog-header">
+        <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="{% url 'collection' %}">Collection</a><span aria-hidden="true">/</span><span>{{ airline.name }}</span></nav>
+        <p class="eyebrow">Airline or operator collection</p>
+        <h1>{{ airline.name }} aircraft photographs</h1>
+        <p class="article-lead">Select a registration to view its original photographs, capture dates and camera information. Aircraft are grouped by type to make individual airframes easier to compare.</p>
+        <form method="get" action="{% url 'collection' %}" class="catalog-search" role="search">
+            <label for="airline-search">Search the full registration archive</label>
+            <div class="search-input-row">
+                <input id="airline-search" type="search" name="search" placeholder="Enter an aircraft registration">
+                <button type="submit" class="content-button primary">Search</button>
+            </div>
+        </form>
+    </header>
 
-    <div class="col col-12 aurel_pl_30 aurel_pr_30">
-    	<div class="aurel_widget_pm_grid_gallery">
-    		<div class="aurel_widget_container">
-    			<div class="aurel_front_end_display">
-                    
-                    <div class="aurel_grid_wrapper aurel_grid_006" data-uniqid="006" data-perload="3">
-                        <div class="aurel_albums_listing_cont aurel_albums_grid aurel_albums_grid3 view_type_grid albums_titles_show">
-                            
-                            <div class="aurel_albums_grid_item search_bar">
-                                    <div class="aurel_inner_cont">
-                                        <!-- Search Widget -->
-                                        <div class="widget widget_search">
-                                            <form id="search_form" name="search_form" method="get" action="/collection" class="aurel_search_form">
-                                                <button type="submit" class="aurel_icon_search"><i class="fa fa-search"></i></button> 
-                                                <input type="text" name="search" placeholder="Search our library of {{registrations_count}} registrations..." class="aurel_field_search" form="search_form">
-                                                <div class="clear"></div>
-                                            </form>
-                                        </div>
-                                    </div>
-                            </div>
-
-                            {% for aircraft in airline.aircrafts %}
-                                    {% for item in aircraft.registrations %}   
-                                        <div class="aurel_albums_grid_item columns_3"> 
-    										<div class="aurel_inner_cont">
-    											<a href="{{airline.short_name}}/{{item.short_name}}" class="aurel_dp aurel_no_select cover">
-    												<img class="cover" src="{{item.cover_url}}" alt="">
-
-    												<span class="aurel_albums_grid_content">
-                                                        <span class="aurel_albums_title">{{item.name}} <span style="float:right;"> {{aircraft.name}} </span></span>
-    												</span>
-    												</a>
-    										</div>
-                                        </div>
-                                     {%endfor%}
-                            {%endfor%}
-                        </div>    
-                    </div>
-
-    			</div>
-    		</div>
-    	</div>
-    </div>
-							
-{% endblock content%}
-
+    {% for aircraft in airline.aircrafts %}
+    <section class="aircraft-type-group" aria-labelledby="aircraft-type-{{ forloop.counter }}">
+        <div class="section-heading-row">
+            <h2 id="aircraft-type-{{ forloop.counter }}">{{ aircraft.name }}</h2>
+            <p>{{ aircraft.registrations|length }} registration{{ aircraft.registrations|length|pluralize }}</p>
+        </div>
+        <div class="catalog-card-grid">
+            {% for item in aircraft.registrations %}
+            <article class="catalog-card">
+                <a href="{% url 'registration' airline.short_name item.short_name %}">
+                    {% if item.cover_url %}<img src="{{ item.cover_url }}" alt="{{ item.name }}, {{ aircraft.name }}, from the {{ airline.name }} aircraft collection" loading="lazy">{% endif %}
+                    <div class="card-copy"><h3>{{ item.name }}</h3><p>{{ aircraft.name }}</p></div>
+                </a>
+            </article>
+            {% empty %}
+            <p class="empty-state">No registrations are currently catalogued for this aircraft type.</p>
+            {% endfor %}
+        </div>
+    </section>
+    {% empty %}
+    <p class="empty-state">No aircraft are currently catalogued in this collection.</p>
+    {% endfor %}
+</div>
+{% endblock content %}

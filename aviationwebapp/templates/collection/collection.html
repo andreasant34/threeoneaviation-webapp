@@ -1,64 +1,55 @@
 {% extends 'layout.html' %}
 
-{% block title %}Collection{% endblock title %}
+{% block title %}Aircraft Photo Collection by Airline & Registration{% endblock title %}
+{% block meta_description %}Search {{ registrations_count }} aircraft registrations in the original ThreeOne Aviation photo archive, organised by airline, aircraft type and registration.{% endblock meta_description %}
+{% block og_title %}Aircraft Photo Collection | ThreeOne Aviation{% endblock og_title %}
 
-{% block content%}
-								<div class="col col-12 aurel_pl_30 aurel_pr_30">
-									<div class="aurel_widget_pm_grid_gallery">
-										<div class="aurel_widget_container">
-											<div class="aurel_front_end_display">
-												<div class="aurel_grid_wrapper aurel_photoswipe_wrapper aurel_grid_006" data-uniqid="006" data-perload="3">
-													<div class="aurel_albums_listing_cont aurel_albums_grid aurel_albums_grid3 view_type_grid aurel_isotope_trigger albums_titles_show">
-														<div class="aurel_albums_grid_item search_bar">
-																<div class="aurel_inner_cont">
-																	<!-- Search Widget -->
-							                                        <div class="widget widget_search">
-							                                            <form id="search_form" name="search_form" method="get" action="/collection" class="aurel_search_form">
-							                                                <button type="submit" class="aurel_icon_search"><i class="fa fa-search"></i></button> 
-							                                                <input type="text" name="search" placeholder="Search our library of {{registrations_count}} registrations..." class="aurel_field_search" form="search_form">
-							                                                <div class="clear"></div>
-							                                            </form>
-							                                        </div>
-																</div>
-														</div>
+{% block content %}
+<div class="site-page catalog-page">
+    <header class="catalog-header">
+        <p class="eyebrow">Aircraft archive</p>
+        <h1>Browse the aircraft photography collection</h1>
+        <p class="article-lead">Explore original photographs organised from airline or operator collection to aircraft type and individual registration. Each registration page includes capture dates, camera details and links to related airframes.</p>
+        <form method="get" action="{% url 'collection' %}" class="catalog-search" role="search">
+            <label for="collection-search">Search by aircraft registration</label>
+            <div class="search-input-row">
+                <input id="collection-search" type="search" name="search" placeholder="For example: D-ATOP" autocomplete="off">
+                <button type="submit" class="content-button primary">Search {{ registrations_count }} registrations</button>
+            </div>
+        </form>
+    </header>
 
-                                                        {% for item in airlines %}
-															<div class="aurel_albums_grid_item columns_3">
-																<div class="aurel_inner_cont">
-																	<a href="collection/{{item.short_name}}" class="aurel_dp aurel_no_select cover">
-																		<img class="cover" src="{{item.cover_url}}" alt="">
+    <section class="catalog-explainer" aria-labelledby="collection-method-title">
+        <div>
+            <h2 id="collection-method-title">How the collection is organised</h2>
+            <p>Choose a collection below, then select an aircraft registration. The labels describe the archive's filing structure and may reflect the aircraft's operator at the time it was photographed.</p>
+        </div>
+        <p>Looking for photography advice? Read the <a href="{% url 'spotting-guide' %}">Malta plane-spotting guide</a>.</p>
+    </section>
 
-																		<span class="aurel_albums_grid_content">
-																			<span class="aurel_albums_title">{{item.name}}</span>
-																		</span>
-																		</a>
-																</div>
-															</div>
-
-                                                            {% if not forloop.counter|divisibleby:"2" %}
-                                                                <div class="aurel_albums_grid_item columns_3">
-                                                                    <div class="aurel_inner_cont">
-                                                                            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7886748096844050"
-                                                                                 crossorigin="anonymous"></script>
-                                                                            <ins class="adsbygoogle"
-                                                                                 style="display:block"
-                                                                                 data-ad-format="fluid"
-                                                                                 data-ad-layout-key="-6i+eh+1f-3e+31"
-                                                                                 data-ad-client="ca-pub-7886748096844050"
-                                                                                 data-ad-slot="2603309691"></ins>
-                                                                            <script>
-                                                                                 (adsbygoogle = window.adsbygoogle || []).push({});
-                                                                            </script>
-                                                                    </div>
-                                                                </div>
-                                                            {% endif %}
-                                                        {%endfor%}
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							
-{% endblock content%}
-
+    <section aria-labelledby="airlines-title">
+        <div class="section-heading-row">
+            <h2 id="airlines-title">Airline and operator collections</h2>
+            <p>{{ airlines|length }} collection{{ airlines|length|pluralize }}</p>
+        </div>
+        <div class="catalog-card-grid">
+            {% for item in airlines %}
+            <article class="catalog-card">
+                <a href="{% url 'airline' item.short_name %}">
+                    {% if item.cover_url %}<img src="{{ item.cover_url }}" alt="Aircraft from the {{ item.name }} photo collection" loading="lazy">{% endif %}
+                    <div class="card-copy">
+                        <h3>{{ item.name }}</h3>
+                        <p>{{ item.aircrafts|length }} aircraft type{{ item.aircrafts|length|pluralize }}</p>
+                    </div>
+                </a>
+            </article>
+            {% if forloop.counter|divisibleby:"4" %}
+            {% include 'components/ad-unit.html' with ad_slot='2603309691' ad_placement='collection-card' ad_format='fluid' ad_layout_key='-6i+eh+1f-3e+31' %}
+            {% endif %}
+            {% empty %}
+            <p class="empty-state">The aircraft collection is temporarily unavailable. Please try again later.</p>
+            {% endfor %}
+        </div>
+    </section>
+</div>
+{% endblock content %}

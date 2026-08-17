@@ -1,65 +1,115 @@
 {% extends 'layout.html' %}
 
-{% block title %}{{airline.name}} {{registration_name}}{% endblock title %}
+{% block title %}{{ registration_name }} — {{ aircraft.name }} Aircraft Photos{% endblock title %}
+{% block meta_description %}Original photographs of {{ registration_name }}, a {{ aircraft.name }} catalogued in the {{ airline.name }} collection, with capture dates and camera details.{% endblock meta_description %}
+{% block og_title %}{{ registration_name }} — {{ aircraft.name }} | ThreeOne Aviation{% endblock og_title %}
+{% block og_description %}View {{ photo_count }} original photograph{{ photo_count|pluralize }} of {{ registration_name }} from the Malta-based ThreeOne Aviation archive.{% endblock og_description %}
 
-{% block content%}
-<div class="airline_name">
-        <a href="/collection/{{airline.short_name}}">{{airline.name}}</a>
-        <a class="registration_name_text">{{registration_name}}
-            <span style="font-size: 16px !important;text-transform: capitalize; font-weight: normal;">{{aircraft.name}}</span>
-        </a>
-</div>
+{% block content %}
+<div class="site-page aircraft-entry-page">
+    <article>
+        <header class="aircraft-entry-header">
+            <nav class="breadcrumbs" aria-label="Breadcrumb">
+                <a href="{% url 'collection' %}">Collection</a>
+                <span aria-hidden="true">/</span>
+                <a href="{% url 'airline' airline.short_name %}">{{ airline.name }}</a>
+                <span aria-hidden="true">/</span>
+                <span>{{ registration_name }}</span>
+            </nav>
+            <p class="eyebrow">Aircraft spotting entry</p>
+            <h1>{{ registration_name }} — {{ aircraft.name }}</h1>
+            <p class="article-lead">
+                An original ThreeOne Aviation photo record filed in the {{ airline.name }} collection. The gallery preserves the capture date and camera model available in each source image's metadata.
+            </p>
+        </header>
 
-<div class="col col-12 aurel_pl_30 aurel_pr_30">
-	<div class="aurel_widget_pm_grid_gallery aurel_photoswipe_wrapper" data-uniqid="{{registration_name}}" data-pswp-uid="{{registration_name}}">
-		<div class="aurel_widget_container">
-			<div class="aurel_front_end_display">
-                <div class="aurel_albums_listing_cont aurel_albums_grid aurel_albums_grid3 view_type_grid albums_titles_show" style="position: relative;">
-                    <div class="aurel_albums_grid_item search_bar">
-                            <div class="aurel_inner_cont">
-                                <!-- Search Widget -->
-                                <div class="widget widget_search">
-                                    <form id="search_form" name="search_form" method="get" action="/collection" class="aurel_search_form">
-                                        <button type="submit" class="aurel_icon_search"><i class="fa fa-search"></i></button> 
-                                        <input type="text" name="search" placeholder="Search our library of {{registrations_count}} registrations..." class="aurel_field_search" form="search_form">
-                                        <div class="clear"></div>
-                                    </form>
-                                </div>
-                            </div>
-                    </div>
+        <section class="aircraft-facts" aria-labelledby="facts-title">
+            <h2 id="facts-title">Aircraft record</h2>
+            <dl>
+                <div><dt>Registration</dt><dd>{{ registration_name }}</dd></div>
+                <div><dt>Aircraft type</dt><dd>{{ aircraft.name }}</dd></div>
+                <div><dt>Archive collection</dt><dd><a href="{% url 'airline' airline.short_name %}">{{ airline.name }}</a></dd></div>
+                <div><dt>Photographs</dt><dd>{{ photo_count }}</dd></div>
+                {% if cover %}
+                <div><dt>Featured capture date</dt><dd>{{ cover.date_taken }}</dd></div>
+                <div><dt>Camera</dt><dd>{{ cover.camera_model|default:"Not recorded" }}</dd></div>
+                {% if cover.exposure_time %}<div><dt>Shutter speed</dt><dd>{{ cover.exposure_time }}</dd></div>{% endif %}
+                {% if cover.aperture %}<div><dt>Aperture</dt><dd>{{ cover.aperture }}</dd></div>{% endif %}
+                {% if cover.focal_length %}<div><dt>Focal length</dt><dd>{{ cover.focal_length }}</dd></div>{% endif %}
+                {% if cover.iso_speed %}<div><dt>Sensitivity</dt><dd>ISO {{ cover.iso_speed }}</dd></div>{% endif %}
+                {% endif %}
+            </dl>
+            <p class="fact-note">Airline and operator relationships can change over an aircraft's life. The collection name describes how the photograph is catalogued at ThreeOne Aviation.</p>
+        </section>
 
-                    <div class="single_cover_width aurel_inner_cont"> 
-                        <a class=" aurel_pswp_slide aurel_grid_blog_image aurel_dp aurel_no_select cover" href="{{cover.max_image_url}}" data-size="{{cover.data_size}}" data-count="0">
-                            <img class="cover" src="{{cover.min_image_url}}" alt="">
-                            
-                            <span class="aurel_albums_grid_content">
-                                <span class="aurel_albums_title camera_model_wrapper" style="float: left; text-align:left;"><i class="fa fa-camera" style="padding-right: 5px;"></i>{{cover.camera_model}}</span>
-                                <span class="aurel_albums_title" style="float: right; text-align:right; padding-right: 5px;"><i class="fa fa-calendar" style="padding-right: 5px;"></i>{{cover.date_taken}}</span>
-                            </span>
-                        </a>
-                    </div>
-
-                    <div class="single_flex">
-                        {% for item in registration_photos %}   
-                            <div class="aurel_albums_grid_item columns_3"> 
-    							<div class="aurel_inner_cont">
-    								<a class="aurel_pswp_slide aurel_grid_blog_image aurel_dp aurel_no_select cover" href="{{ item.max_image_url}}" data-size="{{item.data_size}}" data-count="{{ forloop.counter}}">
-    									<img class="cover" src="{{item.min_image_url}}" alt="">
-    									
-    									<span class="aurel_albums_grid_content">
-                                            <span class="aurel_albums_title camera_model_wrapper" style="float: left; text-align:left; padding-left: 5px;"><i class="fa fa-camera" style="padding-right: 5px;"></i>{{item.camera_model}}</span>
-    										<span class="aurel_albums_title" style="float: right; text-align:right; padding-right: 5px;"><i class="fa fa-calendar" style="padding-right: 5px;"></i>{{item.date_taken}}</span>
-    									</span>
-    								</a>
-    							</div>
-                            </div>
-                         {%endfor%}
-                    </div>
+        <section class="entry-search" aria-label="Search the aircraft archive">
+            <form id="search_form" name="search_form" method="get" action="{% url 'collection' %}" class="aurel_search_form">
+                <label for="registration-search">Find another registration</label>
+                <div class="search-input-row">
+                    <input id="registration-search" type="search" name="search" placeholder="Search {{ registrations_count }} registrations" class="aurel_field_search">
+                    <button type="submit" class="content-button primary">Search</button>
                 </div>
-			</div>
-		</div>
-	</div>
-</div>
-							
-{% endblock content%}
+            </form>
+        </section>
 
+        <section class="aircraft-gallery-section" aria-labelledby="photos-title">
+            <div class="section-heading-row">
+                <div>
+                    <p class="eyebrow">Original photography</p>
+                    <h2 id="photos-title">{{ registration_name }} photo gallery</h2>
+                </div>
+                <p>{{ photo_count }} image{{ photo_count|pluralize }}</p>
+            </div>
+
+            {% if cover %}
+            <div class="aurel_widget_pm_grid_gallery aurel_photoswipe_wrapper entry-photo-grid" data-uniqid="{{ registration_name }}" data-pswp-uid="{{ registration_name }}">
+                <figure class="entry-photo entry-photo-featured">
+                    <a class="aurel_pswp_slide aurel_grid_blog_image aurel_dp aurel_no_select" href="{{ cover.max_image_url }}" data-size="{{ cover.data_size }}" data-count="0">
+                        <img src="{{ cover.min_image_url }}" alt="{{ registration_name }}, {{ aircraft.name }}, photographed for the {{ airline.name }} collection on {{ cover.date_taken }}">
+                    </a>
+                    <figcaption>
+                        <div>
+                            <strong>{{ registration_name }} — {{ aircraft.name }}</strong>
+                            {% if cover.description %}<p class="photo-description">{{ cover.description }}</p>{% endif %}
+                        </div>
+                        <span>Photographed {{ cover.date_taken }}{% if cover.camera_model %} with {{ cover.camera_model }}{% endif %}{% if cover.setting_summary %}. {{ cover.setting_summary }}{% endif %}.</span>
+                    </figcaption>
+                </figure>
+
+                {% for item in registration_photos %}
+                <figure class="entry-photo">
+                    <a class="aurel_pswp_slide aurel_grid_blog_image aurel_dp aurel_no_select" href="{{ item.max_image_url }}" data-size="{{ item.data_size }}" data-count="{{ forloop.counter }}">
+                        <img src="{{ item.min_image_url }}" alt="Photograph {{ forloop.counter|add:'1' }} of {{ registration_name }}, {{ aircraft.name }}, captured on {{ item.date_taken }}" loading="lazy">
+                    </a>
+                    <figcaption>
+                        <div>
+                            <strong>{{ registration_name }} in the {{ airline.name }} collection</strong>
+                            {% if item.description %}<p class="photo-description">{{ item.description }}</p>{% endif %}
+                        </div>
+                        <span>Photographed {{ item.date_taken }}{% if item.camera_model %} with {{ item.camera_model }}{% endif %}{% if item.setting_summary %}. {{ item.setting_summary }}{% endif %}.</span>
+                    </figcaption>
+                </figure>
+                {% endfor %}
+            </div>
+            {% else %}
+            <p class="empty-state">No photographs are currently available for this registration. The entry will be updated when an image is catalogued.</p>
+            {% endif %}
+        </section>
+
+        {% if related_registrations %}
+        <section class="related-aircraft" aria-labelledby="related-title">
+            <p class="eyebrow">Continue exploring</p>
+            <h2 id="related-title">More {{ aircraft.name }} registrations</h2>
+            <div class="related-link-grid">
+                {% for item in related_registrations %}
+                <a href="{% url 'registration' airline.short_name item.short_name %}">
+                    <span>{{ item.name }}</span>
+                    <small>{{ aircraft.name }}</small>
+                </a>
+                {% endfor %}
+            </div>
+        </section>
+        {% endif %}
+    </article>
+</div>
+{% endblock content %}

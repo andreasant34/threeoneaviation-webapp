@@ -1,0 +1,53 @@
+{% extends 'layout.html' %}
+
+{% block title %}About the Photography Archive{% endblock title %}
+{% block meta_description %}Learn about ThreeOne Aviation, an independent Malta-based aircraft photography archive, its editorial approach and photo ownership.{% endblock meta_description %}
+{% block og_title %}About ThreeOne Aviation{% endblock og_title %}
+
+{% block content %}
+<div class="site-page article-page">
+    <article class="prose-card">
+        <header class="article-header">
+            <p class="eyebrow">About the project</p>
+            <h1>ThreeOne Aviation</h1>
+            <p class="article-lead">An independent aircraft photography archive created in Malta and named for the runway direction at the heart of the collection.</p>
+        </header>
+
+        <section>
+            <h2>Why this archive exists</h2>
+            <p>
+                ThreeOne Aviation was created to give individual aircraft photographs a useful, lasting home. A social post disappears quickly; a structured archive lets an enthusiast search by registration, compare aircraft from the same fleet and return to a particular sighting years later.
+            </p>
+            <p>
+                The collection focuses on aviation photography connected with Malta. It documents scheduled visitors alongside business jets, cargo aircraft, special liveries and less common movements whenever they are photographed and added to the archive.
+            </p>
+        </section>
+
+        <section>
+            <h2>Original photography and editorial approach</h2>
+            <p>
+                Unless a page clearly states otherwise, the photographs published here are original works from the ThreeOne Aviation collection. Images are grouped manually by airline or operator, aircraft type and registration. Capture dates, camera models and image dimensions are taken from the source photo metadata.
+            </p>
+            <p>
+                Aircraft information is kept deliberately specific to what the archive can support. ThreeOne Aviation does not publish automatically generated aircraft biographies simply to create more pages. If an airline, type or registration has been identified incorrectly, a correction is welcomed.
+            </p>
+        </section>
+
+        <section>
+            <h2>Independence and attribution</h2>
+            <p>
+                ThreeOne Aviation is an enthusiast-led photography project. It is not Malta International Airport, an airline, an aircraft manufacturer or an air traffic service, and it is not endorsed by those organisations. Airline names and aircraft designations are used only to identify the subjects shown.
+            </p>
+            <p>
+                Copyright remains with ThreeOne Aviation unless a photograph carries a different credit. Republishing, editing or commercially using an image requires prior written permission.
+            </p>
+        </section>
+
+        <section class="article-callout">
+            <h2>Corrections, licensing and questions</h2>
+            <p>For an identification correction, a question about a photograph or an image-use request, include the aircraft registration or page link in your message.</p>
+            <a class="content-button primary" href="{% url 'contact' %}">Contact ThreeOne Aviation</a>
+        </section>
+    </article>
+</div>
+{% endblock content %}

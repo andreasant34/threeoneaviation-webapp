@@ -7,6 +7,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = settings.DJANGO_SECRET_KEY
 DEBUG = settings.DEBUG
 ALLOWED_HOSTS = settings.DJANGO_ALLOWED_HOSTS.split(",")
+ADSENSE_AD_UNITS_ENABLED = settings.ADSENSE_AD_UNITS_ENABLED
 
 if settings.ENFORCE_HOST is not None:
     ENFORCE_HOST = settings.ENFORCE_HOST
@@ -38,7 +39,8 @@ TEMPLATES = [
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
-                'django.template.context_processors.request'
+                'django.template.context_processors.request',
+                'aviationwebapp.context_processors.adsense_settings'
             ],
         },
     },

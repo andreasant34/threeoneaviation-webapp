@@ -1,0 +1,17 @@
+{% if adsense_ad_units_enabled %}
+<aside class="ad-placement ad-placement--{{ ad_placement|default:'content' }}" aria-label="Advertisement">
+    <span class="ad-placement-label">Advertisement</span>
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-7886748096844050"
+         data-ad-slot="{{ ad_slot }}"
+         data-ad-format="{{ ad_format|default:'auto' }}"
+         {% if ad_layout_key %}data-ad-layout-key="{{ ad_layout_key }}"{% endif %}
+         data-full-width-responsive="true"></ins>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+</aside>
+{% else %}
+<!-- Reserved AdSense placement: {{ ad_placement|default:'content' }}; slot {{ ad_slot }}. Set ADSENSE_AD_UNITS_ENABLED=true to activate it. -->
+{% endif %}

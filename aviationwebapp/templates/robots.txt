@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /collection?search=
+
+Sitemap: https://threeoneaviation.com/sitemap.xml

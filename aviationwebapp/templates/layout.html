@@ -1,166 +1,143 @@
 {% load static %}
 
 <!DOCTYPE html>
-<html lang="en" class="aurel_header_gradient_page aurel_content_under_header aurel_non_transparent_header">
+<html lang="en" class="aurel_non_transparent_header">
 <head>
-	<title>{% block title %}{% endblock title %} - ThreeOne Aviation</title>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="description" content="Plane spotting in Malta">
-	<meta name="keywords" content="plane, spotting, malta, runway 31, aircraft, boeing, airbus">
-	<meta name="author" content="ThreeOne Aviation">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}Aircraft Photography in Malta{% endblock title %} - ThreeOne Aviation</title>
+    <meta name="description" content="{% block meta_description %}An independent archive of original aircraft photography and practical plane-spotting information from Malta.{% endblock meta_description %}">
+    <meta name="author" content="ThreeOne Aviation">
+    <meta name="robots" content="{% block robots %}index,follow,max-image-preview:large{% endblock robots %}">
+    <meta name="google-adsense-account" content="ca-pub-7886748096844050">
 
-	<link rel="shortcut icon" type="image/png" href="https://cdn.threeoneaviation.com/favicon.ico"/>
+    <link rel="canonical" href="{% block canonical %}https://threeoneaviation.com{{ request.path }}{% endblock canonical %}">
+    <link rel="shortcut icon" type="image/png" href="https://cdn.threeoneaviation.com/favicon.ico">
 
-	<!-- CSS Files -->
-	<link rel="stylesheet" href="{% static 'css/kube.css' %}">
-	<link rel="stylesheet" href="{% static 'css/roboto.css' %}">
-	<link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
-	<link rel="stylesheet" href="{% static 'css/theme.css' %}">
-	<link rel="stylesheet" href="{% static 'css/photoswipe.css' %}">
+    <meta property="og:site_name" content="ThreeOne Aviation">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="{% block og_title %}ThreeOne Aviation — Aircraft Photography in Malta{% endblock og_title %}">
+    <meta property="og:description" content="{% block og_description %}Original aircraft photography and practical plane-spotting information from Malta.{% endblock og_description %}">
+    <meta property="og:url" content="https://threeoneaviation.com{{ request.path }}">
 
-	<link rel="canonical" href="https://threeoneaviation.com/" />
+    <link rel="stylesheet" href="{% static 'css/kube.css' %}">
+    <link rel="stylesheet" href="{% static 'css/roboto.css' %}">
+    <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/theme.css' %}">
+    <link rel="stylesheet" href="{% static 'css/photoswipe.css' %}">
+    <link rel="stylesheet" href="{% static 'css/site-content.css' %}?v=20260817-5">
+
+    {% block adsense %}
+    {% if adsense_ad_units_enabled %}
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7886748096844050" crossorigin="anonymous"></script>
+    {% endif %}
+    {% endblock adsense %}
 </head>
 
-
 <body class="aurel_drag_protection">
-	<div class="aurel_site_wrapper static_header_footer fadeOnLoad">
+    <div class="aurel_site_wrapper static_header_footer fadeOnLoad">
+        <header class="aurel_main_header aurel_logo_left aurel_border_off aurel_header_solid_style aurel_sticky_menu_on">
+            <div class="aurel_main_header_wrapper">
+                <div class="aurel_header_left_part aurel_header_logo_part">
+                    <div class="aurel_logo_cont">
+                        <a class="aurel_image_logo aurel_dp aurel_no_select aurel_retina" href="{% url 'home' %}" aria-label="ThreeOne Aviation home"></a>
+                    </div>
+                </div>
 
-		
-		<!-- Header -->
-		<header class="aurel_main_header aurel_logo_left aurel_border_off aurel_header_solid_style aurel_sticky_menu_on ">
-			<div class="aurel_main_header_wrapper 
-			{% block header_portrait_class%}
-				header_portrait_class
-			{% endblock header_portrait_class%}">
-				<div class="aurel_header_left_part aurel_header_logo_part">
-					<div class="aurel_logo_cont">
-						<a class="aurel_image_logo aurel_dp aurel_no_select aurel_retina" href="/"></a>
-					</div>
-				</div>
+                <div class="aurel_header_middle_part aurel_header_menu_part">
+                    <nav class="aurel_nav" aria-label="Primary navigation">
+                        <ul class="aurel_menu">
+                            <li class="{% if request.path == '/' %}current-menu-ancestor{% endif %}"><a href="{% url 'home' %}">Home</a></li>
+                            <li class="{% if highlight_featured_menu_item %}current-menu-ancestor{% endif %}"><a href="{% url 'featured' %}">Featured</a></li>
+                            <li class="{% if highlight_collection_menu_item %}current-menu-ancestor{% endif %}"><a href="{% url 'collection' %}">Collection</a></li>
+                            <li class="{% if highlight_guide_menu_item %}current-menu-ancestor{% endif %}"><a href="{% url 'spotting-guide' %}">Spotting guide</a></li>
+                            <li class="{% if highlight_about_menu_item %}current-menu-ancestor{% endif %}"><a href="{% url 'about' %}">About</a></li>
+                        </ul>
+                    </nav>
+                </div>
 
-				<div class="aurel_header_middle_part aurel_header_menu_part">
-					<nav class="aurel_nav">
-						<ul class="aurel_menu">
-							<li class="menu-item-has-children">
-								<a href="/">Home</a>
-							</li>
+                <div class="aurel_header_right_part aurel_header_socials_part">
+                    <a class="header-contact-link {% if highlight_contact_menu_item %}current{% endif %}" href="{% url 'contact' %}">Contact</a>
+                </div>
 
-							<li class="menu-item-has-children {% if highlight_featured_menu_item %}current-menu-ancestor{% endif %}">
-								<a href="/featured">Featured</a>
-							</li>
+                <div class="aurel_header_mobile_logo">
+                    <div class="aurel_logo_cont">
+                        <a href="{% url 'home' %}" class="aurel_image_logo aurel_dp aurel_no_select aurel_retina" aria-label="ThreeOne Aviation home"></a>
+                    </div>
+                </div>
 
-							<li class="menu-item-has-children {% if highlight_collection_menu_item %}current-menu-ancestor{% endif %}">
-								<a href="/collection">Collection</a>
-							</li>
-						</ul>
-					</nav>
-				</div>
+                <a class="aurel_header_mobile_menu_toggler" href="javascript:void(0)" aria-label="Open navigation menu">
+                    <span class="aurel_mmt_icon" aria-hidden="true">
+                        <span class="aurel_mmt_line01"></span>
+                        <span class="aurel_mmt_line02"></span>
+                        <span class="aurel_mmt_line03"></span>
+                    </span>
+                </a>
+            </div>
 
-				<div class="aurel_header_right_part aurel_header_socials_part">
-					<div class="aurel_header_socials">
-						<a class="aurel_footer_social_button aurel_facebook" href="https://www.facebook.com/"><i class="fa fa-facebook"></i></a>
-						<a class="aurel_footer_social_button aurel_instagram" href="https://www.instagram.com/?hl=ru"><i class="fa fa-instagram"></i></a>
-						<!--
-					 	<a class="aurel_footer_social_button aurel_twitter" href="https://twitter.com/"><i class="fa fa-twitter"></i></a>
-						<a class="aurel_footer_social_button aurel_pinterest" href="https://pinterest.com/"><i class="fa fa-pinterest"></i></a>
-						
-						<a class="aurel_toogle_fullview" href="javascript:void(0)">
-							<span class="aurel_fullview_block01"></span>
-							<span class="aurel_fullview_block02"></span>
-							<span class="aurel_fullview_block03"></span>
-							<span class="aurel_fullview_block04"></span>
-						</a>-->
-					</div>
-				</div>
+            <div class="aurel_mobile_menu_wrapper">
+                <nav class="aurel_mobile_nav" aria-label="Mobile navigation">
+                    <ul class="aurel_menu">
+                        <li><a href="{% url 'home' %}">Home</a></li>
+                        <li><a href="{% url 'featured' %}">Featured</a></li>
+                        <li><a href="{% url 'collection' %}">Collection</a></li>
+                        <li><a href="{% url 'spotting-guide' %}">Spotting guide</a></li>
+                        <li><a href="{% url 'about' %}">About</a></li>
+                        <li><a href="{% url 'contact' %}">Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
 
-				<!-- Logo Mobile -->
-				<div class="aurel_header_mobile_logo">
-					<div class="aurel_logo_cont">
-						<a href="/" class="aurel_image_logo aurel_dp aurel_no_select aurel_retina"></a>
-					</div>
-				</div>
+        <main class="my_content_wrapper" id="main-content">
+            {% block content %}{% endblock content %}
+        </main>
 
-				<a class="aurel_header_mobile_menu_toggler" href="javascript:void(0)">
-					<span class="aurel_mmt_icon">
-						<span class="aurel_mmt_line01"></span>
-						<span class="aurel_mmt_line02"></span>
-						<span class="aurel_mmt_line03"></span>
-					</span>
-				</a>
-			</div>
+        <div class="aurel_verticaly_page_trigger"></div>
 
-			<!-- Mobile Menu -->
-			<div class="aurel_mobile_menu_wrapper">
-				<nav class="aurel_mobile_nav">
-					<ul class="aurel_menu">
-							<li class="menu-item-has-children">
-								<a href="/">Home</a>
-							</li>
+        {% block footer %}
+        <footer class="aurel_footer aurel_border_off site-footer">
+            <div class="aurel_footer_inner aurel_container">
+                <nav class="footer-links" aria-label="Footer navigation">
+                    <a href="{% url 'about' %}">About</a>
+                    <a href="{% url 'contact' %}">Contact</a>
+                    <a href="{% url 'privacy-policy' %}">Privacy policy</a>
+                    <a href="{% url 'spotting-guide' %}">Spotting guide</a>
+                    <a id="privacy-settings-link" href="#" hidden>Privacy and cookie settings</a>
+                </nav>
+                <p class="aurel_copyright">&copy; 2021–{% now "Y" %} ThreeOne Aviation. Original aircraft photography from Malta.</p>
+            </div>
+        </footer>
+        {% endblock footer %}
+    </div>
 
-							<li class="menu-item-has-children">
-								<a href="/featured">Featured</a>
-							</li>
+    <div class="aurel_preloader_wrapper" aria-hidden="true">
+        <div class="aurel_preloader_content">
+            <div class="aurel_preloader_bar"></div>
+            <p class="aurel_preloader_text">LOADING</p>
+        </div>
+    </div>
 
-							<li class="menu-item-has-children">
-								<a href="/collection">Collection</a>
-							</li>
-					</ul>
-				</nav>
-			</div>
-		</header>
-
-		<!-- Content -->
-		{% block wallpaper_image%}
-					<div class="wallpaper aurel_js_bg_image" style="background-color: #819dc2">
-					</div>
-		{% endblock wallpaper_image%}
-
-		<div class="my_content_wrapper">
-			{% block content%}					
-			{% endblock content%}
-		</div>
-
-		<div class="aurel_verticaly_page_trigger"></div>
-		
-		<!-- Footer -->
-		{% block footer%}
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7886748096844050" crossorigin="anonymous"></script>
-            <ins class="adsbygoogle"
-                 style="display:block"
-                 data-ad-client="ca-pub-7886748096844050"
-                 data-ad-slot="4618144653"
-                 data-ad-format="auto"
-                 data-full-width-responsive="true"></ins>
-        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-
-		<footer class="aurel_footer aurel_border_off">
-			<div class="aurel_footer_inner aurel_container">
-				<div class="aurel_copyright">© 2021 ThreeOne Aviation. All Rights Reserved. <br/> <span style="display: block; margin-top: 10px;">Email: info@threeoneaviation.com</span> </div>
-			</div>
-		</footer>
-		{% endblock footer%}
-
-	</div>
-
-	<!-- Preloader -->
-	<div class="aurel_preloader_wrapper">
-		<div class="aurel_preloader_content">
-			<div class="aurel_preloader_bar"></div>
-			<h6 class="aurel_preloader_text">LOADING</h6>
-		</div>
-	</div>
-
-	<!-- JS Files -->
-	
-	<script src="{% static 'js/jquery.min.js' %}"></script>
-	<script src="{% static 'js/photoswipe.min.js' %}"></script>
-	<script src="{% static 'js/photoswipe-ui-default.min.js' %}"></script>
-	<script src="{% static 'js/theme.js' %}"></script>
-	<script src="{% static 'js/pm_image_slider.js' %}"></script>
-	
-	
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/photoswipe.min.js' %}"></script>
+    <script src="{% static 'js/photoswipe-ui-default.min.js' %}"></script>
+    <script src="{% static 'js/theme.js' %}"></script>
+    <script src="{% static 'js/pm_image_slider.js' %}"></script>
+    <script>
+        window.googlefc = window.googlefc || {};
+        window.googlefc.callbackQueue = window.googlefc.callbackQueue || [];
+        window.googlefc.callbackQueue.push({
+            CONSENT_API_READY: function () {
+                var link = document.getElementById('privacy-settings-link');
+                if (!link || !window.googlefc.showRevocationMessage) return;
+                link.hidden = false;
+                link.addEventListener('click', function (event) {
+                    event.preventDefault();
+                    window.googlefc.showRevocationMessage();
+                });
+            }
+        });
+    </script>
 </body>
 </html>

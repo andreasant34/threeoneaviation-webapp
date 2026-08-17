@@ -1,3 +1,4 @@
+from django.http import Http404
 from django.shortcuts import render
 from dataclasses import asdict
 from aviationwebapp.services.content_service import ContentService
@@ -9,19 +10,44 @@ from  aviationwebapp.view_models.collection_view_models import CollectionRootVie
 ContentServiceInstance = ContentService()
 
 def home(request):
-    return render(request, 'home/index.html')
+    airlines = ContentServiceInstance.get_airlines()
+    return render(request, 'home/index.html', {
+        'airlines_count': len(airlines),
+        'latest_registrations': ContentServiceInstance.get_latest_registrations(),
+        'registrations_count': ContentServiceInstance.get_registrations_count(),
+    })
 
 def not_found(request,exception):
-    return render(request, '404.html')
+    return render(request, '404.html', status=404)
 
 def error(request):
-    return render(request, '500.html')    
+    return render(request, '500.html', status=500)
+
+def about(request):
+    return render(request, 'about.html', {'highlight_about_menu_item': True})
+
+def contact(request):
+    return render(request, 'contact.html', {'highlight_contact_menu_item': True})
+
+def spotting_guide(request):
+    return render(request, 'spotting-guide.html', {'highlight_guide_menu_item': True})
 
 def privacy_policy(request):
     return render(request, 'privacy-policy.html')
 
 def ads_txt(request):
-    return render(request, 'ads.txt')
+    return render(request, 'ads.txt', content_type='text/plain')
+
+def robots_txt(request):
+    return render(request, 'robots.txt', content_type='text/plain')
+
+def sitemap(request):
+    return render(
+        request,
+        'sitemap.xml',
+        {'airlines': ContentServiceInstance.get_airlines()},
+        content_type='application/xml'
+    )
 
 def featured(request):
     featured_result = ContentServiceInstance.get_featured()
@@ -72,26 +98,31 @@ def __render_airline_and_or_registration(request, airline_name:str, registration
     airline = ContentServiceInstance.get_airline(airline_name)
 
     if airline is not None and registration_name is not None:
-        photos = ContentServiceInstance.get_registration_photos(airline, registration_name)
         registration = ContentServiceInstance.get_registration(airline, registration_name)
 
-        if registration is None: #Invalid registration, view the default list of airlines
-            return __render_root_collection(request)
+        if registration is None:
+            raise Http404("Aircraft registration not found")
+
+        photos = ContentServiceInstance.get_registration_photos(airline, registration_name)
 
         cover_photos = [p for p in photos if "cover" in p.name]
         other_photos = [p for p in photos if "cover" not in p.name]
-        cover_photos = cover_photos or other_photos
-
-        # Fallback if there isn't a cover photo
-        cover = cover_photos[0] if cover_photos else None
+        cover = cover_photos[0] if cover_photos else (other_photos[0] if other_photos else None)
+        if not cover_photos and other_photos:
+            other_photos = other_photos[1:]
 
         view_model = CollectionSingleSearchViewModel(
             airline= airline,
             aircraft= registration.aircraft,
             highlight_collection_menu_item= True,
-            registration_name= registration_name.upper(),
+            registration_name= registration.name,
             registration_photos= other_photos,
             cover= cover,
+            photo_count= len(photos),
+            related_registrations= [
+                item for item in registration.aircraft.registrations
+                if item.short_name != registration.short_name
+            ][:6],
             registrations_count= ContentServiceInstance.get_registrations_count()
         )
 
@@ -106,7 +137,7 @@ def __render_airline_and_or_registration(request, airline_name:str, registration
 
         return render(request, 'collection/registrations.html', asdict(view_model))
 
-    return __render_root_collection(request)
+    raise Http404("Airline collection not found")
 
 def __render_root_collection(request):
     """Renders the root collection view that lists airlines"""
@@ -119,6 +150,3 @@ def __render_root_collection(request):
     )
 
     return render(request, 'collection/collection.html', asdict(view_model))
-
-def competition(request):
-    return render(request, 'competition/competition.html')

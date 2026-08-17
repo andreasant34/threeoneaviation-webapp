@@ -1,35 +1,98 @@
 {% extends 'layout.html' %}
-{% load static %}
 
-{% block title %}Home{% endblock title %}
-
-{% block header_portrait_class%}
-{% endblock header_portrait_class%}
-
-{% block wallpaper_image%}
-		<div class="wallpaper aurel_js_bg_image" data-src="https://cdn.threeoneaviation.com/wallpaper.png">
-		</div>
-
-{% endblock wallpaper_image%}
+{% block title %}Aircraft Photography & Plane Spotting in Malta{% endblock title %}
+{% block meta_description %}Explore original aircraft photography from Malta, browse the archive by airline and registration, and read a practical guide to plane spotting at Malta International Airport.{% endblock meta_description %}
+{% block canonical %}https://threeoneaviation.com/{% endblock canonical %}
 
 {% block content %}
-<div class="home_quote">
-<p class="aurel_js_font_size aurel_js_color" data-font-size="28px" data-line-height="48px" data-color="#fff" style="color: rgb(255, 255, 255); text-align: center;"><i>Plane spotting empowered by <br/> Malta's very own <br/> Runway <strong>31</strong></i></p>
+<div class="site-page home-page">
+    <section class="home-hero" aria-labelledby="home-title">
+        <p class="eyebrow">Malta-based aviation photography</p>
+        <h1 id="home-title">Aircraft photography and plane spotting from Runway 31</h1>
+        <p class="hero-intro">
+            ThreeOne Aviation is an independent visual record of aircraft seen in Malta. Every gallery is organised by airline, aircraft type and registration, with capture dates and camera details preserved from the original photographs.
+        </p>
+        <div class="hero-actions">
+            <a class="content-button primary" href="{% url 'collection' %}">Explore the aircraft collection</a>
+            <a class="content-button" href="{% url 'spotting-guide' %}">Read the Malta spotting guide</a>
+        </div>
+    </section>
+
+    <section class="content-section archive-intro" aria-labelledby="archive-title">
+        <div>
+            <p class="eyebrow">The archive</p>
+            <h2 id="archive-title">A searchable record, not just a photo stream</h2>
+            <p>
+                Use the collection to identify a photographed aircraft, compare registrations within the same fleet, or revisit an airline's appearances in Malta. Individual aircraft pages include the information available in the source image metadata rather than generic, mass-produced aircraft text.
+            </p>
+        </div>
+        <dl class="archive-stats" aria-label="Archive statistics">
+            <div><dt>{{ registrations_count }}</dt><dd>aircraft registrations</dd></div>
+            <div><dt>{{ airlines_count }}</dt><dd>airline collections</dd></div>
+            <div><dt>100%</dt><dd>original photography</dd></div>
+        </dl>
+    </section>
+
+    {% include 'components/ad-unit.html' with ad_slot='4618144653' ad_placement='home-horizontal' ad_format='auto' %}
+
+    {% if latest_registrations %}
+    <section class="content-section" aria-labelledby="latest-title">
+        <div class="section-heading-row">
+            <div>
+                <p class="eyebrow">Recently catalogued</p>
+                <h2 id="latest-title">Latest aircraft entries</h2>
+            </div>
+            <a class="text-link" href="{% url 'collection' %}">Browse the full collection</a>
+        </div>
+        <div class="editorial-card-grid aircraft-card-grid">
+            {% for item in latest_registrations %}
+            <article class="editorial-card aircraft-card">
+                <a href="{% url 'registration' item.aircraft.airline.short_name item.short_name %}">
+                    {% if item.cover_url %}<img src="{{ item.cover_url }}" alt="{{ item.name }}, {{ item.aircraft.name }}, in the {{ item.aircraft.airline.name }} collection" loading="lazy">{% endif %}
+                    <div class="card-copy">
+                        <p class="card-kicker">{{ item.aircraft.airline.name }}</p>
+                        <h3>{{ item.name }}</h3>
+                        <p>{{ item.aircraft.name }}</p>
+                    </div>
+                </a>
+            </article>
+            {% endfor %}
+        </div>
+    </section>
+    {% endif %}
+
+    <section class="content-section two-column-feature" aria-labelledby="malta-title">
+        <div>
+            <p class="eyebrow">Plane spotting in Malta</p>
+            <h2 id="malta-title">Plan the photograph before the aircraft arrives</h2>
+            <p>
+                Malta's light can be superb, but runway direction, wind, heat haze and access all affect the result. The guide explains a responsible workflow for checking movements, choosing a legal public viewpoint and setting up a camera for jets or propeller aircraft.
+            </p>
+            <a class="text-link" href="{% url 'spotting-guide' %}">Plane-spotting and photography guide</a>
+        </div>
+        <aside class="field-note">
+            <p class="eyebrow">Archive method</p>
+            <h3>What each entry records</h3>
+            <ul class="check-list">
+                <li>Aircraft registration and type</li>
+                <li>Airline or operator collection</li>
+                <li>Date photographed</li>
+                <li>Camera model and image dimensions</li>
+                <li>Related registrations from the same fleet</li>
+            </ul>
+        </aside>
+    </section>
+
+    <section class="content-section compact-cta" aria-labelledby="project-title">
+        <div>
+            <p class="eyebrow">Behind ThreeOne</p>
+            <h2 id="project-title">An enthusiast-led photography project</h2>
+            <p>Learn why the archive exists, how photographs are catalogued and how to report an identification correction or ask about image use.</p>
+        </div>
+        <div class="hero-actions">
+            <a class="content-button" href="{% url 'about' %}">About the project</a>
+            <a class="content-button" href="{% url 'contact' %}">Contact ThreeOne</a>
+        </div>
+    </section>
 </div>
 {% endblock content %}
-
-{% block footer%}
-	<footer class="aurel_footer aurel_border_off" style="position: absolute !important; bottom: 0px !important;">
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7886748096844050" crossorigin="anonymous"></script>
-            <ins class="adsbygoogle"
-                 style="display:block"
-                 data-ad-client="ca-pub-7886748096844050"
-                 data-ad-slot="4618144653"
-                 data-ad-format="auto"
-                 data-full-width-responsive="true"></ins>
-        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-		<div class="aurel_footer_inner aurel_container">
-			<div class="aurel_copyright">© 2021 ThreeOne Aviation. All Rights Reserved. <br/> <span style="display: block; margin-top: 10px;">Email: info@threeoneaviation.com</span> </div>
-		</div>
-	</footer>
-{% endblock footer%}

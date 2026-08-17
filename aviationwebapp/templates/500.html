@@ -1,27 +1,17 @@
 {% extends 'layout.html' %}
-{% load static %}
 
-{% block title %}Error{% endblock title %}
-
-{% block header_portrait_class%}
-{% endblock header_portrait_class%}
-
-{% block wallpaper_image%}
-		<div class="wallpaper aurel_js_bg_image" data-src="https://threeoneaviation.fra1.cdn.digitaloceanspaces.com/wallpaper.png">
-		</div>
-
-{% endblock wallpaper_image%}
+{% block title %}Temporary Site Error{% endblock title %}
+{% block meta_description %}ThreeOne Aviation encountered a temporary error.{% endblock meta_description %}
+{% block robots %}noindex,nofollow{% endblock robots %}
+{% block adsense %}{% endblock adsense %}
 
 {% block content %}
-<div class="home_quote">
-<p class="aurel_js_font_size aurel_js_color" data-font-size="28px" data-line-height="48px" data-color="#fff" style="color: rgb(255, 255, 255); text-align: center;">Mayday! Mayday! All engines failed! We are working to restart our engines.</p>
+<div class="site-page status-page">
+    <div class="prose-card">
+        <p class="eyebrow">Temporary error</p>
+        <h1>The archive could not complete that request</h1>
+        <p>Please try again shortly. If the problem continues, email <a href="mailto:info@threeoneaviation.com">info@threeoneaviation.com</a>.</p>
+        <a class="content-button primary" href="{% url 'home' %}">Return home</a>
+    </div>
 </div>
 {% endblock content %}
-
-{% block footer%}
-	<footer class="aurel_footer aurel_border_off" style="position: absolute !important; bottom: 0px !important;">
-		<div class="aurel_footer_inner aurel_container">
-			<div class="aurel_copyright">© 2021 ThreeOne Aviation. All Rights Reserved. <br/> <span style="display: block; margin-top: 10px;">Email: info@threeoneaviation.com</span> </div>
-		</div>
-	</footer>
-{% endblock footer%}

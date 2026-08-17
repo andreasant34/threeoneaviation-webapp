@@ -160,14 +160,24 @@ class ContentService:
         photos = []
 
         for item in (f for f in files if "-wm.jpg" in f["name"].lower()):
+            metadata = item.get("imageMediaMetadata", {})
+            capture_time = metadata.get("time")
+            formatted_capture_time = datetime.strptime(
+                capture_time, "%Y:%m:%d %H:%M:%S"
+            ).strftime("%b %d, %Y") if capture_time else "Date not recorded"
+
             photo = Photo(
                 item["id"], item["name"],
-                datetime.strptime(
-                    item["imageMediaMetadata"]["time"], "%Y:%m:%d %H:%M:%S"
-                ).strftime("%b %d, %Y"),
-                item["imageMediaMetadata"]["width"],
-                item["imageMediaMetadata"]["height"],
-                item["imageMediaMetadata"]["cameraModel"]
+                formatted_capture_time,
+                metadata.get("width", 0),
+                metadata.get("height", 0),
+                metadata.get("cameraModel", ""),
+                camera_make=metadata.get("cameraMake", ""),
+                exposure_time=metadata.get("exposureTime"),
+                aperture=metadata.get("aperture"),
+                focal_length=metadata.get("focalLength"),
+                iso_speed=metadata.get("isoSpeed"),
+                description=item.get("description", "")
             )
             photos.append(photo)
 

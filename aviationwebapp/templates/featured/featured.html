@@ -1,66 +1,54 @@
 {% extends 'layout.html' %}
 
-{% block title %}Featured{% endblock title %}
+{% block title %}Featured Aircraft Photography{% endblock title %}
+{% block meta_description %}A curated selection of original aircraft photography from Malta, followed by the latest registrations added to the ThreeOne Aviation archive.{% endblock meta_description %}
+{% block og_title %}Featured Aircraft Photography | ThreeOne Aviation{% endblock og_title %}
 
-{% block content%}
-	<div class="col col-12 aurel_pl_30 aurel_pr_30">
-		<div class="aurel_single_gallery_wrapper aurel_no_select aurel_single_gallery_slider aurel_photoswipe_wrapper" data-uniqid="0" data-pswp-uid="0">
-			<div class="single_cover_width aurel_slider_wrapper aurel_slider_title_align_left aurel_slider_004" data-header="yes" data-footer="yes" data-autoplay="on" data-interval="8000" data-id="004">
-				<div class="aurel_slider fit_always" data-autoplay="on" data-interval="8000">
-					<span class="favourite_star"><i class="fa fa-star"></i></span>
-					<!-- Item 1 -->
-					{% for item in featured %}
-						<div class="aurel_slider_slide aurel_slide2preload aurel_slider_slide1" data-count="{{ forloop.counter}}">
-							<a class=" aurel_pswp_slide aurel_grid_blog_image aurel_dp aurel_no_select cover" href="{{item.max_image_url}}" data-size="{{item.data_size}}" data-count="{{ forloop.counter|add:-1}}">
-	                            <img class="cover" src="{{item.min_image_url}}" alt="">
-	                        </a>
-							<div class="aurel_slider_overlay_gradient"></div>
-						</div>
-					{%endfor%}
-				</div>
+{% block content %}
+<div class="site-page featured-page">
+    <header class="catalog-header">
+        <p class="eyebrow">Editor's selection</p>
+        <h1>Featured aircraft photography</h1>
+        <p class="article-lead">A visual selection from the ThreeOne Aviation collection, chosen for the aircraft, light, livery or moment—not generated from a popularity feed.</p>
+    </header>
 
-				<a href="javascript:void(0)" class="aurel_slider_btn_prev"></a>
-				<a href="javascript:void(0)" class="aurel_slider_btn_next"></a>
+    {% if featured %}
+    <section class="featured-slider-section" aria-label="Featured aircraft photographs">
+        <div class="aurel_single_gallery_wrapper aurel_no_select aurel_single_gallery_slider aurel_photoswipe_wrapper" data-uniqid="0" data-pswp-uid="0">
+            <div class="single_cover_width aurel_slider_wrapper aurel_slider_title_align_left aurel_slider_004" data-header="yes" data-footer="yes" data-autoplay="on" data-interval="8000" data-id="004">
+                <div class="aurel_slider fit_always" data-autoplay="on" data-interval="8000">
+                    {% for item in featured %}
+                    <div class="aurel_slider_slide aurel_slide2preload aurel_slider_slide1" data-count="{{ forloop.counter }}">
+                        <a class="aurel_pswp_slide aurel_grid_blog_image aurel_dp aurel_no_select cover" href="{{ item.max_image_url }}" data-size="{{ item.data_size }}" data-count="{{ forloop.counter|add:-1 }}">
+                            <img class="cover" src="{{ item.min_image_url }}" alt="Featured original aircraft photograph captured on {{ item.date_taken }}{% if item.camera_model %} with {{ item.camera_model }}{% endif %}">
+                        </a>
+                        <div class="aurel_slider_overlay_gradient"></div>
+                    </div>
+                    {% endfor %}
+                </div>
+                <a href="javascript:void(0)" class="aurel_slider_btn_prev" aria-label="Previous photograph"></a>
+                <a href="javascript:void(0)" class="aurel_slider_btn_next" aria-label="Next photograph"></a>
+                <div class="aurel_gallery_preloader"></div>
+            </div>
+        </div>
+    </section>
+    {% endif %}
 
-				<div class="aurel_gallery_preloader"></div>
-			</div>
-		</div>
-
-		<div class="aurel_albums_listing_cont aurel_albums_grid aurel_albums_grid3 view_type_grid albums_titles_show" style="margin-top: 30px; position: relative;">
-			
-	            {% for item in latest_registrations %}   
-		            <div class="aurel_albums_grid_item columns_3"> 
-						<div class="aurel_inner_cont">
-							<span class="latest_icon"><i class="fa fa-bell"></i></span>
-							<a href="collection/{{item.aircraft.airline.short_name}}/{{item.short_name}}" class="aurel_grid_blog_image aurel_dp aurel_no_select cover">
-								<img class="cover" src="{{item.cover_url}}" alt="">
-
-								<span class="aurel_albums_grid_content">
-		                            <span class="aurel_albums_title">{{item.name}} <span style="float:right;"> {{item.aircraft.name}} </span></span>
-								</span>
-								</a>
-						</div>
-		            </div>
-
-                    {% if not forloop.counter|divisibleby:"2" %}
-                        <div class="aurel_albums_grid_item columns_3">
-                            <div class="aurel_inner_cont">
-                                    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7886748096844050"
-                                         crossorigin="anonymous"></script>
-                                    <ins class="adsbygoogle"
-                                         style="display:block"
-                                         data-ad-format="fluid"
-                                         data-ad-layout-key="-6i+eh+1f-3e+31"
-                                         data-ad-client="ca-pub-7886748096844050"
-                                         data-ad-slot="2603309691"></ins>
-                                    <script>
-                                         (adsbygoogle = window.adsbygoogle || []).push({});
-                                    </script>
-                            </div>
-                        </div>
-                    {% endif %}
-		         {%endfor%}
-    	</div>
-	</div>
-{% endblock content%}
-
+    <section class="content-section" aria-labelledby="latest-title">
+        <div class="section-heading-row">
+            <div><p class="eyebrow">Archive updates</p><h2 id="latest-title">Latest aircraft registrations</h2></div>
+            <a class="text-link" href="{% url 'collection' %}">Browse every collection</a>
+        </div>
+        <div class="editorial-card-grid aircraft-card-grid">
+            {% for item in latest_registrations %}
+            <article class="editorial-card aircraft-card">
+                <a href="{% url 'registration' item.aircraft.airline.short_name item.short_name %}">
+                    {% if item.cover_url %}<img src="{{ item.cover_url }}" alt="{{ item.name }}, {{ item.aircraft.name }}, in the {{ item.aircraft.airline.name }} collection" loading="lazy">{% endif %}
+                    <div class="card-copy"><p class="card-kicker">{{ item.aircraft.airline.name }}</p><h3>{{ item.name }}</h3><p>{{ item.aircraft.name }}</p></div>
+                </a>
+            </article>
+            {% empty %}<p class="empty-state">No recent registrations are available at the moment.</p>{% endfor %}
+        </div>
+    </section>
+</div>
+{% endblock content %}
