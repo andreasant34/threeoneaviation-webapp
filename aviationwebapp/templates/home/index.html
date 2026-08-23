@@ -1,35 +1,32 @@
 {% extends 'layout.html' %}
 
-{% block title %}Aircraft Photography & Plane Spotting in Malta{% endblock title %}
-{% block meta_description %}Explore original aircraft photography from Malta, browse the archive by airline and registration, and read a practical guide to plane spotting at Malta International Airport.{% endblock meta_description %}
+{% block title %}Aircraft Photography & Plane Spotting from Malta's runway 13/31{% endblock title %}
+{% block meta_description %}Explore original aircraft photography from Malta and browse our catalogue by airline and registration.{% endblock meta_description %}
 {% block canonical %}https://threeoneaviation.com/{% endblock canonical %}
 
 {% block content %}
 <div class="site-page home-page">
     <section class="home-hero" aria-labelledby="home-title">
         <p class="eyebrow">Malta-based aviation photography</p>
-        <h1 id="home-title">Aircraft photography and plane spotting from Runway 31</h1>
+        <h1 id="home-title">Aircraft photography and plane spotting from Runway 13/31</h1>
         <p class="hero-intro">
-            ThreeOne Aviation is an independent visual record of aircraft seen in Malta. Every gallery is organised by airline, aircraft type and registration, with capture dates and camera details preserved from the original photographs.
+            ThreeOne Aviation is an independent catalogue of aircraft seen in Malta, organised by airline, aircraft type and registration.
         </p>
         <div class="hero-actions">
-            <a class="content-button primary" href="{% url 'collection' %}">Explore the aircraft collection</a>
-            <a class="content-button" href="{% url 'spotting-guide' %}">Read the Malta spotting guide</a>
+            <a class="content-button primary" href="{% url 'collection' %}">Explore the catalogue</a>
         </div>
     </section>
 
     <section class="content-section archive-intro" aria-labelledby="archive-title">
         <div>
-            <p class="eyebrow">The archive</p>
-            <h2 id="archive-title">A searchable record, not just a photo stream</h2>
+            <p class="eyebrow">The Catalogue</p>
             <p>
-                Use the collection to identify a photographed aircraft, compare registrations within the same fleet, or revisit an airline's appearances in Malta. Individual aircraft pages include the information available in the source image metadata rather than generic, mass-produced aircraft text.
+                Use the catalogue to identify an aircraft and compare registrations within the same fleet.
             </p>
         </div>
         <dl class="archive-stats" aria-label="Archive statistics">
             <div><dt>{{ registrations_count }}</dt><dd>aircraft registrations</dd></div>
-            <div><dt>{{ airlines_count }}</dt><dd>airline collections</dd></div>
-            <div><dt>100%</dt><dd>original photography</dd></div>
+            <div><dt>{{ airlines_count }}</dt><dd>airlines</dd></div>
         </dl>
     </section>
 
@@ -39,10 +36,9 @@
     <section class="content-section" aria-labelledby="latest-title">
         <div class="section-heading-row">
             <div>
-                <p class="eyebrow">Recently catalogued</p>
-                <h2 id="latest-title">Latest aircraft entries</h2>
+                <p class="eyebrow">Recently captured</p>
             </div>
-            <a class="text-link" href="{% url 'collection' %}">Browse the full collection</a>
+            <a class="text-link" href="{% url 'collection' %}">Browse the full catalogue</a>
         </div>
         <div class="editorial-card-grid aircraft-card-grid">
             {% for item in latest_registrations %}
@@ -61,37 +57,14 @@
     </section>
     {% endif %}
 
-    <section class="content-section two-column-feature" aria-labelledby="malta-title">
-        <div>
-            <p class="eyebrow">Plane spotting in Malta</p>
-            <h2 id="malta-title">Plan the photograph before the aircraft arrives</h2>
-            <p>
-                Malta's light can be superb, but runway direction, wind, heat haze and access all affect the result. The guide explains a responsible workflow for checking movements, choosing a legal public viewpoint and setting up a camera for jets or propeller aircraft.
-            </p>
-            <a class="text-link" href="{% url 'spotting-guide' %}">Plane-spotting and photography guide</a>
-        </div>
-        <aside class="field-note">
-            <p class="eyebrow">Archive method</p>
-            <h3>What each entry records</h3>
-            <ul class="check-list">
-                <li>Aircraft registration and type</li>
-                <li>Airline or operator collection</li>
-                <li>Date photographed</li>
-                <li>Camera model and image dimensions</li>
-                <li>Related registrations from the same fleet</li>
-            </ul>
-        </aside>
-    </section>
-
     <section class="content-section compact-cta" aria-labelledby="project-title">
         <div>
-            <p class="eyebrow">Behind ThreeOne</p>
+            <p class="eyebrow">Behind ThreeOne Aviation</p>
             <h2 id="project-title">An enthusiast-led photography project</h2>
-            <p>Learn why the archive exists, how photographs are catalogued and how to report an identification correction or ask about image use.</p>
         </div>
         <div class="hero-actions">
             <a class="content-button" href="{% url 'about' %}">About the project</a>
-            <a class="content-button" href="{% url 'contact' %}">Contact ThreeOne</a>
+            <a class="content-button" href="{% url 'contact' %}">Contact ThreeOne Aviation</a>
         </div>
     </section>
 </div>

@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{% block title %}Aircraft Photography in Malta{% endblock title %} - ThreeOne Aviation</title>
-    <meta name="description" content="{% block meta_description %}An independent archive of original aircraft photography and practical plane-spotting information from Malta.{% endblock meta_description %}">
+    <meta name="description" content="{% block meta_description %}An independent catalogue of original aircraft photographs taken from Malta's Runway 13/31.{% endblock meta_description %}">
     <meta name="author" content="ThreeOne Aviation">
     <meta name="robots" content="{% block robots %}index,follow,max-image-preview:large{% endblock robots %}">
     <meta name="google-adsense-account" content="ca-pub-7886748096844050">
@@ -18,7 +18,7 @@
     <meta property="og:site_name" content="ThreeOne Aviation">
     <meta property="og:type" content="website">
     <meta property="og:title" content="{% block og_title %}ThreeOne Aviation — Aircraft Photography in Malta{% endblock og_title %}">
-    <meta property="og:description" content="{% block og_description %}Original aircraft photography and practical plane-spotting information from Malta.{% endblock og_description %}">
+    <meta property="og:description" content="{% block og_description %}Original aircraft photography taken from Malta's Runway 13/31.{% endblock og_description %}">
     <meta property="og:url" content="https://threeoneaviation.com{{ request.path }}">
 
     <link rel="stylesheet" href="{% static 'css/kube.css' %}">
@@ -26,12 +26,10 @@
     <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
     <link rel="stylesheet" href="{% static 'css/theme.css' %}">
     <link rel="stylesheet" href="{% static 'css/photoswipe.css' %}">
-    <link rel="stylesheet" href="{% static 'css/site-content.css' %}?v=20260817-5">
+    <link rel="stylesheet" href="{% static 'css/site-content.css' %}">
 
     {% block adsense %}
-    {% if adsense_ad_units_enabled %}
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7886748096844050" crossorigin="anonymous"></script>
-    {% endif %}
     {% endblock adsense %}
 </head>
 
@@ -41,7 +39,7 @@
             <div class="aurel_main_header_wrapper">
                 <div class="aurel_header_left_part aurel_header_logo_part">
                     <div class="aurel_logo_cont">
-                        <a class="aurel_image_logo aurel_dp aurel_no_select aurel_retina" href="{% url 'home' %}" aria-label="ThreeOne Aviation home"></a>
+                        <a class="aurel_image_logo aurel_dp aurel_no_select aurel_retina" href="{% url 'home' %}" aria-label="ThreeOne Aviation Home"></a>
                     </div>
                 </div>
 
@@ -51,7 +49,6 @@
                             <li class="{% if request.path == '/' %}current-menu-ancestor{% endif %}"><a href="{% url 'home' %}">Home</a></li>
                             <li class="{% if highlight_featured_menu_item %}current-menu-ancestor{% endif %}"><a href="{% url 'featured' %}">Featured</a></li>
                             <li class="{% if highlight_collection_menu_item %}current-menu-ancestor{% endif %}"><a href="{% url 'collection' %}">Collection</a></li>
-                            <li class="{% if highlight_guide_menu_item %}current-menu-ancestor{% endif %}"><a href="{% url 'spotting-guide' %}">Spotting guide</a></li>
                             <li class="{% if highlight_about_menu_item %}current-menu-ancestor{% endif %}"><a href="{% url 'about' %}">About</a></li>
                         </ul>
                     </nav>
@@ -63,7 +60,7 @@
 
                 <div class="aurel_header_mobile_logo">
                     <div class="aurel_logo_cont">
-                        <a href="{% url 'home' %}" class="aurel_image_logo aurel_dp aurel_no_select aurel_retina" aria-label="ThreeOne Aviation home"></a>
+                        <a href="{% url 'home' %}" class="aurel_image_logo aurel_dp aurel_no_select aurel_retina" aria-label="ThreeOne Aviation Home"></a>
                     </div>
                 </div>
 
@@ -81,8 +78,7 @@
                     <ul class="aurel_menu">
                         <li><a href="{% url 'home' %}">Home</a></li>
                         <li><a href="{% url 'featured' %}">Featured</a></li>
-                        <li><a href="{% url 'collection' %}">Collection</a></li>
-                        <li><a href="{% url 'spotting-guide' %}">Spotting guide</a></li>
+                        <li><a href="{% url 'collection' %}">Catalogue</a></li>
                         <li><a href="{% url 'about' %}">About</a></li>
                         <li><a href="{% url 'contact' %}">Contact</a></li>
                     </ul>
@@ -103,10 +99,8 @@
                     <a href="{% url 'about' %}">About</a>
                     <a href="{% url 'contact' %}">Contact</a>
                     <a href="{% url 'privacy-policy' %}">Privacy policy</a>
-                    <a href="{% url 'spotting-guide' %}">Spotting guide</a>
-                    <a id="privacy-settings-link" href="#" hidden>Privacy and cookie settings</a>
                 </nav>
-                <p class="aurel_copyright">&copy; 2021–{% now "Y" %} ThreeOne Aviation. Original aircraft photography from Malta.</p>
+                <p class="aurel_copyright">&copy; 2021–{% now "Y" %} ThreeOne Aviation. Original aircraft photography taken from Malta's Runway 13/31.</p>
             </div>
         </footer>
         {% endblock footer %}
@@ -124,20 +118,5 @@
     <script src="{% static 'js/photoswipe-ui-default.min.js' %}"></script>
     <script src="{% static 'js/theme.js' %}"></script>
     <script src="{% static 'js/pm_image_slider.js' %}"></script>
-    <script>
-        window.googlefc = window.googlefc || {};
-        window.googlefc.callbackQueue = window.googlefc.callbackQueue || [];
-        window.googlefc.callbackQueue.push({
-            CONSENT_API_READY: function () {
-                var link = document.getElementById('privacy-settings-link');
-                if (!link || !window.googlefc.showRevocationMessage) return;
-                link.hidden = false;
-                link.addEventListener('click', function (event) {
-                    event.preventDefault();
-                    window.googlefc.showRevocationMessage();
-                });
-            }
-        });
-    </script>
 </body>
 </html>

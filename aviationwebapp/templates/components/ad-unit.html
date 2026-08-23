@@ -1,4 +1,3 @@
-{% if adsense_ad_units_enabled %}
 <aside class="ad-placement ad-placement--{{ ad_placement|default:'content' }}" aria-label="Advertisement">
     <span class="ad-placement-label">Advertisement</span>
     <ins class="adsbygoogle"
@@ -12,6 +11,3 @@
         (adsbygoogle = window.adsbygoogle || []).push({});
     </script>
 </aside>
-{% else %}
-<!-- Reserved AdSense placement: {{ ad_placement|default:'content' }}; slot {{ ad_slot }}. Set ADSENSE_AD_UNITS_ENABLED=true to activate it. -->
-{% endif %}

@@ -11,7 +11,6 @@ urlpatterns = [
     path('collection', views.collection, name='collection'),
     path('collection/<str:airline_name>', views.collection, name='airline'),
     path('collection/<str:airline_name>/<str:registration_name>', views.collection, name='registration'),
-    path('spotting-guide', views.spotting_guide, name='spotting-guide'),
     path('about', views.about, name='about'),
     path('contact', views.contact, name='contact'),
     path('privacy-policy', views.privacy_policy, name='privacy-policy'),
