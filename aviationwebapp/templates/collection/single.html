@@ -1,25 +1,25 @@
 {% extends 'layout.html' %}
 
-{% block title %}{{ registration_name }} — {{ aircraft.name }} Aircraft Photos{% endblock title %}
-{% block meta_description %}Original photographs of {{ registration_name }}, a {{ aircraft.name }} catalogued in the {{ airline.name }} collection, with capture dates and camera details.{% endblock meta_description %}
+{% block title %}{{ registration_name }} — {{ aircraft.name }} Photo{% endblock title %}
+{% block meta_description %}An original photograph of {{ registration_name }} in the {{ airline.name }} collection, with capture dates and camera details.{% endblock meta_description %}
 {% block og_title %}{{ registration_name }} — {{ aircraft.name }} | ThreeOne Aviation{% endblock og_title %}
-{% block og_description %}View {{ photo_count }} original photograph{{ photo_count|pluralize }} of {{ registration_name }} from the Malta-based ThreeOne Aviation archive.{% endblock og_description %}
+{% block og_description %}View an original photograph of {{ registration_name }} from the Malta-based ThreeOne Aviation catalogue.{% endblock og_description %}
 
 {% block content %}
 <div class="site-page aircraft-entry-page">
     <article>
         <header class="aircraft-entry-header">
             <nav class="breadcrumbs" aria-label="Breadcrumb">
-                <a href="{% url 'collection' %}">Collection</a>
+                <a href="{% url 'collection' %}">Catalogue</a>
                 <span aria-hidden="true">/</span>
                 <a href="{% url 'airline' airline.short_name %}">{{ airline.name }}</a>
                 <span aria-hidden="true">/</span>
                 <span>{{ registration_name }}</span>
             </nav>
-            <p class="eyebrow">Aircraft spotting entry</p>
+            <p class="eyebrow">Photo</p>
             <h1>{{ registration_name }} — {{ aircraft.name }}</h1>
             <p class="article-lead">
-                An original ThreeOne Aviation photo record filed in the {{ airline.name }} collection. The gallery preserves the capture date and camera model available in each source image's metadata.
+                An original ThreeOne Aviation photo filed in the {{ airline.name }} collection.
             </p>
         </header>
 
@@ -28,8 +28,7 @@
             <dl>
                 <div><dt>Registration</dt><dd>{{ registration_name }}</dd></div>
                 <div><dt>Aircraft type</dt><dd>{{ aircraft.name }}</dd></div>
-                <div><dt>Archive collection</dt><dd><a href="{% url 'airline' airline.short_name %}">{{ airline.name }}</a></dd></div>
-                <div><dt>Photographs</dt><dd>{{ photo_count }}</dd></div>
+                <div><dt>Airline</dt><dd><a href="{% url 'airline' airline.short_name %}">{{ airline.name }}</a></dd></div>
                 {% if cover %}
                 <div><dt>Featured capture date</dt><dd>{{ cover.date_taken }}</dd></div>
                 <div><dt>Camera</dt><dd>{{ cover.camera_model|default:"Not recorded" }}</dd></div>
@@ -39,7 +38,6 @@
                 {% if cover.iso_speed %}<div><dt>Sensitivity</dt><dd>ISO {{ cover.iso_speed }}</dd></div>{% endif %}
                 {% endif %}
             </dl>
-            <p class="fact-note">Airline and operator relationships can change over an aircraft's life. The collection name describes how the photograph is catalogued at ThreeOne Aviation.</p>
         </section>
 
         <section class="entry-search" aria-label="Search the aircraft archive">
@@ -55,10 +53,9 @@
         <section class="aircraft-gallery-section" aria-labelledby="photos-title">
             <div class="section-heading-row">
                 <div>
-                    <p class="eyebrow">Original photography</p>
-                    <h2 id="photos-title">{{ registration_name }} photo gallery</h2>
+                    <p class="eyebrow">Photo</p>
+                    <h2 id="photos-title">{{ registration_name }}</h2>
                 </div>
-                <p>{{ photo_count }} image{{ photo_count|pluralize }}</p>
             </div>
 
             {% if cover %}
@@ -92,7 +89,7 @@
                 {% endfor %}
             </div>
             {% else %}
-            <p class="empty-state">No photographs are currently available for this registration. The entry will be updated when an image is catalogued.</p>
+            <p class="empty-state">No photographs are currently available for this registration. The entry will be updated when an image is captured.</p>
             {% endif %}
         </section>
 

@@ -1,21 +1,19 @@
 {% extends 'layout.html' %}
 
 {% block title %}{{ airline.name }} Aircraft Photo Collection{% endblock title %}
-{% block meta_description %}Browse original {{ airline.name }} aircraft photographs by type and registration in the ThreeOne Aviation archive from Malta.{% endblock meta_description %}
+{% block meta_description %}Browse original {{ airline.name }} aircraft photographs by type and registration in the ThreeOne Aviation catalogue.{% endblock meta_description %}
 {% block og_title %}{{ airline.name }} Aircraft Photos | ThreeOne Aviation{% endblock og_title %}
 
 {% block content %}
 <div class="site-page catalog-page">
     <header class="catalog-header airline-catalog-header">
-        <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="{% url 'collection' %}">Collection</a><span aria-hidden="true">/</span><span>{{ airline.name }}</span></nav>
-        <p class="eyebrow">Airline or operator collection</p>
-        <h1>{{ airline.name }} aircraft photographs</h1>
-        <p class="article-lead">Select a registration to view its original photographs, capture dates and camera information. Aircraft are grouped by type to make individual airframes easier to compare.</p>
+        <p class="eyebrow">Airline</p>
+        <h1>{{ airline.name }}</h1>
         <form method="get" action="{% url 'collection' %}" class="catalog-search" role="search">
-            <label for="airline-search">Search the full registration archive</label>
+            <label for="collection-search">Not what you are looking for? Search again by aircraft registration</label>
             <div class="search-input-row">
-                <input id="airline-search" type="search" name="search" placeholder="Enter an aircraft registration">
-                <button type="submit" class="content-button primary">Search</button>
+                <input id="collection-search" type="search" name="search" placeholder="{{airline.aircraft_registration_example}}" autocomplete="off">
+                <button type="submit" class="content-button primary">Search {{ registrations_count }} registrations</button>
             </div>
         </form>
     </header>
@@ -35,12 +33,12 @@
                 </a>
             </article>
             {% empty %}
-            <p class="empty-state">No registrations are currently catalogued for this aircraft type.</p>
+            <p class="empty-state">No registrations were found for {{ aircraft.name }}.</p>
             {% endfor %}
         </div>
     </section>
     {% empty %}
-    <p class="empty-state">No aircraft are currently catalogued in this collection.</p>
+    <p class="empty-state">No registrations were found for {{ airline.name }}.</p>
     {% endfor %}
 </div>
 {% endblock content %}

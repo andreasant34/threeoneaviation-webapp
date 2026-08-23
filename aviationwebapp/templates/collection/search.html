@@ -1,27 +1,25 @@
 {% extends 'layout.html' %}
 
 {% block title %}Aircraft Registration Search{% endblock title %}
-{% block meta_description %}Search results from the ThreeOne Aviation aircraft registration photo archive.{% endblock meta_description %}
+{% block meta_description %}Search results from the ThreeOne Aviation catalogue.{% endblock meta_description %}
 {% block robots %}noindex,follow{% endblock robots %}
 {% block adsense %}{% endblock adsense %}
 
 {% block content %}
 <div class="site-page catalog-page">
     <header class="catalog-header">
-        <p class="eyebrow">Archive search</p>
-        <h1>Aircraft registration search</h1>
-        <p class="article-lead">Results for “{{ request.GET.search }}” in a library of {{ registrations_count }} registrations.</p>
+        <p class="eyebrow">Search</p>
+        <p class="article-lead">Results for “{{ search_param }}” in a library of {{ registrations_count }} registrations.</p>
         <form method="get" action="{% url 'collection' %}" class="catalog-search" role="search">
-            <label for="result-search">Search again</label>
             <div class="search-input-row">
-                <input id="result-search" type="search" name="search" value="{{ request.GET.search }}" placeholder="Enter an aircraft registration">
-                <button type="submit" class="content-button primary">Search</button>
+                <input id="result-search" type="search" name="search" value="{{ search_param }}" placeholder="Enter an aircraft registration">
+                <button type="submit" class="content-button primary">Search again</button>
             </div>
         </form>
     </header>
 
     <section aria-labelledby="results-title">
-        <div class="section-heading-row"><h2 id="results-title">Matching registrations</h2><p>{{ registrations|length }} result{{ registrations|length|pluralize }}</p></div>
+        <div class="section-heading-row"><p>{{ registrations|length }} result{{ registrations|length|pluralize }}</p></div>
         <div class="catalog-card-grid">
             {% for item in registrations %}
             <article class="catalog-card">
@@ -37,8 +35,7 @@
             {% empty %}
             <div class="empty-state">
                 <h2>No registration matched that search</h2>
-                <p>Try the complete registration without spaces, or browse by airline and aircraft type instead.</p>
-                <a class="content-button" href="{% url 'collection' %}">Browse all collections</a>
+                <a class="content-button" href="{% url 'collection' %}">Browse all registrations</a>
             </div>
             {% endfor %}
         </div>

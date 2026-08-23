@@ -23,6 +23,7 @@ class CollectionMultiSearchViewModel:
     registrations: List[Registration]
     highlight_collection_menu_item: bool
     registrations_count: int
+    search_param: str
 
 @dataclass
 class CollectionAirlineSearchViewModel:

@@ -7,12 +7,12 @@
 {% block content %}
 <div class="site-page catalog-page">
     <header class="catalog-header">
-        <p class="eyebrow">Aircraft Catalogue</p>
+        <p class="eyebrow">Catalogue</p>
         <h1>Browse the entire collection of aircraft photographs</h1>
         <form method="get" action="{% url 'collection' %}" class="catalog-search" role="search">
             <label for="collection-search">Search by aircraft registration</label>
             <div class="search-input-row">
-                <input id="collection-search" type="search" name="search" placeholder="For example: D-ATOP" autocomplete="off">
+                <input id="collection-search" type="search" name="search" placeholder="D-ATOP" autocomplete="off">
                 <button type="submit" class="content-button primary">Search {{ registrations_count }} registrations</button>
             </div>
         </form>

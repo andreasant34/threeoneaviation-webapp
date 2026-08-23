@@ -134,6 +134,7 @@ class ContentService:
                                 self.__get_first_file_by_parent_id(covers, r['id']),
                                 aircraft
                             )
+                            airline.aircraft_registration_example = registration.name
                             aircraft.registrations.append(registration)
 
                     airline.aircrafts.append(aircraft)

@@ -16,7 +16,7 @@ class Airline:
         self.name = name
         self.short_name = name.lower().replace(" ", "_")
         self.aircrafts = None
-
+        self.aircraft_registration_example = None
         self.cover_id = cover_id
         self.cover_url = settings.CDN_URL + cover_id + ".jpg" if cover_id else None
 

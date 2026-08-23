@@ -89,7 +89,8 @@ def __render_search_param(request, search_param):
         view_model = CollectionMultiSearchViewModel(
             registrations = filtered_registrations,
             highlight_collection_menu_item = True,
-            registrations_count = ContentServiceInstance.get_registrations_count()
+            registrations_count = ContentServiceInstance.get_registrations_count(),
+            search_param = search_param
         )
         return render(request, 'collection/search.html', asdict(view_model))
 
