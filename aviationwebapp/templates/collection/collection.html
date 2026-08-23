@@ -1,15 +1,14 @@
 {% extends 'layout.html' %}
 
 {% block title %}Aircraft Photo Collection by Airline & Registration{% endblock title %}
-{% block meta_description %}Search {{ registrations_count }} aircraft registrations in the original ThreeOne Aviation photo archive, organised by airline, aircraft type and registration.{% endblock meta_description %}
+{% block meta_description %}Search {{ registrations_count }} aircraft registrations in the original ThreeOne Aviation photo catalogue, organised by airline, aircraft type and registration.{% endblock meta_description %}
 {% block og_title %}Aircraft Photo Collection | ThreeOne Aviation{% endblock og_title %}
 
 {% block content %}
 <div class="site-page catalog-page">
     <header class="catalog-header">
-        <p class="eyebrow">Aircraft archive</p>
-        <h1>Browse the aircraft photography collection</h1>
-        <p class="article-lead">Explore original photographs organised from airline or operator collection to aircraft type and individual registration. Each registration page includes capture dates, camera details and links to related airframes.</p>
+        <p class="eyebrow">Aircraft Catalogue</p>
+        <h1>Browse the entire collection of aircraft photographs</h1>
         <form method="get" action="{% url 'collection' %}" class="catalog-search" role="search">
             <label for="collection-search">Search by aircraft registration</label>
             <div class="search-input-row">
@@ -19,19 +18,7 @@
         </form>
     </header>
 
-    <section class="catalog-explainer" aria-labelledby="collection-method-title">
-        <div>
-            <h2 id="collection-method-title">How the collection is organised</h2>
-            <p>Choose a collection below, then select an aircraft registration. The labels describe the archive's filing structure and may reflect the aircraft's operator at the time it was photographed.</p>
-        </div>
-        <p>Looking for photography advice? Read the <a href="{% url 'spotting-guide' %}">Malta plane-spotting guide</a>.</p>
-    </section>
-
     <section aria-labelledby="airlines-title">
-        <div class="section-heading-row">
-            <h2 id="airlines-title">Airline and operator collections</h2>
-            <p>{{ airlines|length }} collection{{ airlines|length|pluralize }}</p>
-        </div>
         <div class="catalog-card-grid">
             {% for item in airlines %}
             <article class="catalog-card">

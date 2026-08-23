@@ -1,3 +1,7 @@
+h1, h2 {
+    text-transform: uppercase;
+}
+
 :root {
     --ink: #17233d;
     --muted: #5d6678;
