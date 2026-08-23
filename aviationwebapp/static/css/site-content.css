@@ -85,9 +85,7 @@ body {
 
 .site-page a {
     color: var(--accent-dark);
-    text-decoration: underline;
-    text-decoration-thickness: 1px;
-    text-underline-offset: 3px;
+    text-decoration: none;
 }
 
 .site-page a:hover,

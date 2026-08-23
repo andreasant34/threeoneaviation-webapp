@@ -1,19 +1,18 @@
 {% extends 'layout.html' %}
 
-{% block title %}{{ airline.name }} Aircraft Photo Collection{% endblock title %}
+{% block title %}{{ airline.name }} Collection{% endblock title %}
 {% block meta_description %}Browse original {{ airline.name }} aircraft photographs by type and registration in the ThreeOne Aviation catalogue.{% endblock meta_description %}
 {% block og_title %}{{ airline.name }} Aircraft Photos | ThreeOne Aviation{% endblock og_title %}
 
 {% block content %}
 <div class="site-page catalog-page">
     <header class="catalog-header airline-catalog-header">
-        <p class="eyebrow">Airline</p>
+        <p class="eyebrow"><a href="{% url 'collection' %}">Airlines</a></p>
         <h1>{{ airline.name }}</h1>
         <form method="get" action="{% url 'collection' %}" class="catalog-search" role="search">
-            <label for="collection-search">Not what you are looking for? Search again by aircraft registration</label>
             <div class="search-input-row">
                 <input id="collection-search" type="search" name="search" placeholder="{{airline.aircraft_registration_example}}" autocomplete="off">
-                <button type="submit" class="content-button primary">Search {{ registrations_count }} registrations</button>
+                <button type="submit" class="content-button primary">Search</button>
             </div>
         </form>
     </header>

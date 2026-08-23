@@ -6,58 +6,20 @@
 {% block og_description %}View an original photograph of {{ registration_name }} from the Malta-based ThreeOne Aviation catalogue.{% endblock og_description %}
 
 {% block content %}
-<div class="site-page aircraft-entry-page">
+<div class="site-page aircraft-entry-page catalog-page">
     <article>
-        <header class="aircraft-entry-header">
-            <nav class="breadcrumbs" aria-label="Breadcrumb">
-                <a href="{% url 'collection' %}">Catalogue</a>
-                <span aria-hidden="true">/</span>
-                <a href="{% url 'airline' airline.short_name %}">{{ airline.name }}</a>
-                <span aria-hidden="true">/</span>
-                <span>{{ registration_name }}</span>
-            </nav>
-            <p class="eyebrow">Photo</p>
+        <header class="aircraft-entry-header catalog-header">
+            <p class="eyebrow"><a href="{% url 'airline' airline.short_name %}"> {{ airline.name }} </a></p>
             <h1>{{ registration_name }} — {{ aircraft.name }}</h1>
-            <p class="article-lead">
-                An original ThreeOne Aviation photo filed in the {{ airline.name }} collection.
-            </p>
-        </header>
-
-        <section class="aircraft-facts" aria-labelledby="facts-title">
-            <h2 id="facts-title">Aircraft record</h2>
-            <dl>
-                <div><dt>Registration</dt><dd>{{ registration_name }}</dd></div>
-                <div><dt>Aircraft type</dt><dd>{{ aircraft.name }}</dd></div>
-                <div><dt>Airline</dt><dd><a href="{% url 'airline' airline.short_name %}">{{ airline.name }}</a></dd></div>
-                {% if cover %}
-                <div><dt>Featured capture date</dt><dd>{{ cover.date_taken }}</dd></div>
-                <div><dt>Camera</dt><dd>{{ cover.camera_model|default:"Not recorded" }}</dd></div>
-                {% if cover.exposure_time %}<div><dt>Shutter speed</dt><dd>{{ cover.exposure_time }}</dd></div>{% endif %}
-                {% if cover.aperture %}<div><dt>Aperture</dt><dd>{{ cover.aperture }}</dd></div>{% endif %}
-                {% if cover.focal_length %}<div><dt>Focal length</dt><dd>{{ cover.focal_length }}</dd></div>{% endif %}
-                {% if cover.iso_speed %}<div><dt>Sensitivity</dt><dd>ISO {{ cover.iso_speed }}</dd></div>{% endif %}
-                {% endif %}
-            </dl>
-        </section>
-
-        <section class="entry-search" aria-label="Search the aircraft archive">
-            <form id="search_form" name="search_form" method="get" action="{% url 'collection' %}" class="aurel_search_form">
-                <label for="registration-search">Find another registration</label>
+            <form method="get" action="{% url 'collection' %}" class="catalog-search" role="search">
                 <div class="search-input-row">
-                    <input id="registration-search" type="search" name="search" placeholder="Search {{ registrations_count }} registrations" class="aurel_field_search">
+                    <input id="collection-search" type="search" name="search" placeholder="{{registration_name}}" autocomplete="off">
                     <button type="submit" class="content-button primary">Search</button>
                 </div>
             </form>
-        </section>
+        </header>
 
         <section class="aircraft-gallery-section" aria-labelledby="photos-title">
-            <div class="section-heading-row">
-                <div>
-                    <p class="eyebrow">Photo</p>
-                    <h2 id="photos-title">{{ registration_name }}</h2>
-                </div>
-            </div>
-
             {% if cover %}
             <div class="aurel_widget_pm_grid_gallery aurel_photoswipe_wrapper entry-photo-grid" data-uniqid="{{ registration_name }}" data-pswp-uid="{{ registration_name }}">
                 <figure class="entry-photo entry-photo-featured">
@@ -91,6 +53,28 @@
             {% else %}
             <p class="empty-state">No photographs are currently available for this registration. The entry will be updated when an image is captured.</p>
             {% endif %}
+        </section>
+
+        <section class="aircraft-facts" aria-labelledby="facts-title">
+            <div class="section-heading-row">
+                <div>
+                    <p class="eyebrow">Photo Details</p>
+                </div>
+            </div>
+
+            <dl>
+                <div><dt>Registration</dt><dd>{{ registration_name }}</dd></div>
+                <div><dt>Aircraft type</dt><dd>{{ aircraft.name }}</dd></div>
+                <div><dt>Airline</dt><dd><a href="{% url 'airline' airline.short_name %}">{{ airline.name }}</a></dd></div>
+                {% if cover %}
+                <div><dt>Featured capture date</dt><dd>{{ cover.date_taken }}</dd></div>
+                <div><dt>Camera</dt><dd>{{ cover.camera_model|default:"Not recorded" }}</dd></div>
+                {% if cover.exposure_time %}<div><dt>Shutter speed</dt><dd>{{ cover.exposure_time }}</dd></div>{% endif %}
+                {% if cover.aperture %}<div><dt>Aperture</dt><dd>{{ cover.aperture }}</dd></div>{% endif %}
+                {% if cover.focal_length %}<div><dt>Focal length</dt><dd>{{ cover.focal_length }}</dd></div>{% endif %}
+                {% if cover.iso_speed %}<div><dt>Sensitivity</dt><dd>ISO {{ cover.iso_speed }}</dd></div>{% endif %}
+                {% endif %}
+            </dl>
         </section>
 
         {% if related_registrations %}
