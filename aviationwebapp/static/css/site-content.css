@@ -182,8 +182,7 @@ body {
     display: grid;
     grid-template-columns: minmax(0, 1.15fr) minmax(330px, 0.85fr);
     gap: clamp(42px, 6vw, 92px);
-    min-height: 440px;
-    align-items: center;
+    align-items: stretch;
     padding: clamp(44px, 5vw, 72px);
     color: #fff;
     background:
@@ -195,7 +194,9 @@ body {
 }
 
 .home-hero-copy {
+    display: flex;
     max-width: 690px;
+    flex-direction: column;
 }
 
 .home-hero h1,
@@ -216,11 +217,91 @@ body {
 }
 
 .hero-intro {
-    max-width: 570px;
+    max-width: 650px;
     margin: 0;
     color: rgba(255, 255, 255, 0.78) !important;
     font-size: clamp(18px, 1.7vw, 21px) !important;
     line-height: 1.5 !important;
+}
+
+.hero-runway-mark {
+    position: relative;
+    display: block;
+    width: 100%;
+    max-width: 650px;
+    height: 68px;
+    box-sizing: border-box;
+    margin-top: auto;
+    margin-bottom: 30px;
+    overflow: hidden;
+    color: rgba(255, 255, 255, 0.86);
+    background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.05), transparent 48%),
+        #69717a;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 2px;
+    box-shadow:
+        inset 0 0 0 4px rgba(38, 48, 59, 0.22),
+        0 12px 25px rgba(6, 14, 26, 0.14);
+    font-size: 13px;
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: 2px;
+}
+
+.hero-runway-mark::before,
+.hero-runway-mark::after {
+    position: absolute;
+    top: 11px;
+    bottom: 11px;
+    width: 16px;
+    content: "";
+    background: repeating-linear-gradient(
+        0deg,
+        rgba(255, 255, 255, 0.72) 0 5px,
+        transparent 5px 9px
+    );
+}
+
+.hero-runway-mark::before {
+    left: 54px;
+}
+
+.hero-runway-mark::after {
+    right: 54px;
+}
+
+.hero-runway-mark span {
+    position: absolute;
+    top: 50%;
+    z-index: 1;
+    width: 28px;
+    text-align: center;
+    transform-origin: center;
+}
+
+.hero-runway-mark span:first-child {
+    left: 16px;
+    transform: translateY(-50%) rotate(90deg);
+}
+
+.hero-runway-mark span:last-child {
+    right: 16px;
+    transform: translateY(-50%) rotate(-90deg);
+}
+
+.hero-runway-mark i {
+    position: absolute;
+    top: 50%;
+    right: 82px;
+    left: 82px;
+    height: 1px;
+    transform: translateY(-50%);
+    background: repeating-linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0.74) 0 22px,
+        transparent 22px 36px
+    );
 }
 
 .home-hero .content-button {
@@ -245,6 +326,7 @@ body {
     z-index: 0;
     box-sizing: border-box;
     max-width: 460px;
+    align-self: start;
     margin-left: auto;
     padding: 34px 34px 30px;
     background: rgba(8, 18, 34, 0.42);
@@ -286,24 +368,13 @@ body {
     color: rgba(255, 255, 255, 0.68);
 }
 
-.hero-catalogue-link,
-.site-page .hero-catalogue-link {
+.hero-catalogue-action {
     margin-top: 34px;
-    color: #d8efc9;
-    font-size: 13px;
-    font-weight: 800;
-    letter-spacing: 0.2px;
 }
 
-.hero-catalogue-link span {
-    display: inline-block;
-    margin-left: 5px;
-    transition: transform 200ms ease;
-}
-
-.hero-catalogue-link:hover span,
-.hero-catalogue-link:focus span {
-    transform: translateX(4px);
+.hero-catalogue-action .content-button {
+    width: 100%;
+    min-height: 68px;
 }
 
 .content-section {
@@ -1179,10 +1250,15 @@ footer.aurel_footer.site-footer .aurel_footer_inner {
         gap: 48px;
     }
 
+    .hero-runway-mark {
+        margin-top: 38px;
+        margin-bottom: 0;
+    }
+
     .hero-catalogue {
         width: calc(100% - 12px);
         max-width: none;
-        margin-left: 12px;
+        margin-left: 0px;
     }
 
     header.aurel_main_header.aurel_logo_left .aurel_logo_cont {
@@ -1313,6 +1389,27 @@ footer.aurel_footer.site-footer .aurel_footer_inner {
         font-size: 40px;
     }
 
+    .hero-runway-mark {
+        height: 58px;
+    }
+
+    .hero-runway-mark::before {
+        left: 46px;
+    }
+
+    .hero-runway-mark::after {
+        right: 46px;
+    }
+
+    .hero-runway-mark i {
+        right: 72px;
+        left: 72px;
+    }
+
+    .hero-catalogue-action .content-button {
+        min-height: 58px;
+    }
+
     .hero-catalogue {
         padding: 28px 24px 25px;
     }
@@ -1368,5 +1465,11 @@ footer.aurel_footer.site-footer .aurel_footer_inner {
         width: 135px;
         height: 106px;
         background-size: 135px auto;
+    }
+}
+
+@media (max-width: 420px) {
+    .hero-catalogue .archive-stats {
+        grid-template-columns: 1fr;
     }
 }
