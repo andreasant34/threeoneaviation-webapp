@@ -354,8 +354,8 @@ body {
 .hero-catalogue .archive-stats div {
     padding: 20px;
     color: #fff;
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.14);
+    background: rgba(6, 15, 28, 0.58);
+    border: 1px solid rgba(185, 223, 159, 0.18);
     border-radius: 3px;
 }
 
