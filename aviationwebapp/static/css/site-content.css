@@ -173,8 +173,8 @@ body {
 
 .home-page {
     --home-navy: #09182e;
-    --home-blue: #204f78;
-    --home-silver: #8b9daa;
+    --home-black: #000;
+    --home-blue-detail: #79b8e5;
     padding: 0 0 32px;
     overflow: hidden;
     background: var(--home-navy);
@@ -190,9 +190,9 @@ body {
     overflow: hidden;
     color: #fff;
     background:
-        radial-gradient(circle at 88% 8%, rgba(207, 220, 229, 0.26), transparent 29rem),
+        radial-gradient(circle at 92% 0%, var(--home-black) 0%, rgba(0, 0, 0, 0.72) 14rem, transparent 36rem),
         radial-gradient(circle at 7% 46%, rgba(67, 132, 181, 0.28), transparent 34rem),
-        linear-gradient(120deg, var(--home-navy) 0%, var(--home-blue) 66%, var(--home-silver) 142%);
+        linear-gradient(120deg, var(--home-navy) 0%, var(--home-navy) 44%, var(--home-black) 82%, var(--home-black) 100%);
 }
 
 .home-hero::after {
@@ -425,20 +425,20 @@ body {
 
 .home-hero .hero-latest-heading .eyebrow {
     margin: 0;
-    color: #d6e1e8;
+    color: var(--home-blue-detail);
 }
 
 .home-hero .aircraft-card {
-    background: rgba(5, 14, 27, 0.42);
-    border-color: rgba(255, 255, 255, 0.14);
-    box-shadow: 0 18px 34px rgba(4, 11, 21, 0.16);
+    background: linear-gradient(145deg, rgba(21, 62, 94, 0.72), rgba(8, 32, 53, 0.78));
+    border-color: rgba(104, 173, 221, 0.32);
+    box-shadow: 0 18px 34px rgba(2, 12, 24, 0.24);
     transition: background 200ms ease, border-color 200ms ease, transform 200ms ease;
 }
 
 .home-hero .aircraft-card:hover,
 .home-hero .aircraft-card:focus-within {
-    background: rgba(5, 14, 27, 0.62);
-    border-color: rgba(190, 210, 224, 0.42);
+    background: linear-gradient(145deg, rgba(29, 82, 122, 0.84), rgba(10, 40, 66, 0.9));
+    border-color: rgba(121, 184, 229, 0.58);
     transform: translateY(-3px);
 }
 
@@ -450,11 +450,11 @@ body {
 }
 
 .home-hero .aircraft-card .card-copy p {
-    color: rgba(255, 255, 255, 0.6);
+    color: #b8d3e6;
 }
 
 .home-hero .aircraft-card .card-kicker {
-    color: #b9ccda;
+    color: var(--home-blue-detail);
 }
 
 .site-page.home-page > .ad-placement {
@@ -1088,8 +1088,8 @@ header.aurel_main_header.aurel_sticky_menu_on.aurel_stick_me.aurel_header_solid_
     width: 100%;
     min-height: 96px;
     background:
-        radial-gradient(circle at 88% -160%, rgba(167, 190, 207, 0.34), transparent 28rem),
-        linear-gradient(90deg, #111d31 0%, #1b2c44 72%) !important;
+        radial-gradient(circle at 88% -160%, rgba(92, 124, 150, 0.2), transparent 28rem),
+        linear-gradient(90deg, #01040a 0%, #061124 72%) !important;
     border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     box-shadow: 0 8px 26px rgba(10, 18, 32, 0.24);
 }
@@ -1327,7 +1327,7 @@ footer.aurel_footer.site-footer .aurel_footer_inner {
     .aurel_mobile_menu_wrapper {
         max-height: calc(100vh - 96px);
         overflow-y: auto;
-        background: linear-gradient(180deg, #111d31 0%, #1b2c44 100%) !important;
+        background: linear-gradient(180deg, #01040a 0%, #061124 100%) !important;
         border-top: 1px solid rgba(255, 255, 255, 0.08);
         box-shadow: 0 12px 22px rgba(10, 18, 32, 0.22);
     }
