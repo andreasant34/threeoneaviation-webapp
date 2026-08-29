@@ -172,9 +172,9 @@ body {
 }
 
 .home-page {
-    --home-navy: #0c1729;
-    --home-blue: #213851;
-    --home-green: #31551d;
+    --home-navy: #09182e;
+    --home-blue: #204f78;
+    --home-silver: #8b9daa;
     padding: 0 0 32px;
     overflow: hidden;
     background: var(--home-navy);
@@ -190,9 +190,9 @@ body {
     overflow: hidden;
     color: #fff;
     background:
-        radial-gradient(circle at 88% 8%, rgba(137, 183, 104, 0.26), transparent 29rem),
-        radial-gradient(circle at 7% 46%, rgba(68, 111, 148, 0.24), transparent 34rem),
-        linear-gradient(120deg, var(--home-navy) 0%, var(--home-blue) 65%, var(--home-green) 138%);
+        radial-gradient(circle at 88% 8%, rgba(207, 220, 229, 0.26), transparent 29rem),
+        radial-gradient(circle at 7% 46%, rgba(67, 132, 181, 0.28), transparent 34rem),
+        linear-gradient(120deg, var(--home-navy) 0%, var(--home-blue) 66%, var(--home-silver) 142%);
 }
 
 .home-hero::after {
@@ -243,14 +243,14 @@ body {
 
 .home-hero .hero-discipline {
     margin-bottom: 20px;
-    color: #c4e3af;
+    color: #d6e1e8;
     font-size: 13px;
 }
 
 .home-hero h1 .hero-location-marker {
     display: inline-flex;
     margin-right: 0.18em;
-    color: #99c57c;
+    color: #adbfcc;
     font-size: 0.42em;
     line-height: 1;
     vertical-align: 0.2em;
@@ -389,7 +389,7 @@ body {
     padding: 0 12px 22px 0;
     color: #fff;
     background: transparent;
-    border-bottom: 1px solid rgba(185, 223, 159, 0.22);
+    border-bottom: 1px solid rgba(201, 216, 226, 0.28);
 }
 
 .hero-catalogue .archive-stats dt {
@@ -425,7 +425,7 @@ body {
 
 .home-hero .hero-latest-heading .eyebrow {
     margin: 0;
-    color: #c4e3af;
+    color: #d6e1e8;
 }
 
 .home-hero .aircraft-card {
@@ -438,7 +438,7 @@ body {
 .home-hero .aircraft-card:hover,
 .home-hero .aircraft-card:focus-within {
     background: rgba(5, 14, 27, 0.62);
-    border-color: rgba(196, 227, 175, 0.35);
+    border-color: rgba(190, 210, 224, 0.42);
     transform: translateY(-3px);
 }
 
@@ -454,7 +454,7 @@ body {
 }
 
 .home-hero .aircraft-card .card-kicker {
-    color: #b9df9f;
+    color: #b9ccda;
 }
 
 .site-page.home-page > .ad-placement {
@@ -1088,7 +1088,7 @@ header.aurel_main_header.aurel_sticky_menu_on.aurel_stick_me.aurel_header_solid_
     width: 100%;
     min-height: 96px;
     background:
-        radial-gradient(circle at 88% -160%, rgba(94, 143, 62, 0.36), transparent 28rem),
+        radial-gradient(circle at 88% -160%, rgba(167, 190, 207, 0.34), transparent 28rem),
         linear-gradient(90deg, #111d31 0%, #1b2c44 72%) !important;
     border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     box-shadow: 0 8px 26px rgba(10, 18, 32, 0.24);
@@ -1145,7 +1145,7 @@ header.aurel_main_header nav.aurel_nav ul.aurel_menu > li > a {
 header.aurel_main_header nav.aurel_nav ul.aurel_menu > li > a:hover,
 header.aurel_main_header nav.aurel_nav ul.aurel_menu > li.current-menu-ancestor > a,
 header.aurel_main_header nav.aurel_nav ul.aurel_menu > li.current-menu-item > a {
-    color: #b9df9f !important;
+    color: #cfdae2 !important;
 }
 
 .header-contact-link {
@@ -1163,8 +1163,8 @@ header.aurel_main_header nav.aurel_nav ul.aurel_menu > li.current-menu-item > a 
 .header-contact-link:hover,
 .header-contact-link.current {
     color: #111d31;
-    background: #b9df9f;
-    border-color: #b9df9f;
+    background: #c7d5df;
+    border-color: #c7d5df;
 }
 
 .ad-placement {
@@ -1339,7 +1339,7 @@ footer.aurel_footer.site-footer .aurel_footer_inner {
     header.aurel_main_header .aurel_mobile_menu_wrapper nav.aurel_mobile_nav a:hover,
     header.aurel_main_header .aurel_mobile_menu_wrapper nav.aurel_mobile_nav .current-menu-ancestor > a,
     header.aurel_main_header .aurel_mobile_menu_wrapper nav.aurel_mobile_nav .current-menu-item > a {
-        color: #b9df9f;
+        color: #cfdae2;
     }
 
     span.aurel_mmt_icon span {
