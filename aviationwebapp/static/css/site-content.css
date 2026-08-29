@@ -172,31 +172,58 @@ body {
 }
 
 .home-page {
-    padding: 64px max(48px, calc((100vw - 1440px) / 2));
+    --home-navy: #0c1729;
+    --home-blue: #213851;
+    --home-green: #31551d;
+    padding: 0 0 32px;
     overflow: hidden;
-    background: transparent;
+    background: var(--home-navy);
 }
 
 .home-hero {
+    --hero-catalogue-drop: clamp(66px, 5.8vw, 96px);
+    position: relative;
+    isolation: isolate;
     box-sizing: border-box;
-    display: grid;
-    grid-template-columns: minmax(0, 1.15fr) minmax(330px, 0.85fr);
-    gap: clamp(42px, 6vw, 92px);
-    align-items: stretch;
-    padding: clamp(44px, 5vw, 72px);
+    min-height: calc(100vh - 96px);
+    padding: clamp(64px, 7vw, 108px) max(150px, calc((100vw - 1440px) / 2)) clamp(68px, 7vw, 104px) clamp(48px, 4vw, 72px);
+    overflow: hidden;
     color: #fff;
     background:
-        radial-gradient(circle at 88% 18%, rgba(116, 164, 83, 0.22), transparent 24rem),
-        linear-gradient(120deg, #111d31 0%, #263c54 72%, #31551d 145%);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 6px;
-    box-shadow: 0 22px 52px rgba(23, 35, 61, 0.2);
+        radial-gradient(circle at 88% 8%, rgba(137, 183, 104, 0.26), transparent 29rem),
+        radial-gradient(circle at 7% 46%, rgba(68, 111, 148, 0.24), transparent 34rem),
+        linear-gradient(120deg, var(--home-navy) 0%, var(--home-blue) 65%, var(--home-green) 138%);
+}
+
+.home-hero::after {
+    position: absolute;
+    z-index: -1;
+    right: -12vw;
+    bottom: 24%;
+    width: 56vw;
+    height: 56vw;
+    min-width: 520px;
+    min-height: 520px;
+    content: "";
+    border: 1px solid rgba(255, 255, 255, 0.045);
+    border-radius: 50%;
+    box-shadow:
+        0 0 0 8vw rgba(255, 255, 255, 0.018),
+        0 0 0 16vw rgba(255, 255, 255, 0.012);
+    pointer-events: none;
+}
+
+.home-hero-masthead {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: minmax(0, 1.45fr) minmax(310px, 0.55fr);
+    gap: clamp(52px, 8vw, 124px);
+    align-items: end;
 }
 
 .home-hero-copy {
-    display: flex;
-    max-width: 690px;
-    flex-direction: column;
+    max-width: 900px;
 }
 
 .home-hero h1,
@@ -205,102 +232,122 @@ body {
 }
 
 .home-hero h1 {
-    max-width: 690px;
-    margin-bottom: 18px;
-    font-size: clamp(42px, 5vw, 68px);
-    line-height: 1.03;
+    max-width: none;
+    margin: 0 0 28px;
+    font-size: clamp(82px, 10vw, 150px);
+    font-weight: 300;
+    line-height: 0.88;
+    letter-spacing: -0.055em;
     text-transform: none;
 }
 
-.home-hero .eyebrow {
-    color: #b9df9f;
+.home-hero .hero-discipline {
+    margin-bottom: 20px;
+    color: #c4e3af;
+    font-size: 13px;
+}
+
+.home-hero h1 .hero-location-marker {
+    display: inline-flex;
+    margin-right: 0.18em;
+    color: #99c57c;
+    font-size: 0.42em;
+    line-height: 1;
+    vertical-align: 0.2em;
 }
 
 .hero-intro {
     max-width: 650px;
     margin: 0;
-    color: rgba(255, 255, 255, 0.78) !important;
-    font-size: clamp(18px, 1.7vw, 21px) !important;
+    color: rgba(255, 255, 255, 0.68) !important;
+    font-size: clamp(17px, 1.5vw, 20px) !important;
     line-height: 1.5 !important;
 }
 
 .hero-runway-mark {
-    position: relative;
+    position: absolute;
+    z-index: 0;
+    top: calc(0px - clamp(64px, 7vw, 108px));
+    bottom: calc(0px - var(--hero-catalogue-drop));
+    right: calc(44px - max(150px, calc((100vw - 1440px) / 2)));
+    left: auto;
     display: block;
-    width: 100%;
-    max-width: 650px;
-    height: 68px;
+    width: clamp(72px, 6vw, 92px);
+    height: auto;
     box-sizing: border-box;
-    margin-top: auto;
-    margin-bottom: 30px;
+    margin: 0;
     overflow: hidden;
-    color: rgba(255, 255, 255, 0.86);
+    color: rgba(255, 255, 255, 0.94);
     background:
-        linear-gradient(180deg, rgba(255, 255, 255, 0.05), transparent 48%),
-        #69717a;
-    border: 1px solid rgba(255, 255, 255, 0.18);
+        linear-gradient(180deg, rgba(255, 255, 255, 0.075), transparent 48%),
+        rgba(104, 113, 122, 0.72);
+    border: 1px solid rgba(255, 255, 255, 0.27);
     border-radius: 2px;
     box-shadow:
-        inset 0 0 0 4px rgba(38, 48, 59, 0.22),
-        0 12px 25px rgba(6, 14, 26, 0.14);
-    font-size: 13px;
+        inset 0 0 0 6px rgba(22, 31, 42, 0.2),
+        0 22px 46px rgba(3, 10, 20, 0.23);
+    font-size: clamp(15px, 1.5vw, 21px);
     font-weight: 800;
     line-height: 1;
-    letter-spacing: 2px;
+    letter-spacing: 3px;
 }
 
 .hero-runway-mark::before,
 .hero-runway-mark::after {
     position: absolute;
-    top: 11px;
-    bottom: 11px;
-    width: 16px;
+    right: 14px;
+    left: 14px;
+    width: auto;
+    height: 22px;
     content: "";
     background: repeating-linear-gradient(
-        0deg,
-        rgba(255, 255, 255, 0.72) 0 5px,
-        transparent 5px 9px
+        90deg,
+        rgba(255, 255, 255, 0.82) 0 7px,
+        transparent 7px 12px
     );
 }
 
 .hero-runway-mark::before {
-    left: 54px;
+    top: 66px;
 }
 
 .hero-runway-mark::after {
-    right: 54px;
+    bottom: 66px;
 }
 
 .hero-runway-mark span {
     position: absolute;
-    top: 50%;
+    left: 50%;
     z-index: 1;
-    width: 28px;
+    width: 48px;
     text-align: center;
     transform-origin: center;
 }
 
 .hero-runway-mark span:first-child {
-    left: 16px;
-    transform: translateY(-50%) rotate(90deg);
+    top: 24px;
+    transform: translateX(-50%) rotate(180deg);
 }
 
 .hero-runway-mark span:last-child {
-    right: 16px;
-    transform: translateY(-50%) rotate(-90deg);
+    top: auto;
+    right: auto;
+    bottom: 24px;
+    transform: translateX(-50%);
 }
 
 .hero-runway-mark i {
     position: absolute;
-    top: 50%;
-    right: 82px;
-    left: 82px;
-    height: 1px;
-    transform: translateY(-50%);
+    top: 112px;
+    bottom: 112px;
+    left: 50%;
+    width: 2px;
+    height: auto;
+    transform: translateX(-50%);
     background: repeating-linear-gradient(
-        90deg,
-        rgba(255, 255, 255, 0.74) 0 22px,
-        transparent 22px 36px
+        180deg,
+        rgba(255, 255, 255, 0.8) 0 34px,
+        transparent 34px 55px
     );
 }
 
@@ -322,26 +369,13 @@ body {
 }
 
 .hero-catalogue {
-    position: relative;
-    z-index: 0;
     box-sizing: border-box;
-    max-width: 460px;
-    align-self: start;
+    width: 100%;
+    max-width: 390px;
     margin-left: auto;
-    padding: 34px 34px 30px;
-    background: rgba(8, 18, 34, 0.42);
-    border: 1px solid rgba(255, 255, 255, 0.18);
-    border-radius: 5px;
-    box-shadow: 0 24px 48px rgba(7, 15, 28, 0.22);
-    backdrop-filter: blur(8px);
-}
-
-.hero-catalogue h2 {
-    margin-bottom: 25px;
-    color: #fff;
-    font-size: clamp(24px, 2.4vw, 33px);
-    line-height: 1.18;
-    text-transform: none;
+    padding-left: clamp(24px, 3vw, 44px);
+    border-left: 1px solid rgba(255, 255, 255, 0.18);
+    transform: translateY(var(--hero-catalogue-drop));
 }
 
 .hero-catalogue .archive-stats {
@@ -352,15 +386,16 @@ body {
 }
 
 .hero-catalogue .archive-stats div {
-    padding: 20px;
+    padding: 0 12px 22px 0;
     color: #fff;
-    background: rgba(6, 15, 28, 0.58);
-    border: 1px solid rgba(185, 223, 159, 0.18);
-    border-radius: 3px;
+    background: transparent;
+    border-bottom: 1px solid rgba(185, 223, 159, 0.22);
 }
 
 .hero-catalogue .archive-stats dt {
     color: #fff;
+    font-size: clamp(32px, 3.3vw, 48px);
+    font-weight: 300;
     text-decoration: none;
 }
 
@@ -369,12 +404,62 @@ body {
 }
 
 .hero-catalogue-action {
-    margin-top: 34px;
+    margin-top: 24px;
 }
 
 .hero-catalogue-action .content-button {
     width: 100%;
-    min-height: 68px;
+    min-height: 60px;
+}
+
+.hero-latest {
+    position: relative;
+    z-index: 1;
+    margin-top: 120px;
+    margin-right: calc(44px - max(150px, calc((100vw - 1440px) / 2)));
+}
+
+.hero-latest-heading {
+    margin-bottom: 24px;
+}
+
+.home-hero .hero-latest-heading .eyebrow {
+    margin: 0;
+    color: #c4e3af;
+}
+
+.home-hero .aircraft-card {
+    background: rgba(5, 14, 27, 0.42);
+    border-color: rgba(255, 255, 255, 0.14);
+    box-shadow: 0 18px 34px rgba(4, 11, 21, 0.16);
+    transition: background 200ms ease, border-color 200ms ease, transform 200ms ease;
+}
+
+.home-hero .aircraft-card:hover,
+.home-hero .aircraft-card:focus-within {
+    background: rgba(5, 14, 27, 0.62);
+    border-color: rgba(196, 227, 175, 0.35);
+    transform: translateY(-3px);
+}
+
+.home-hero .aircraft-card > a,
+.home-hero .aircraft-card > a:hover,
+.home-hero .aircraft-card > a:focus,
+.home-hero .aircraft-card h3 {
+    color: #fff;
+}
+
+.home-hero .aircraft-card .card-copy p {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.home-hero .aircraft-card .card-kicker {
+    color: #b9df9f;
+}
+
+.site-page.home-page > .ad-placement {
+    width: auto;
+    margin: 32px 44px 0 clamp(48px, 4vw, 72px);
 }
 
 .content-section {
@@ -1026,7 +1111,7 @@ header.aurel_main_header .aurel_main_header_wrapper,
 header.aurel_main_header.aurel_logo_left .aurel_logo_cont {
     position: relative;
     height: 96px;
-    margin-left: 32px;
+    margin-left: calc(clamp(48px, 4vw, 72px) - 17px);
     overflow: visible;
 }
 
@@ -1189,18 +1274,30 @@ footer.aurel_footer.site-footer .aurel_footer_inner {
     }
 
     .home-page {
-        padding: 48px;
+        padding: 0 0 32px;
     }
 
-    .home-hero,
     .content-section {
         padding-right: 48px;
         padding-left: 48px;
     }
 
     .home-page .home-hero {
-        padding-right: 40px;
-        padding-left: 40px;
+        padding-right: 132px;
+        padding-left: 48px;
+    }
+
+    .hero-runway-mark {
+        right: -112px;
+    }
+
+    .hero-latest {
+        margin-right: -112px;
+    }
+
+    .site-page.home-page > .ad-placement {
+        margin-right: 20px;
+        margin-left: 48px;
     }
 
     .home-page .content-section {
@@ -1208,13 +1305,17 @@ footer.aurel_footer.site-footer .aurel_footer_inner {
         padding-left: 0;
     }
 
-    .home-hero {
+    .home-hero-masthead {
         grid-template-columns: minmax(0, 1fr) minmax(300px, 0.78fr);
         gap: 38px;
     }
 }
 
 @media (max-width: 960px) {
+    .home-hero {
+        --hero-catalogue-drop: 44px;
+    }
+
     .site-page {
         margin-top: 0;
     }
@@ -1245,20 +1346,19 @@ footer.aurel_footer.site-footer .aurel_footer_inner {
         background: #fff;
     }
 
-    .home-hero {
+    .home-hero-masthead {
         grid-template-columns: 1fr;
         gap: 48px;
     }
 
-    .hero-runway-mark {
-        margin-top: 38px;
-        margin-bottom: 0;
-    }
-
     .hero-catalogue {
-        width: calc(100% - 12px);
+        width: 100%;
         max-width: none;
-        margin-left: 0px;
+        margin-left: 0;
+        padding-top: 28px;
+        padding-left: 0;
+        border-top: 1px solid rgba(255, 255, 255, 0.18);
+        border-left: 0;
     }
 
     header.aurel_main_header.aurel_logo_left .aurel_logo_cont {
@@ -1274,6 +1374,10 @@ footer.aurel_footer.site-footer .aurel_footer_inner {
 }
 
 @media (max-width: 760px) {
+    .home-hero {
+        --hero-catalogue-drop: 30px;
+    }
+
     .site-page {
         width: 100%;
         margin: 0;
@@ -1281,22 +1385,47 @@ footer.aurel_footer.site-footer .aurel_footer_inner {
     }
 
     .home-page {
-        padding: 30px 22px;
+        padding: 0 0 24px;
     }
 
-    .home-hero,
     .content-section {
         min-height: 0;
         padding: 45px 24px;
     }
 
     .home-page .home-hero {
-        padding: 36px 26px;
+        padding: 52px 84px 64px 22px;
+    }
+
+    .hero-runway-mark {
+        top: -52px;
+        right: -76px;
+        left: auto;
+        width: 56px;
+        background:
+            linear-gradient(180deg, rgba(255, 255, 255, 0.075), transparent 48%),
+            #69717a;
+        opacity: 1;
+    }
+
+    .hero-latest {
+        margin-right: -76px;
+    }
+
+    .hero-runway-mark::before,
+    .hero-runway-mark::after {
+        right: 9px;
+        left: 9px;
     }
 
     .home-page .content-section {
         padding-right: 0;
         padding-left: 0;
+    }
+
+    .site-page.home-page > .ad-placement {
+        width: auto;
+        margin: 24px 8px 0 22px;
     }
 
     .ad-placement {
@@ -1386,24 +1515,8 @@ footer.aurel_footer.site-footer .aurel_footer_inner {
     }
 
     .home-hero h1 {
-        font-size: 40px;
-    }
-
-    .hero-runway-mark {
-        height: 58px;
-    }
-
-    .hero-runway-mark::before {
-        left: 46px;
-    }
-
-    .hero-runway-mark::after {
-        right: 46px;
-    }
-
-    .hero-runway-mark i {
-        right: 72px;
-        left: 72px;
+        margin-bottom: 26px;
+        font-size: clamp(70px, 22vw, 104px);
     }
 
     .hero-catalogue-action .content-button {
@@ -1411,7 +1524,7 @@ footer.aurel_footer.site-footer .aurel_footer_inner {
     }
 
     .hero-catalogue {
-        padding: 28px 24px 25px;
+        padding: 26px 0 0;
     }
 
     .hero-catalogue .archive-stats {
