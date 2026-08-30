@@ -879,6 +879,13 @@ jQuery(window).on('load', function () {
 	setTimeout("aurel_window.trigger('resize')",300);
 	setTimeout('aurel_theme_setup()', 300);
 	setTimeout("jQuery('.aurel_coming_soon_page').css('opacity', '1')", 500);
+	// Start the homepage entrance sequence once the global preloader is clearing.
+	if (jQuery('.home-page').length > 0) {
+		var home_motion_delay = jQuery('.aurel_preloader_wrapper').length > 0 ? 850 : 80;
+		setTimeout(function () {
+			jQuery('.home-page').addClass('home-motion-ready');
+		}, home_motion_delay);
+	}
 	// Preloader
 	if (jQuery('.aurel_preloader_wrapper').length > 0) {
 		setTimeout("jQuery('.fadeOnLoad').removeClass('fadeOnLoad')",900);

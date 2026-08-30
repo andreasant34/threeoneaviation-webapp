@@ -477,6 +477,133 @@ body {
     color: var(--home-blue-detail);
 }
 
+/* The ready class is added after the site preloader clears so the entrance
+   sequence is visible instead of running behind it. */
+.home-page.home-motion-ready .home-hero-copy > *,
+.home-page.home-motion-ready .hero-catalogue .archive-stats,
+.home-page.home-motion-ready .hero-catalogue-action,
+.home-page.home-motion-ready .hero-latest-heading,
+.home-page.home-motion-ready .hero-latest .aircraft-card {
+    animation: home-reveal 700ms cubic-bezier(0.22, 1, 0.36, 1) backwards;
+}
+
+.home-page.home-motion-ready .home-hero-copy .hero-discipline {
+    animation-delay: 80ms;
+}
+
+.home-page.home-motion-ready .home-hero-copy h1 {
+    animation-delay: 180ms;
+}
+
+.home-page.home-motion-ready .home-hero-copy .hero-intro {
+    animation-delay: 300ms;
+}
+
+.home-page.home-motion-ready .hero-catalogue .archive-stats {
+    animation-delay: 380ms;
+}
+
+.home-page.home-motion-ready .hero-catalogue-action {
+    animation-delay: 480ms;
+}
+
+.home-page.home-motion-ready .hero-runway-mark {
+    animation: home-runway-arrival 900ms cubic-bezier(0.22, 1, 0.36, 1) 120ms backwards;
+}
+
+.home-page.home-motion-ready .hero-flight-path span {
+    --flight-opacity: 0.65;
+    animation: home-flight-mark 520ms ease-out backwards;
+}
+
+.home-page.home-motion-ready .hero-flight-path span:nth-child(1) {
+    --flight-opacity: 0.2;
+    animation-delay: 360ms;
+}
+
+.home-page.home-motion-ready .hero-flight-path span:nth-child(2) {
+    --flight-opacity: 0.32;
+    animation-delay: 450ms;
+}
+
+.home-page.home-motion-ready .hero-flight-path span:nth-child(3) {
+    --flight-opacity: 0.46;
+    animation-delay: 540ms;
+}
+
+.home-page.home-motion-ready .hero-flight-path span:nth-child(4) {
+    animation-delay: 630ms;
+}
+
+.home-page.home-motion-ready .hero-latest-heading {
+    animation-delay: 640ms;
+}
+
+.home-page.home-motion-ready .hero-latest .aircraft-card:nth-child(1) {
+    animation-delay: 720ms;
+}
+
+.home-page.home-motion-ready .hero-latest .aircraft-card:nth-child(2) {
+    animation-delay: 820ms;
+}
+
+.home-page.home-motion-ready .hero-latest .aircraft-card:nth-child(3) {
+    animation-delay: 920ms;
+}
+
+.home-page.home-motion-ready .hero-latest .aircraft-card:nth-child(4) {
+    animation-delay: 1020ms;
+}
+
+.home-page.home-motion-ready .hero-latest .aircraft-card:nth-child(n + 5) {
+    animation-delay: 1120ms;
+}
+
+@keyframes home-reveal {
+    from {
+        opacity: 0;
+        transform: translateY(22px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes home-runway-arrival {
+    from {
+        opacity: 0;
+        transform: translateY(-28px) scaleY(0.94);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scaleY(1);
+    }
+}
+
+@keyframes home-flight-mark {
+    from {
+        opacity: 0;
+        transform: translate(-16px, 7px) scale(0.9);
+    }
+    to {
+        opacity: var(--flight-opacity);
+        transform: translate(0, 0) scale(1);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .home-page.home-motion-ready .home-hero-copy > *,
+    .home-page.home-motion-ready .hero-catalogue .archive-stats,
+    .home-page.home-motion-ready .hero-catalogue-action,
+    .home-page.home-motion-ready .hero-runway-mark,
+    .home-page.home-motion-ready .hero-flight-path span,
+    .home-page.home-motion-ready .hero-latest-heading,
+    .home-page.home-motion-ready .hero-latest .aircraft-card {
+        animation: none;
+    }
+}
+
 .site-page.home-page > .ad-placement {
     width: auto;
     margin: 32px 44px 0 clamp(48px, 4vw, 72px);
