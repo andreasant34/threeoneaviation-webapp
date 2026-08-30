@@ -237,9 +237,10 @@ body {
     position: relative;
     z-index: 1;
     display: grid;
-    grid-template-columns: minmax(0, 1.45fr) minmax(310px, 0.55fr);
-    gap: clamp(52px, 8vw, 124px);
+    grid-template-columns: minmax(0, 1.15fr) minmax(330px, 0.7fr) minmax(280px, 0.62fr);
+    gap: clamp(24px, 3vw, 44px);
     align-items: end;
+    min-height: calc(100vh - 96px - clamp(132px, 14vw, 212px));
 }
 
 .home-hero-copy {
@@ -261,10 +262,48 @@ body {
     text-transform: none;
 }
 
+.home-hero h1.hero-islands {
+    margin-bottom: 0;
+    line-height: 0;
+}
+
+.hero-islands img {
+    display: block;
+    width: clamp(230px, 29vw, 420px);
+    max-width: 100%;
+    height: auto;
+}
+
 .home-hero .hero-discipline {
-    margin-bottom: 20px;
+    margin-bottom: 8px;
     color: #d6e1e8;
-    font-size: 13px;
+    font-size: 18px;
+    white-space: nowrap;
+}
+
+.home-hero .hero-location {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin: 0 0 18px;
+    color: rgba(214, 225, 232, 0.56);
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: 1.6px;
+    text-transform: uppercase;
+}
+
+.home-hero .hero-location .fa {
+    color: var(--home-blue-detail);
+    font-size: 11px;
+    opacity: 0.72;
+}
+
+@media (min-width: 1440px) {
+    .home-hero .hero-discipline {
+        font-size: 38px;
+    }
 }
 
 .home-hero h1 .hero-location-marker {
@@ -282,6 +321,16 @@ body {
     color: rgba(255, 255, 255, 0.68) !important;
     font-size: clamp(17px, 1.5vw, 20px) !important;
     line-height: 1.5 !important;
+}
+
+.home-hero-masthead > .hero-intro {
+    position: relative;
+    top: var(--hero-catalogue-drop);
+    align-self: end;
+    justify-self: end;
+    margin-bottom: 15px;
+    text-align: right;
+    white-space: nowrap;
 }
 
 .hero-runway-mark {
@@ -409,7 +458,6 @@ body {
     padding: 0 12px 22px 0;
     color: #fff;
     background: transparent;
-    border-bottom: 1px solid rgba(201, 216, 226, 0.28);
 }
 
 .hero-catalogue .archive-stats dt {
@@ -417,6 +465,10 @@ body {
     font-size: clamp(32px, 3.3vw, 48px);
     font-weight: 300;
     text-decoration: none;
+}
+
+.hero-catalogue .registration-count {
+    font-variant-numeric: tabular-nums;
 }
 
 .hero-catalogue .archive-stats dd {
@@ -480,6 +532,7 @@ body {
 /* The ready class is added after the site preloader clears so the entrance
    sequence is visible instead of running behind it. */
 .home-page.home-motion-ready .home-hero-copy > *,
+.home-page.home-motion-ready .home-hero-masthead > .hero-intro,
 .home-page.home-motion-ready .hero-catalogue .archive-stats,
 .home-page.home-motion-ready .hero-catalogue-action,
 .home-page.home-motion-ready .hero-latest-heading,
@@ -491,11 +544,15 @@ body {
     animation-delay: 80ms;
 }
 
-.home-page.home-motion-ready .home-hero-copy h1 {
-    animation-delay: 180ms;
+.home-page.home-motion-ready .home-hero-copy .hero-location {
+    animation-delay: 150ms;
 }
 
-.home-page.home-motion-ready .home-hero-copy .hero-intro {
+.home-page.home-motion-ready .home-hero-copy h1 {
+    animation-delay: 220ms;
+}
+
+.home-page.home-motion-ready .home-hero-masthead > .hero-intro {
     animation-delay: 300ms;
 }
 
@@ -594,6 +651,7 @@ body {
 
 @media (prefers-reduced-motion: reduce) {
     .home-page.home-motion-ready .home-hero-copy > *,
+    .home-page.home-motion-ready .home-hero-masthead > .hero-intro,
     .home-page.home-motion-ready .hero-catalogue .archive-stats,
     .home-page.home-motion-ready .hero-catalogue-action,
     .home-page.home-motion-ready .hero-runway-mark,
@@ -1458,8 +1516,8 @@ footer.aurel_footer.site-footer .aurel_footer_inner {
     }
 
     .home-hero-masthead {
-        grid-template-columns: minmax(0, 1fr) minmax(300px, 0.78fr);
-        gap: 38px;
+        grid-template-columns: minmax(0, 1fr) minmax(300px, 0.62fr) minmax(280px, 0.78fr);
+        gap: 24px;
     }
 }
 
@@ -1501,6 +1559,15 @@ footer.aurel_footer.site-footer .aurel_footer_inner {
     .home-hero-masthead {
         grid-template-columns: 1fr;
         gap: 48px;
+    }
+
+    .home-hero-masthead > .hero-intro {
+        top: 0;
+        max-width: 420px;
+        justify-self: start;
+        margin-bottom: 0;
+        text-align: left;
+        white-space: normal;
     }
 
     .hero-catalogue {

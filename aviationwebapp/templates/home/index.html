@@ -1,4 +1,5 @@
 {% extends 'layout.html' %}
+{% load static %}
 
 {% block title %}Aircraft Photography & Plane Spotting from Malta's runway 13/31{% endblock title %}
 {% block meta_description %}Explore original aircraft photography from Malta and browse our catalogue by airline and registration.{% endblock meta_description %}
@@ -10,13 +11,17 @@
         <div class="home-hero-masthead">
             <div class="home-hero-copy">
                 <p class="eyebrow hero-discipline">Aviation photography</p>
-                <h1 id="home-title">Malta</h1>
-                <p class="hero-intro">Aircraft movements from Runway 13/31</p>
+                <p class="hero-location"><i class="fa fa-map-marker" aria-hidden="true"></i><span>Malta</span></p>
+                <h1 class="hero-islands" id="home-title">
+                    <img src="{% static 'img/malteseIslands.png' %}" alt="Malta" width="500" height="500" decoding="async" fetchpriority="high">
+                </h1>
             </div>
+
+            <p class="hero-intro">Aircraft movements from Runway 13/31</p>
 
             <aside class="hero-catalogue" aria-label="Catalogue summary">
                 <dl class="archive-stats" aria-label="Catalogue statistics">
-                    <div><dt>{{ registrations_count }}</dt><dd>registrations</dd></div>
+                    <div><dt class="registration-count" data-count="{{ registrations_count }}">{{ registrations_count }}</dt><dd>registrations</dd></div>
                     <div><dt>{{ airlines_count }}</dt><dd>airlines</dd></div>
                 </dl>
                 <div class="hero-actions hero-catalogue-action">
