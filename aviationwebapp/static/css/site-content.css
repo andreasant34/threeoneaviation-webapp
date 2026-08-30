@@ -182,6 +182,7 @@ body {
 
 .home-hero {
     --hero-catalogue-drop: clamp(66px, 5.8vw, 96px);
+    --hero-wide-anchor-offset: calc(max(150px, calc((100vw - 1440px) / 2)) - 150px);
     position: relative;
     isolation: isolate;
     box-sizing: border-box;
@@ -257,7 +258,7 @@ body {
     position: relative;
     z-index: 1;
     display: grid;
-    grid-template-columns: minmax(0, 1.15fr) minmax(330px, 0.7fr) minmax(280px, 0.62fr);
+    grid-template-columns: minmax(0, 1fr) minmax(330px, 360px) minmax(280px, 390px);
     gap: clamp(24px, 3vw, 44px);
     align-items: end;
     min-height: calc(100vh - 96px - clamp(132px, 14vw, 212px));
@@ -346,6 +347,7 @@ body {
 .home-hero-masthead > .hero-intro {
     position: relative;
     top: var(--hero-catalogue-drop);
+    left: var(--hero-wide-anchor-offset);
     align-self: end;
     justify-self: end;
     margin-bottom: 15px;
@@ -458,6 +460,8 @@ body {
 }
 
 .hero-catalogue {
+    position: relative;
+    left: var(--hero-wide-anchor-offset);
     box-sizing: border-box;
     width: 100%;
     max-width: 390px;
@@ -621,6 +625,26 @@ body {
     animation-delay: 720ms;
 }
 
+.home-page.home-motion-ready .hero-flight-path--reverse span:nth-child(1) {
+    animation-delay: 720ms;
+}
+
+.home-page.home-motion-ready .hero-flight-path--reverse span:nth-child(2) {
+    animation-delay: 630ms;
+}
+
+.home-page.home-motion-ready .hero-flight-path--reverse span:nth-child(3) {
+    animation-delay: 540ms;
+}
+
+.home-page.home-motion-ready .hero-flight-path--reverse span:nth-child(4) {
+    animation-delay: 450ms;
+}
+
+.home-page.home-motion-ready .hero-flight-path--reverse span:nth-child(5) {
+    animation-delay: 360ms;
+}
+
 .home-page.home-motion-ready .hero-latest-heading {
     animation-delay: 640ms;
 }
@@ -681,7 +705,7 @@ body {
 @keyframes home-flight-mark-reverse {
     from {
         opacity: 0;
-        transform: translate(-16px, 7px) scale(-0.9, 0.9);
+        transform: translate(16px, -7px) scale(-0.9, 0.9);
     }
     to {
         opacity: var(--flight-opacity);
