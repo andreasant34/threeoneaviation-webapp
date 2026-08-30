@@ -1,10 +1,6 @@
 {% extends 'layout.html' %}
 {% load static %}
 
-{% block title %}Aircraft Photography & Plane Spotting from Malta's runway 13/31{% endblock title %}
-{% block meta_description %}Explore original aircraft photography from Malta and browse our catalogue by airline and registration.{% endblock meta_description %}
-{% block canonical %}https://threeoneaviation.com/{% endblock canonical %}
-
 {% block content %}
 <div class="site-page home-page">
     <section class="home-hero" aria-labelledby="home-title">
@@ -40,7 +36,15 @@
             <span>✈︎</span>
             <span>✈︎</span>
             <span>✈︎</span>
+            <span class="flight-node-large">&#9992;&#xfe0e;</span>
+        </div>
+
+
+        <div class="hero-flight-path hero-flight-path--reverse" aria-hidden="true">
             <span>✈︎</span>
+            <span>✈︎</span>
+            <span class="flight-node-large">&#9992;&#xfe0e;</span>
+            <span class="flight-node-large">&#9992;&#xfe0e;</span>
         </div>
 
         {% if latest_registrations %}

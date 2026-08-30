@@ -217,6 +217,15 @@ body {
     filter: drop-shadow(0 0 8px rgba(67, 132, 181, 0.2));
 }
 
+.hero-flight-path--reverse span {
+    transform: scaleX(-1);
+}
+
+.hero-flight-path--reverse {
+    left: 800px;
+    margin-top: 300px;
+}
+
 .hero-flight-path span:nth-child(1) {
     opacity: 0.2;
 }
@@ -231,6 +240,17 @@ body {
 
 .hero-flight-path span:nth-child(4) {
     opacity: 0.65;
+}
+
+.hero-flight-path .flight-node-large {
+    display: none;
+    opacity: 0.78;
+}
+
+@media (min-width: 1440px) {
+    .hero-flight-path .flight-node-large {
+        display: inline;
+    }
 }
 
 .home-hero-masthead {
@@ -573,6 +593,10 @@ body {
     animation: home-flight-mark 520ms ease-out backwards;
 }
 
+.home-page.home-motion-ready .hero-flight-path--reverse span {
+    animation-name: home-flight-mark-reverse;
+}
+
 .home-page.home-motion-ready .hero-flight-path span:nth-child(1) {
     --flight-opacity: 0.2;
     animation-delay: 360ms;
@@ -590,6 +614,11 @@ body {
 
 .home-page.home-motion-ready .hero-flight-path span:nth-child(4) {
     animation-delay: 630ms;
+}
+
+.home-page.home-motion-ready .hero-flight-path span:nth-child(5) {
+    --flight-opacity: 0.78;
+    animation-delay: 720ms;
 }
 
 .home-page.home-motion-ready .hero-latest-heading {
@@ -646,6 +675,17 @@ body {
     to {
         opacity: var(--flight-opacity);
         transform: translate(0, 0) scale(1);
+    }
+}
+
+@keyframes home-flight-mark-reverse {
+    from {
+        opacity: 0;
+        transform: translate(-16px, 7px) scale(-0.9, 0.9);
+    }
+    to {
+        opacity: var(--flight-opacity);
+        transform: translate(0, 0) scaleX(-1);
     }
 }
 
@@ -1494,7 +1534,11 @@ footer.aurel_footer.site-footer .aurel_footer_inner {
 
     .hero-flight-path {
         right: -82px;
-        transform: rotate(-18deg);
+    }
+
+    .hero-flight-path--reverse {
+        left: 54vw;
+        margin-top: 240px;
     }
 
     .hero-runway-mark {
@@ -1617,10 +1661,14 @@ footer.aurel_footer.site-footer .aurel_footer_inner {
     }
 
     .hero-flight-path {
-        top: 32px;
+        top: 132px;
         right: -48px;
         left: clamp(155px, 46vw, 210px);
-        transform: rotate(-42deg);
+    }
+
+    .hero-flight-path--reverse {
+        left: clamp(190px, 58vw, 260px);
+        margin-top: 120px;
     }
 
     .hero-runway-mark {
