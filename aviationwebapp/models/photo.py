@@ -1,5 +1,6 @@
 from aviationwebapp.config import settings
 from aviationwebapp.models.registration import Registration
+from aviationwebapp.models.local_event import LocalEvent
 
 class Photo:
     """Represents a single photo
@@ -25,7 +26,8 @@ class Photo:
         focal_length=None,
         iso_speed=None,
         description: str = "",
-        registration: Registration = None
+        registration: Registration = None,
+        local_event: LocalEvent = None
     ):
         self.max_image_id = max_image_id
         self.max_image_url = settings.CDN_URL + max_image_id + ".jpg"
@@ -52,6 +54,7 @@ class Photo:
             ) if value
         )
         self.registration = registration
+        self.local_event = local_event
 
     def set_min_image(self, min_image_id: str):
         """Sets the respective minimized image of this photo"""

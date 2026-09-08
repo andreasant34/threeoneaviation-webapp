@@ -8,6 +8,7 @@ class Settings(BaseSettings):
     ENFORCE_HOST: str|None = None
     CACHE_EXPIRATION: int = 3600
     ROOT_FOLDER_ID:str|None = None
+    EVENTS_FOLDER_ID:str|None = None
     CDN_URL:str|None = None
     FEATURED_FOLDER_ID:str|None = None
     GOOGLE_SERVICE_ACCOUNT_TOKEN:str|None = None

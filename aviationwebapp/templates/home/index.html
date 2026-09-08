@@ -55,8 +55,9 @@
             <div class="editorial-card-grid aircraft-card-grid">
                 {% for item in latest_photos %}
                 <article class="editorial-card aircraft-card">
+                    {% if item.registration %}
                     <a href="{% url 'registration' item.registration.aircraft.airline.short_name item.registration.short_name %}">
-                        {% if item.registration.cover_url %}<img src="{{ item.registration.cover_url }}" alt="{{ item.registration.name }}, {{ item.registration.aircraft.name }}, in the {{ item.registration.aircraft.airline.name }} collection" loading="lazy">{% endif %}
+                        {% if item.min_image_url %}<img src="{{ item.min_image_url }}" alt="{{ item.registration.name }}, {{ item.registration.aircraft.name }}, in the {{ item.registration.aircraft.airline.name }} collection" loading="lazy">{% endif %}
                         <div class="card-copy">
                             <div class="card-copy-meta">
                                 <p class="card-kicker">{{ item.registration.aircraft.airline.name }}</p>
@@ -65,6 +66,18 @@
                             <h3>{{ item.registration.name }}</h3>
                         </div>
                     </a>
+                    {% endif %}
+                    {% if item.local_event %}
+                    <a href="#">
+                        {% if item.min_image_url %}<img src="{{ item.min_image_url }}" alt="{{ item.local_event.name }}" loading="lazy">{% endif %}
+                        <div class="card-copy">
+                            <div class="card-copy-meta">
+                                <p class="card-kicker">{{ item.local_event.name }}</p>
+                                <p class="card-kicker card-date">{{ item.date_taken }}</p>
+                            </div>
+                        </div>
+                    </a>
+                    {% endif %}
                 </article>
                 {% endfor %}
             </div>

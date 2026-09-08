@@ -8,6 +8,7 @@ from aviationwebapp.models.airline import Airline
 from aviationwebapp.models.registration import Registration
 from aviationwebapp.models.photo import Photo
 from aviationwebapp.models.aircraft import Aircraft
+from aviationwebapp.models.local_event import LocalEvent
 from aviationwebapp.models.core_content import CoreContent
 
 class ContentService:
@@ -95,6 +96,7 @@ class ContentService:
 
         covers = self.client.get_cover_files()
         logos = self.client.get_logo_files()
+        minified_files = self.client.get_minified_files()
 
         all_folders = [f for f in self.client.get_folder_hierarchy() if 'parents' in f]
         airline_folders = [f for f in all_folders if settings.ROOT_FOLDER_ID in f['parents']]
@@ -102,6 +104,7 @@ class ContentService:
         aircraft_folders = [f for f in all_folders if set(airline_ids) & set(f['parents'])]
         aircraft_ids = [f['id'] for f in aircraft_folders]
         registration_folders = [f for f in all_folders if set(aircraft_ids) & set(f['parents'])]
+        event_folders = [f for f in all_folders if settings.EVENTS_FOLDER_ID in f['parents']]
 
         airlines = []
         for a in airline_folders:
@@ -133,7 +136,12 @@ class ContentService:
 
         airlines.sort(key= lambda x: x.name.lower())
 
-        core_items = CoreContent(airlines, covers, logos)
+        local_events = []
+        for e in event_folders:
+            local_event = LocalEvent(e['id'], e['name'], self.__get_first_file_by_parent_id(covers, e['id']))
+            local_events.append(local_event)
+
+        core_items = CoreContent(airlines, covers, logos, minified_files, local_events)
         self.cache.set(cache_key, core_items)
         return core_items
 
@@ -177,9 +185,16 @@ class ContentService:
                     photo.registration = registration
                     break
 
+            for local_event in core.local_events:
+                print('Event Details: ', local_event.id, ' ', local_event.name)
+                if local_event.id in item.get("parents", [])[0]:
+                    photo.local_event = local_event
+                    break
+
+            print(photo.name,"Parent: ", item.get("parents", [])[0], " Reg: ", photo.registration, " EV: ", photo.local_event)
             photos.append(photo)
 
-        for item in (i for i in files if "-min.jpg" in i["name"].lower()):
+        for item in (i for i in core.minified_files):
             minified_name = item["name"].lower().replace("-min.jpg", ".jpg")
             for photo in (p for p in photos if p.name.lower().replace("-wm.jpg", ".jpg") == minified_name):
                 photo.set_min_image(item["id"])

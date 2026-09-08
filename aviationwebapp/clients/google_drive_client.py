@@ -27,7 +27,7 @@ class GoogleDriveClient:
 
     def get_detailed_files_latest(self, num_of_files)-> List[Dict]:
         """Retrieves the latest image files which were added recently"""
-        query = f"not trashed and name contains '-wm.jpg' AND not '{settings.FEATURED_FOLDER_ID}' in parents AND not '18SnlUisPKBW1dqcUgobJkFW2j_fJC9uY' in parents AND not '1IshS4omwHSDHQBTiA0d57meqkhTV_WcP' in parents"
+        query = f"not trashed and name contains '-wm.jpg' AND not '{settings.FEATURED_FOLDER_ID}' in parents"
         results = self.client.files().list(
             pageSize=num_of_files,
             fields="files(*)",
@@ -39,6 +39,16 @@ class GoogleDriveClient:
     def get_cover_files(self)-> List[Dict]:
         """Retrieves all cover image files"""
         query = "name='cover-min.jpg' and not trashed"
+        results = self.client.files().list(
+            pageSize=999,
+            fields="files(id,name,parents)",
+            q=query
+        ).execute()
+        return results.get('files', [])
+
+    def get_minified_files(self)-> List[Dict]:
+        """Retrieves all cover image files"""
+        query = "name contains '-min.jpg' and not trashed"
         results = self.client.files().list(
             pageSize=999,
             fields="files(id,name,parents)",
