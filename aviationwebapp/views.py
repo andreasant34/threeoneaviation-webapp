@@ -14,7 +14,7 @@ def home(request):
     return render(request, 'home/index.html', {
         'airlines_count': len(airlines),
         'highlight_home_menu_item': True,
-        'latest_registrations': ContentServiceInstance.get_latest_registrations(),
+        'latest_photos': ContentServiceInstance.get_latest_photos(),
         'registrations_count': ContentServiceInstance.get_registrations_count(),
     })
 
@@ -52,11 +52,8 @@ def sitemap(request):
 
 def featured(request):
     featured_result = ContentServiceInstance.get_featured()
-    latest_registrations = ContentServiceInstance.get_latest_registrations()
-
     view_model = FeaturedViewModel(
         featured=featured_result,
-        latest_registrations=latest_registrations,
         highlight_featured_menu_item=True
     )
 

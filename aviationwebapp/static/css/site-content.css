@@ -553,6 +553,23 @@ body {
     color: var(--home-blue-detail);
 }
 
+.home-hero .aircraft-card .card-copy-meta {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.home-hero .aircraft-card .card-copy-meta .card-kicker {
+    margin-bottom: 5px;
+    color: var(--home-blue-detail);
+}
+
+.home-hero .aircraft-card .card-copy-meta .card-date {
+    flex-shrink: 0;
+    text-align: right;
+}
+
 /* The ready class is added after the site preloader clears so the entrance
    sequence is visible instead of running behind it. */
 .home-page.home-motion-ready .home-hero-copy > *,

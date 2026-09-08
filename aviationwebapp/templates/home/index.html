@@ -47,20 +47,22 @@
             <span class="flight-node-large">&#9992;&#xfe0e;</span>
         </div>
 
-        {% if latest_registrations %}
+        {% if latest_photos %}
         <div class="hero-latest" aria-labelledby="latest-title">
             <div class="hero-latest-heading">
                 <p class="eyebrow" id="latest-title">Recently captured</p>
             </div>
             <div class="editorial-card-grid aircraft-card-grid">
-                {% for item in latest_registrations %}
+                {% for item in latest_photos %}
                 <article class="editorial-card aircraft-card">
-                    <a href="{% url 'registration' item.aircraft.airline.short_name item.short_name %}">
-                        {% if item.cover_url %}<img src="{{ item.cover_url }}" alt="{{ item.name }}, {{ item.aircraft.name }}, in the {{ item.aircraft.airline.name }} collection" loading="lazy">{% endif %}
+                    <a href="{% url 'registration' item.registration.aircraft.airline.short_name item.registration.short_name %}">
+                        {% if item.registration.cover_url %}<img src="{{ item.registration.cover_url }}" alt="{{ item.registration.name }}, {{ item.registration.aircraft.name }}, in the {{ item.registration.aircraft.airline.name }} collection" loading="lazy">{% endif %}
                         <div class="card-copy">
-                            <p class="card-kicker">{{ item.aircraft.airline.name }}</p>
-                            <h3>{{ item.name }}</h3>
-                            <p>{{ item.aircraft.name }}</p>
+                            <div class="card-copy-meta">
+                                <p class="card-kicker">{{ item.registration.aircraft.airline.name }}</p>
+                                <p class="card-kicker card-date">{{ item.date_taken }}</p>
+                            </div>
+                            <h3>{{ item.registration.name }}</h3>
                         </div>
                     </a>
                 </article>

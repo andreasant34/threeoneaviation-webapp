@@ -25,12 +25,12 @@ class GoogleDriveClient:
         ).execute()
         return results.get('files', [])
 
-    def get_files_descending(self)-> List[Dict]:
+    def get_detailed_files_latest(self, num_of_files)-> List[Dict]:
         """Retrieves the latest image files which were added recently"""
-        query = f"not trashed and name contains '-wm.jpg'"
+        query = f"not trashed and name contains '-wm.jpg' AND not '{settings.FEATURED_FOLDER_ID}' in parents AND not '18SnlUisPKBW1dqcUgobJkFW2j_fJC9uY' in parents AND not '1IshS4omwHSDHQBTiA0d57meqkhTV_WcP' in parents"
         results = self.client.files().list(
-            pageSize=999,
-            fields="files(id,name,parents,modifiedTime)",
+            pageSize=num_of_files,
+            fields="files(*)",
             q=query,
             orderBy="modifiedTime desc"
         ).execute()

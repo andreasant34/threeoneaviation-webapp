@@ -34,28 +34,18 @@ class ContentService:
         self.cache.set(cache_key, photos)
         return photos
 
-    def get_latest_registrations(self) -> List[Registration]:
-        """Retrieves the registrations that were added recently"""
-        cache_key = 'latest'
+    def get_latest_photos(self) -> List[Photo]:
+        """Retrieves the photos that were added recently"""
+        cache_key = 'latest_photos'
         cached = self.cache.get(cache_key)
         if cached is not None:
             return cached
 
-        core = self.__get_core_content_without_photos()
+        latest_files = self.client.get_detailed_files_latest(6)
+        latest_photos = self.__files_as_photos(latest_files)
 
-        max_num_of_items = 6
-        latest_registrations : List[Registration] = []
-        unique_reg_ids = set([])
-
-        latest_files = self.client.get_files_descending()
-        for item in latest_files:
-            for r in core.registrations:
-                if r.id in item['parents'] and r.id not in unique_reg_ids and len(unique_reg_ids) < max_num_of_items:
-                    unique_reg_ids.add(r.id)
-                    latest_registrations.append(r)
-
-        self.cache.set(cache_key, latest_registrations)
-        return latest_registrations
+        self.cache.set(cache_key, latest_photos)
+        return latest_photos
 
     def get_airline(self, airline_name: str) -> Airline | None:
         airlines = self.get_airlines()
@@ -155,9 +145,10 @@ class ContentService:
                 return file["id"]
         return None
 
-    @staticmethod
-    def __files_as_photos(files) -> List[Photo]:
+    def __files_as_photos(self, files) -> List[Photo]:
         """Converts an array of Google Drive files into a list of Photos"""
+
+        core = self.__get_core_content_without_photos()
         photos = []
 
         for item in (f for f in files if "-wm.jpg" in f["name"].lower()):
@@ -180,6 +171,12 @@ class ContentService:
                 iso_speed=metadata.get("isoSpeed"),
                 description=item.get("description", "")
             )
+
+            for registration in core.registrations:
+                if registration.id in item.get("parents", [])[0]:
+                    photo.registration = registration
+                    break
+
             photos.append(photo)
 
         for item in (i for i in files if "-min.jpg" in i["name"].lower()):
