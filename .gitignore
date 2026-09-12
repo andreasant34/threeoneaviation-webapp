@@ -1,6 +1,5 @@
 staticfiles/
-.env.dev
-.env.prod
+.env.*
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
