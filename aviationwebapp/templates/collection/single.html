@@ -20,11 +20,12 @@
         </header>
 
         <section class="aircraft-gallery-section" aria-labelledby="photos-title">
-            {% if cover %}
+            {% if registration_photos|length > 0 %}
             <div class="aurel_widget_pm_grid_gallery aurel_photoswipe_wrapper entry-photo-grid" data-uniqid="{{ registration_name }}" data-pswp-uid="{{ registration_name }}">
+                {% for item in registration_photos %}
                 <figure class="entry-photo entry-photo-featured">
                     <a class="aurel_pswp_slide aurel_grid_blog_image aurel_dp aurel_no_select" href="{{ cover.max_image_url }}" data-size="{{ cover.data_size }}" data-count="0">
-                        <img src="{{ cover.min_image_url }}" alt="{{ registration_name }}, {{ aircraft.name }}, photographed for the {{ airline.name }} collection on {{ cover.date_taken }}">
+                        <img src="{{ item.max_image_url }}" alt="{{ registration_name }}, {{ aircraft.name }}, photographed for the {{ airline.name }} collection on {{ cover.date_taken }}">
                     </a>
                     <figcaption>
                         <div>
@@ -32,20 +33,6 @@
                             {% if cover.description %}<p class="photo-description">{{ cover.description }}</p>{% endif %}
                         </div>
                         <span>Photographed {{ cover.date_taken }}{% if cover.camera_model %} with {{ cover.camera_model }}{% endif %}{% if cover.setting_summary %}. {{ cover.setting_summary }}{% endif %}.</span>
-                    </figcaption>
-                </figure>
-
-                {% for item in registration_photos %}
-                <figure class="entry-photo">
-                    <a class="aurel_pswp_slide aurel_grid_blog_image aurel_dp aurel_no_select" href="{{ item.max_image_url }}" data-size="{{ item.data_size }}" data-count="{{ forloop.counter }}">
-                        <img src="{{ item.min_image_url }}" alt="Photograph {{ forloop.counter|add:'1' }} of {{ registration_name }}, {{ aircraft.name }}, captured on {{ item.date_taken }}" loading="lazy">
-                    </a>
-                    <figcaption>
-                        <div>
-                            <strong>{{ registration_name }} in the {{ airline.name }} collection</strong>
-                            {% if item.description %}<p class="photo-description">{{ item.description }}</p>{% endif %}
-                        </div>
-                        <span>Photographed {{ item.date_taken }}{% if item.camera_model %} with {{ item.camera_model }}{% endif %}{% if item.setting_summary %}. {{ item.setting_summary }}{% endif %}.</span>
                     </figcaption>
                 </figure>
                 {% endfor %}

@@ -107,8 +107,6 @@ def __render_airline_and_or_registration(request, airline_name:str, registration
         cover_photos = [p for p in photos if "cover" in p.name]
         other_photos = [p for p in photos if "cover" not in p.name]
         cover = cover_photos[0] if cover_photos else (other_photos[0] if other_photos else None)
-        if not cover_photos and other_photos:
-            other_photos = other_photos[1:]
 
         view_model = CollectionSingleSearchViewModel(
             airline= airline,
