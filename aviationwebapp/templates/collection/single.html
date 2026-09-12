@@ -9,14 +9,20 @@
 <div class="site-page aircraft-entry-page catalog-page">
     <article>
         <header class="aircraft-entry-header catalog-header">
-            <p class="eyebrow"><a href="{% url 'airline' airline.short_name %}"> {{ airline.name }} </a></p>
-            <h1>{{ registration_name }} — {{ aircraft.name }}</h1>
-            <form method="get" action="{% url 'collection' %}" class="catalog-search" role="search">
-                <div class="search-input-row">
-                    <input id="collection-search" type="search" name="search" placeholder="{{registration_name}}" autocomplete="off">
-                    <button type="submit" class="content-button primary">Search</button>
+            <div class="aircraft-identity-strip" role="group" aria-label="Aircraft identity">
+                <a class="aircraft-identity aircraft-identity-airline" href="{% url 'airline' airline.short_name %}">
+                    <span>Airline</span>
+                    <strong>{{ airline.name }}</strong>
+                </a>
+                <div class="aircraft-identity aircraft-identity-registration">
+                    <span>Registration</span>
+                    <strong>{{ registration_name }}</strong>
                 </div>
-            </form>
+                <div class="aircraft-identity aircraft-identity-type">
+                    <span>Aircraft</span>
+                    <strong>{{ aircraft.name }}</strong>
+                </div>
+            </div>
         </header>
 
         <section class="aircraft-gallery-section" aria-labelledby="photos-title">
@@ -27,13 +33,6 @@
                     <a class="aurel_pswp_slide aurel_grid_blog_image aurel_dp aurel_no_select" href="{{ cover.max_image_url }}" data-size="{{ cover.data_size }}" data-count="0">
                         <img src="{{ item.max_image_url }}" alt="{{ registration_name }}, {{ aircraft.name }}, photographed for the {{ airline.name }} collection on {{ cover.date_taken }}">
                     </a>
-                    <figcaption>
-                        <div>
-                            <strong>{{ registration_name }} — {{ aircraft.name }}</strong>
-                            {% if cover.description %}<p class="photo-description">{{ cover.description }}</p>{% endif %}
-                        </div>
-                        <span>Photographed {{ cover.date_taken }}{% if cover.camera_model %} with {{ cover.camera_model }}{% endif %}{% if cover.setting_summary %}. {{ cover.setting_summary }}{% endif %}.</span>
-                    </figcaption>
                 </figure>
                 {% endfor %}
             </div>
@@ -43,18 +42,12 @@
         </section>
 
         <section class="aircraft-facts" aria-labelledby="facts-title">
-            <div class="section-heading-row">
-                <div>
-                    <p class="eyebrow">Photo Details</p>
-                </div>
-            </div>
-
             <dl>
                 <div><dt>Registration</dt><dd>{{ registration_name }}</dd></div>
                 <div><dt>Aircraft type</dt><dd>{{ aircraft.name }}</dd></div>
-                <div><dt>Airline</dt><dd><a href="{% url 'airline' airline.short_name %}">{{ airline.name }}</a></dd></div>
+                <div><dt>Airline</dt><dd>{{ airline.name }}</dd></div>
                 {% if cover %}
-                <div><dt>Featured capture date</dt><dd>{{ cover.date_taken }}</dd></div>
+                <div><dt>Date Captured</dt><dd>{{ cover.date_taken }}</dd></div>
                 <div><dt>Camera</dt><dd>{{ cover.camera_model|default:"Not recorded" }}</dd></div>
                 {% if cover.exposure_time %}<div><dt>Shutter speed</dt><dd>{{ cover.exposure_time }}</dd></div>{% endif %}
                 {% if cover.aperture %}<div><dt>Aperture</dt><dd>{{ cover.aperture }}</dd></div>{% endif %}
