@@ -1,4 +1,5 @@
 {% extends 'layout.html' %}
+{% load static %}
 
 {% block title %}{{ registration_name }} — {{ aircraft.name }} Photo{% endblock title %}
 {% block meta_description %}An original photograph of {{ registration_name }} in the {{ airline.name }} collection, with capture dates and camera details.{% endblock meta_description %}
@@ -25,37 +26,58 @@
             </div>
         </header>
 
-        {% for item in registration_photos %}
+        {% if registration_photos %}
+        <section class="aircraft-gallery-section registration-photo-carousel" data-photo-carousel aria-label="Photographs of {{ registration_name }}" tabindex="0">
+            <div class="aurel_widget_pm_grid_gallery aurel_photoswipe_wrapper entry-photo-carousel" data-uniqid="{{ registration_name }}" data-pswp-uid="{{ registration_name }}">
+                <div class="registration-photo-stage">
+                    {% for item in registration_photos %}
+                    <figure class="entry-photo entry-photo-featured registration-photo-slide{% if forloop.first %} is-active{% endif %}" data-photo-slide="{{ forloop.counter0 }}">
+                        <a class="aurel_pswp_slide aurel_grid_blog_image aurel_dp aurel_no_select" href="{{ item.max_image_url }}" data-size="{{ item.data_size }}" data-count="{{ forloop.counter0 }}">
+                            <img src="{{ item.max_image_url }}" alt="{{ registration_name }}, {{ aircraft.name }}, photographed for the {{ airline.name }} collection on {{ item.date_taken }}"{% if not forloop.first %} loading="lazy"{% endif %}>
+                        </a>
+                    </figure>
+                    {% endfor %}
 
-        <section class="aircraft-gallery-section" aria-labelledby="photos-title">
-
-            <div class="aurel_widget_pm_grid_gallery aurel_photoswipe_wrapper entry-photo-grid" data-uniqid="{{ registration_name }}" data-pswp-uid="{{ registration_name }}">
-
-                <figure class="entry-photo entry-photo-featured">
-                    <a class="aurel_pswp_slide aurel_grid_blog_image aurel_dp aurel_no_select" href="{{ item.max_image_url }}" data-size="{{ item.data_size }}" data-count="0">
-                        <img src="{{ item.max_image_url }}" alt="{{ registration_name }}, {{ aircraft.name }}, photographed for the {{ airline.name }} collection on {{ item.date_taken }}">
-                    </a>
-                </figure>
+                    {% if registration_photos|length > 1 %}
+                    <button class="registration-carousel-button registration-carousel-previous" type="button" data-photo-previous aria-label="Previous photograph"></button>
+                    <button class="registration-carousel-button registration-carousel-next" type="button" data-photo-next aria-label="Next photograph"></button>
+                    <p class="registration-photo-counter" aria-live="polite">
+                        <span data-photo-current>1</span> / {{ registration_photos|length }}
+                    </p>
+                    {% endif %}
+                </div>
             </div>
 
+            {% if registration_photos|length > 1 %}
+            <div class="registration-photo-thumbnails" aria-label="Choose a photograph">
+                {% for item in registration_photos %}
+                <button type="button" class="registration-photo-thumbnail{% if forloop.first %} is-active{% endif %}" data-photo-thumbnail="{{ forloop.counter0 }}" aria-label="Show photograph {{ forloop.counter }} of {{ registration_photos|length }}"{% if forloop.first %} aria-current="true"{% endif %}>
+                    <img src="{{ item.min_image_url }}" alt="" loading="lazy">
+                </button>
+                {% endfor %}
+            </div>
+            {% endif %}
+
+            <div class="registration-photo-details">
+                {% for item in registration_photos %}
+                <section class="aircraft-facts registration-photo-facts{% if forloop.first %} is-active{% endif %}" data-photo-facts="{{ forloop.counter0 }}" aria-label="Details for photograph {{ forloop.counter }}">
+                    <dl>
+                        <div><dt>Date captured</dt><dd>{{ item.date_taken }}</dd></div>
+                        <div><dt>Camera</dt><dd>{{ item.camera_model|default:"Not recorded" }}</dd></div>
+                        {% if item.exposure_time %}<div><dt>Shutter speed</dt><dd>{{ item.exposure_time }}</dd></div>{% endif %}
+                        {% if item.aperture %}<div><dt>Aperture</dt><dd>{{ item.aperture }}</dd></div>{% endif %}
+                        {% if item.focal_length %}<div><dt>Focal length</dt><dd>{{ item.focal_length }}</dd></div>{% endif %}
+                        {% if item.iso_speed %}<div><dt>Sensitivity</dt><dd>ISO {{ item.iso_speed }}</dd></div>{% endif %}
+                    </dl>
+                </section>
+                {% endfor %}
+            </div>
         </section>
-
-        <section class="aircraft-facts" aria-labelledby="facts-title">
-            <dl>
-                <div><dt>Registration</dt><dd>{{ registration_name }}</dd></div>
-                <div><dt>Aircraft type</dt><dd>{{ aircraft.name }}</dd></div>
-                <div><dt>Airline</dt><dd>{{ airline.name }}</dd></div>
-                <div><dt>Date Captured</dt><dd>{{ item.date_taken }}</dd></div>
-                <div><dt>Camera</dt><dd>{{ item.camera_model|default:"Not recorded" }}</dd></div>
-                {% if item.exposure_time %}<div><dt>Shutter speed</dt><dd>{{ item.exposure_time }}</dd></div>{% endif %}
-                {% if item.aperture %}<div><dt>Aperture</dt><dd>{{ item.aperture }}</dd></div>{% endif %}
-                {% if item.focal_length %}<div><dt>Focal length</dt><dd>{{ item.focal_length }}</dd></div>{% endif %}
-                {% if item.iso_speed %}<div><dt>Sensitivity</dt><dd>ISO {{ item.iso_speed }}</dd></div>{% endif %}
-            </dl>
-
-        </section>
-
-        {% endfor %}
+        {% endif %}
     </article>
 </div>
 {% endblock content %}
+
+{% block extra_scripts %}
+<script src="{% static 'js/registration_photo_carousel.js' %}"></script>
+{% endblock extra_scripts %}
