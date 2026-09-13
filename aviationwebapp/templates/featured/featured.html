@@ -12,26 +12,6 @@
         <p class="article-lead">A visual selection from the ThreeOne Aviation collection, chosen for the aircraft, light, livery or moment—not generated from a popularity feed.</p>
     </header>
 
-    {% if featured %}
-    <section class="featured-slider-section" aria-label="Featured aircraft photographs">
-        <div class="aurel_single_gallery_wrapper aurel_no_select aurel_single_gallery_slider aurel_photoswipe_wrapper" data-uniqid="0" data-pswp-uid="0">
-            <div class="single_cover_width aurel_slider_wrapper aurel_slider_title_align_left aurel_slider_004" data-header="yes" data-footer="yes" data-autoplay="on" data-interval="8000" data-id="004">
-                <div class="aurel_slider fit_always" data-autoplay="on" data-interval="8000">
-                    {% for item in featured %}
-                    <div class="aurel_slider_slide aurel_slide2preload aurel_slider_slide1" data-count="{{ forloop.counter }}">
-                        <a class="aurel_pswp_slide aurel_grid_blog_image aurel_dp aurel_no_select cover" href="{{ item.max_image_url }}" data-size="{{ item.data_size }}" data-count="{{ forloop.counter|add:-1 }}">
-                            <img class="cover" src="{{ item.min_image_url }}" alt="Featured original aircraft photograph captured on {{ item.date_taken }}{% if item.camera_model %} with {{ item.camera_model }}{% endif %}">
-                        </a>
-                        <div class="aurel_slider_overlay_gradient"></div>
-                    </div>
-                    {% endfor %}
-                </div>
-                <a href="javascript:void(0)" class="aurel_slider_btn_prev" aria-label="Previous photograph"></a>
-                <a href="javascript:void(0)" class="aurel_slider_btn_next" aria-label="Next photograph"></a>
-                <div class="aurel_gallery_preloader"></div>
-            </div>
-        </div>
-    </section>
-    {% endif %}
+    {% include 'components/photo_carousel.html' with photos=featured_photos gallery_id='featured' carousel_label='Featured aircraft photographs' component_class='featured-slider-section' show_identity=True only %}
 </div>
 {% endblock content %}

@@ -5,6 +5,6 @@ from aviationwebapp.models.registration import Registration
 
 @dataclass
 class FeaturedViewModel:
-    featured: List[Photo]
+    featured_photos: List[Photo]
     highlight_featured_menu_item: bool
 

@@ -53,7 +53,7 @@ def sitemap(request):
 def featured(request):
     featured_result = ContentServiceInstance.get_featured()
     view_model = FeaturedViewModel(
-        featured=featured_result,
+        featured_photos=featured_result,
         highlight_featured_menu_item=True
     )
 
