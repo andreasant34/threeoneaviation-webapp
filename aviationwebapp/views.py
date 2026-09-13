@@ -104,9 +104,7 @@ def __render_airline_and_or_registration(request, airline_name:str, registration
 
         photos = ContentServiceInstance.get_registration_photos(airline, registration_name)
 
-        cover_photos = [p for p in photos if "cover" in p.name]
         other_photos = [p for p in photos if "cover" not in p.name]
-        cover = cover_photos[0] if cover_photos else (other_photos[0] if other_photos else None)
 
         view_model = CollectionSingleSearchViewModel(
             airline= airline,
@@ -114,13 +112,7 @@ def __render_airline_and_or_registration(request, airline_name:str, registration
             highlight_collection_menu_item= True,
             registration_name= registration.name,
             registration_photos= other_photos,
-            cover= cover,
-            photo_count= len(photos),
-            related_registrations= [
-                item for item in registration.aircraft.registrations
-                if item.short_name != registration.short_name
-            ][:6],
-            registrations_count= ContentServiceInstance.get_registrations_count()
+            photo_count= len(other_photos)
         )
 
         return render(request, 'collection/single.html', asdict(view_model))

@@ -12,11 +12,8 @@ class CollectionSingleSearchViewModel:
     aircraft: Aircraft
     registration_name: str
     registration_photos: List[Photo]
-    cover: Photo
     photo_count: int
-    related_registrations: List[Registration]
     highlight_collection_menu_item: bool
-    registrations_count: int
 
 @dataclass
 class CollectionMultiSearchViewModel:
