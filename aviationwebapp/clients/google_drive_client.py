@@ -15,71 +15,31 @@ class GoogleDriveClient:
         except Exception as e:
             print(e)
 
-    def get_featured_files(self)-> List[Dict]:
-        """Retrieves all image files marked as featured"""
-        query = f"'{settings.FEATURED_FOLDER_ID}' in parents and not trashed"
-        results = self.client.files().list(
-            pageSize=999,
-            fields="files(*)",
-            q=query
-        ).execute()
-        return results.get('files', [])
+    def get_minified_files_basic(self) -> List[Dict]:
+        query = "name='-min.jpg' and not name='cover-min.jpg' and not trashed"
+        fields = "nextPageToken,files(id,name,parents)"
+        return self.get_paginated_result(query, fields)
 
-    def get_detailed_files_latest(self, num_of_files)-> List[Dict]:
-        """Retrieves the latest image files which were added recently"""
-        query = f"not trashed and name contains '-wm.jpg' AND not '{settings.FEATURED_FOLDER_ID}' in parents"
-        results = self.client.files().list(
-            pageSize=num_of_files,
-            fields="files(*)",
-            q=query,
-            orderBy="modifiedTime desc"
-        ).execute()
-        return results.get('files', [])
-
-    def get_cover_files(self)-> List[Dict]:
+    def get_cover_files_basic(self)-> List[Dict]:
         """Retrieves all cover image files"""
         query = "name='cover-min.jpg' and not trashed"
-        results = self.client.files().list(
-            pageSize=999,
-            fields="files(id,name,parents)",
-            q=query
-        ).execute()
-        return results.get('files', [])
-
-    def get_minified_files(self)-> List[Dict]:
-        """Retrieves all cover image files"""
-        query = "name contains '-min.jpg' and not trashed"
-        results = self.client.files().list(
-            pageSize=999,
-            fields="files(id,name,parents)",
-            q=query
-        ).execute()
-        return results.get('files', [])
-
-    def get_logo_files(self)-> List[Dict]:
-        """Retrieves all logo image files"""
-        query = "name='logo-min.jpg' and not trashed"
-        results = self.client.files().list(
-            pageSize=999,
-            fields="files(id,name,parents)",
-            q=query
-        ).execute()
-        return results.get('files', [])
-
-    def get_registration_files(self, registration_id)-> List[Dict]:
-        """Retrieves all image files of the given registration"""
-        query = f"'{registration_id}' in parents and not trashed"
-        results = self.client.files().list(
-            pageSize=999,
-            fields="files(*)",
-            q=query
-        ).execute()
-        return results.get('files', [])
+        fields = "nextPageToken,files(id,name,parents)"
+        return self.get_paginated_result(query, fields)
 
     def get_folder_hierarchy(self)-> List[Dict]:
         """Retrieves the folder hierarchy within Google Drive"""
         query = f"mimeType='application/vnd.google-apps.folder' and not trashed"
         fields = "nextPageToken,files(id,name,parents)"
+        return self.get_paginated_result(query, fields)
+
+    def get_watermarked_files_detailed(self)-> List[Dict]:
+        """Retrieves all watermarked files"""
+        query = f"not trashed and name contains '-wm.jpg'"
+        fields="nextPageToken,files(id,name,parents,imageMediaMetadata(time,cameraModel,exposureTime,aperture,focalLength,isoSpeed))"
+        return self.get_paginated_result(query, fields)
+
+    def get_paginated_result(self, query:str, fields:str)-> List[Dict]:
+        """Retrieves the folder hierarchy within Google Drive"""
         all_results = []
         page_token = None
 

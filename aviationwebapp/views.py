@@ -51,9 +51,9 @@ def sitemap(request):
     )
 
 def featured(request):
-    featured_result = ContentServiceInstance.get_featured()
+    featured_photos = ContentServiceInstance.get_featured_photos()
     view_model = FeaturedViewModel(
-        featured_photos=featured_result,
+        featured_photos=featured_photos,
         highlight_featured_menu_item=True
     )
 
@@ -97,22 +97,18 @@ def __render_airline_and_or_registration(request, airline_name:str, registration
     airline = ContentServiceInstance.get_airline(airline_name)
 
     if airline is not None and registration_name is not None:
-        registration = ContentServiceInstance.get_registration(airline, registration_name)
+        registration = airline.find_registration(registration_name)
 
         if registration is None:
             raise Http404("Aircraft registration not found")
-
-        photos = ContentServiceInstance.get_registration_photos(airline, registration_name)
-
-        other_photos = [p for p in photos if "cover" not in p.name]
 
         view_model = CollectionSingleSearchViewModel(
             airline= airline,
             aircraft= registration.aircraft,
             highlight_collection_menu_item= True,
             registration_name= registration.name,
-            registration_photos= other_photos,
-            photo_count= len(other_photos)
+            registration_photos= registration.photos,
+            photo_count= len(registration.photos)
         )
 
         return render(request, 'collection/single.html', asdict(view_model))
