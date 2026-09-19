@@ -16,7 +16,7 @@ class GoogleDriveClient:
             print(e)
 
     def get_minified_files_basic(self) -> List[Dict]:
-        query = "name='-min.jpg' and not name='cover-min.jpg' and not trashed"
+        query = "name contains '-min.jpg' and not name='cover-min.jpg' and not trashed"
         fields = "nextPageToken,files(id,name,parents)"
         return self.get_paginated_result(query, fields)
 

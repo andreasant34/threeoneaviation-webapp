@@ -49,7 +49,7 @@ class ContentService:
             return cached
 
         minified_files  = self.client.get_minified_files_basic()
-        dic_minified_files_by_normalized_name = self.__to_dictionary(minified_files, lambda x: x.name.lower().replace("-min.jpg", ".jpg"))
+        dic_minified_files_by_normalized_name = self.__to_dictionary(minified_files, lambda x: self.__normalize_file_name(x['name']))
 
         covers = self.client.get_cover_files_basic()
         dic_covers_by_parent_id = self.__to_dictionary(covers, lambda x: x['parents'][0])
@@ -105,7 +105,8 @@ class ContentService:
 
         for photo in all_photos:
             dic_photos_by_name[photo.name] = photo
-            min_image = dic_minified_files_by_normalized_name.get(photo.name)
+
+            min_image = dic_minified_files_by_normalized_name.get(self.__normalize_file_name(photo.name))
             if min_image:
                 photo.set_min_image(min_image['id'])
 
@@ -131,6 +132,10 @@ class ContentService:
     @staticmethod
     def __to_dictionary(items, key_selector):
         return {key_selector(item): item for item in items}
+
+    @staticmethod
+    def __normalize_file_name(file_name):
+        return file_name.replace("-wm.jpg", ".jpg").replace("-min.jpg", ".jpg")
 
     @staticmethod
     def __watermarked_file_as_photo(watermarked_file) -> Photo:
