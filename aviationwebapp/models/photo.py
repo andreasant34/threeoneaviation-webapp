@@ -15,6 +15,8 @@ class Photo:
         max_image_id: str,
         name: str,
         date_taken: str,
+        width: int,
+        height: int,
         camera_model=None,
         exposure_time=None,
         aperture=None,
@@ -26,6 +28,7 @@ class Photo:
 
         self.date_taken = date_taken
         self.name = name
+        self.data_size = str(width) + "x" + str(height)
         self.camera_model = camera_model
         self.exposure_time = self.__format_exposure_time(exposure_time)
         self.aperture = self.__format_number(aperture, "f/")

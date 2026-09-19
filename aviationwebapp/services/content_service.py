@@ -143,6 +143,8 @@ class ContentService:
         return Photo(
             watermarked_file["id"], watermarked_file["name"],
             formatted_capture_time,
+            metadata.get("width", 0),
+            metadata.get("height", 0),
             metadata.get("cameraModel", ""),
             exposure_time=metadata.get("exposureTime"),
             aperture=metadata.get("aperture"),

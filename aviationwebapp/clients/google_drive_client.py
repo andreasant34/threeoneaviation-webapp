@@ -35,7 +35,7 @@ class GoogleDriveClient:
     def get_watermarked_files_detailed(self)-> List[Dict]:
         """Retrieves all watermarked files"""
         query = f"not trashed and name contains '-wm.jpg'"
-        fields="nextPageToken,files(id,name,parents,imageMediaMetadata(time,cameraModel,exposureTime,aperture,focalLength,isoSpeed))"
+        fields="nextPageToken,files(id,name,parents,imageMediaMetadata(time,width,height,cameraModel,exposureTime,aperture,focalLength,isoSpeed))"
         return self.get_paginated_result(query, fields)
 
     def get_paginated_result(self, query:str, fields:str)-> List[Dict]:
