@@ -7,9 +7,9 @@
 {% block content %}
 <div class="site-page featured-page">
     <header class="catalog-header">
-        <p class="eyebrow">Editor's selection</p>
-        <h1>Featured aircraft photography</h1>
-        <p class="article-lead">A visual selection from the ThreeOne Aviation collection, chosen for the aircraft, light, livery or moment—not generated from a popularity feed.</p>
+        <p class="eyebrow">FEATURED</p>
+        <h1 class="sr-only">Featured aircraft photography</h1>
+        <p class="featured-curator-note">OUR FAVOURITE SHOTS THROUGHOUT THE YEARS</p>
     </header>
 
     {% include 'components/photo_carousel.html' with photos=featured_photos gallery_id='featured' carousel_label='Featured aircraft photographs' component_class='featured-slider-section' show_identity=True only %}

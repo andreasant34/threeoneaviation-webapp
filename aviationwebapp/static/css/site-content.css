@@ -1328,14 +1328,15 @@ body {
 
 .catalog-page .catalog-card,
 .featured-page .editorial-card,
-.aircraft-entry-page .entry-photo,
+.photo-carousel .entry-photo,
 .aircraft-entry-page .related-link-grid a {
     background: rgba(255, 255, 255, 0.9);
     border-color: #cbd5d5;
     box-shadow: 0 8px 24px rgba(23, 35, 61, 0.07);
 }
 
-/* Aircraft entries use the same navy, black and white visual language as home. */
+/* Featured photography and aircraft entries share the navy, black and white visual language. */
+.featured-page,
 .aircraft-entry-page {
     --entry-navy: #09182e;
     --entry-black: #000;
@@ -1348,6 +1349,51 @@ body {
         linear-gradient(120deg, var(--entry-navy) 0%, var(--entry-navy) 44%, var(--entry-black) 82%, var(--entry-black) 100%);
 }
 
+/* A compact curator's label lets the photography remain the page's headline. */
+.featured-page > .catalog-header {
+    position: relative;
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    gap: 24px;
+    margin-bottom: 14px;
+    padding: 18px 22px;
+    overflow: hidden;
+    align-items: center;
+    background:
+        linear-gradient(90deg, rgba(121, 184, 229, 0.08), transparent 36%),
+        linear-gradient(105deg, #0d2c47, #071b2e 66%, #02080e);
+    border-color: rgba(121, 184, 229, 0.28);
+    box-shadow: none;
+}
+
+.featured-page > .catalog-header::before {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 3px;
+    content: "";
+    background: var(--entry-blue);
+}
+
+.featured-page > .catalog-header .eyebrow {
+    margin: 0;
+    padding-right: 24px;
+    color: var(--entry-blue);
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    border-right: 1px solid rgba(121, 184, 229, 0.3);
+    white-space: nowrap;
+}
+
+.featured-page > .catalog-header .featured-curator-note {
+    margin: 0;
+    color: rgba(255, 255, 255, 0.82);
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.site-page.featured-page,
 .site-page.aircraft-entry-page {
     padding-top: 12px;
 }
@@ -1610,13 +1656,13 @@ body {
     box-shadow: 0 18px 34px rgba(2, 12, 24, 0.24);
 }
 
-.aircraft-entry-page .entry-photo figcaption span,
-.aircraft-entry-page .entry-photo .photo-description,
+.photo-carousel .entry-photo figcaption span,
+.photo-carousel .entry-photo .photo-description,
 .aircraft-entry-page .related-link-grid small {
     color: #b8d3e6;
 }
 
-.aircraft-entry-page .aircraft-facts {
+.photo-carousel .aircraft-facts {
     padding: 10px;
     color: #fff;
     background: rgba(121, 184, 229, 0.28);
@@ -1624,37 +1670,37 @@ body {
     box-shadow: none;
 }
 
-.aircraft-entry-page .aircraft-facts .section-heading-row {
+.photo-carousel .aircraft-facts .section-heading-row {
     margin: 0 0 10px;
     padding: 14px 18px;
 }
 
-.aircraft-entry-page .aircraft-facts dl {
+.photo-carousel .aircraft-facts dl {
     background: #fff;
     border-color: #fff;
 }
 
-.aircraft-entry-page .aircraft-facts dl > div {
+.photo-carousel .aircraft-facts dl > div {
     background: #000;
 }
 
-.aircraft-entry-page .aircraft-facts .eyebrow,
-.aircraft-entry-page .aircraft-facts dt {
+.photo-carousel .aircraft-facts .eyebrow,
+.photo-carousel .aircraft-facts dt {
     color: #fff;
     text-decoration: none;
 }
 
-.aircraft-entry-page .aircraft-facts dd {
+.photo-carousel .aircraft-facts dd {
     color: #fff;
 }
 
-.aircraft-entry-page .aircraft-facts a {
+.photo-carousel .aircraft-facts a {
     color: #fff;
     text-decoration: none;
 }
 
-.aircraft-entry-page .aircraft-facts a:hover,
-.aircraft-entry-page .aircraft-facts a:focus {
+.photo-carousel .aircraft-facts a:hover,
+.photo-carousel .aircraft-facts a:focus {
     color: #fff;
     text-decoration: none;
 }
@@ -2142,6 +2188,28 @@ footer.aurel_footer.site-footer .aurel_footer_inner {
     .featured-page > .catalog-header,
     .aircraft-entry-page .aircraft-entry-header {
         padding: 32px 26px;
+    }
+
+    .featured-page > .catalog-header {
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: 12px 18px;
+        padding: 16px 18px;
+    }
+
+    .featured-page > .catalog-header::after {
+        grid-column: 2;
+        grid-row: 1;
+    }
+
+    .featured-page > .catalog-header .eyebrow {
+        padding-right: 0;
+        border-right: 0;
+    }
+
+    .featured-page > .catalog-header .featured-curator-note {
+        grid-column: 1 / -1;
+        padding-top: 12px;
+        border-top: 1px solid rgba(121, 184, 229, 0.2);
     }
 
     .archive-intro,
