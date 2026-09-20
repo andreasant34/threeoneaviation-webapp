@@ -114,7 +114,7 @@ class ContentService:
             photo = dic_photos_by_name[featured_file['name']]
             featured_photos.append(photo)
 
-        latest_photos = sorted(all_photos, key=lambda x: x.date_taken, reverse=True)[:6]
+        latest_photos = sorted(all_photos, key=lambda x: x.capture_time, reverse=True)[:6]
 
         core_content = CoreContent(airlines, local_events, featured_photos, latest_photos)
         self.cache.set(cache_key, core_content)
@@ -140,13 +140,14 @@ class ContentService:
     @staticmethod
     def __watermarked_file_as_photo(watermarked_file) -> Photo:
         metadata = watermarked_file.get("imageMediaMetadata", {})
-        capture_time = metadata.get("time")
-        formatted_capture_time = datetime.strptime(
-            capture_time, "%Y:%m:%d %H:%M:%S"
-        ).strftime("%b %d, %Y") if capture_time else "Date not recorded"
+        capture_time = datetime.strptime(
+            metadata.get("time"), "%Y:%m:%d %H:%M:%S"
+        )
+        formatted_capture_time = capture_time.strftime("%b %d, %Y") if capture_time else "Date not recorded"
 
         return Photo(
             watermarked_file["id"], watermarked_file["name"],
+            capture_time,
             formatted_capture_time,
             metadata.get("width", 0),
             metadata.get("height", 0),

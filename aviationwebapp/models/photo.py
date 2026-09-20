@@ -1,6 +1,7 @@
 from __future__ import annotations
 from aviationwebapp.config import settings
 from typing import TYPE_CHECKING
+from datetime import datetime
 
 if TYPE_CHECKING:
     from aviationwebapp.models.registration import Registration
@@ -14,6 +15,7 @@ class Photo:
         self,
         max_image_id: str,
         name: str,
+        capture_time: datetime,
         date_taken: str,
         width: int,
         height: int,
@@ -26,6 +28,7 @@ class Photo:
         self.max_image_id = max_image_id
         self.max_image_url = settings.CDN_URL + max_image_id + ".jpg"
 
+        self.capture_time = capture_time
         self.date_taken = date_taken
         self.name = name
         self.data_size = str(width) + "x" + str(height)
