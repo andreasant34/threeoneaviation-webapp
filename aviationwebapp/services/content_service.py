@@ -1,5 +1,6 @@
 from collections import defaultdict
 from datetime import datetime
+from threading import Lock
 from typing import List
 
 from aviationwebapp.config import settings
@@ -18,6 +19,7 @@ class ContentService:
     def __init__(self):
         self.client = GoogleDriveClient()
         self.cache = InMemoryCache()
+        self.__cache_miss_lock = Lock()
         return
 
     def get_airlines(self) -> List[Airline]:
@@ -48,6 +50,14 @@ class ContentService:
         if cached is not None:
             return cached
 
+        with self.__cache_miss_lock:
+            cached = self.cache.get(cache_key)
+            if cached is not None:
+                return cached
+
+            return self.__refresh_core_content(cache_key)
+
+    def __refresh_core_content(self, cache_key: str) -> CoreContent:
         minified_files  = self.client.get_minified_files_basic()
         dic_minified_files_by_normalized_name = self.__to_dictionary(minified_files, lambda x: self.__normalize_file_name(x['name']))
 
