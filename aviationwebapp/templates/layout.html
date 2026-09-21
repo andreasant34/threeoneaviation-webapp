@@ -12,6 +12,10 @@
     <meta name="robots" content="{% block robots %}index,follow,max-image-preview:large{% endblock robots %}">
     <meta name="google-adsense-account" content="ca-pub-7886748096844050">
 
+    <link rel="preconnect" href="https://cdn.threeoneaviation.com" crossorigin>
+    <link rel="preload" href="https://cdn.threeoneaviation.com/logo.png" as="image" fetchpriority="high">
+    <link rel="stylesheet" href="{% static 'css/preloader.css' %}">
+
     <link rel="canonical" href="{% block canonical %}https://threeoneaviation.com{{ request.path }}{% endblock canonical %}">
     <link rel="shortcut icon" type="image/png" href="https://cdn.threeoneaviation.com/favicon.ico">
 
@@ -21,12 +25,20 @@
     <meta property="og:description" content="{% block og_description %}Original aircraft photography taken from Malta's Runway 13/31.{% endblock og_description %}">
     <meta property="og:url" content="https://threeoneaviation.com{{ request.path }}">
 
-    <link rel="stylesheet" href="{% static 'css/kube.css' %}">
-    <link rel="stylesheet" href="{% static 'css/roboto.css' %}">
-    <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
-    <link rel="stylesheet" href="{% static 'css/theme.css' %}">
-    <link rel="stylesheet" href="{% static 'css/photoswipe.css' %}">
-    <link rel="stylesheet" href="{% static 'css/site-content.css' %}">
+    <link rel="preload" href="{% static 'css/kube.css' %}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="{% static 'css/roboto.css' %}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="{% static 'css/font-awesome.min.css' %}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="{% static 'css/theme.css' %}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="{% static 'css/photoswipe.css' %}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="{% static 'css/site-content.css' %}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript>
+        <link rel="stylesheet" href="{% static 'css/kube.css' %}">
+        <link rel="stylesheet" href="{% static 'css/roboto.css' %}">
+        <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+        <link rel="stylesheet" href="{% static 'css/theme.css' %}">
+        <link rel="stylesheet" href="{% static 'css/photoswipe.css' %}">
+        <link rel="stylesheet" href="{% static 'css/site-content.css' %}">
+    </noscript>
 
     {% block adsense %}
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7886748096844050" crossorigin="anonymous"></script>
@@ -34,6 +46,14 @@
 </head>
 
 <body class="aurel_drag_protection">
+    <div class="aurel_preloader_wrapper" aria-hidden="true">
+        <div class="aurel_preloader_content">
+            <img class="aurel_preloader_logo" src="https://cdn.threeoneaviation.com/logo.png" alt="">
+            <div class="aurel_preloader_bar"></div>
+            <p class="aurel_preloader_text">LOADING</p>
+        </div>
+    </div>
+
     <div class="aurel_site_wrapper static_header_footer fadeOnLoad">
         <header class="aurel_main_header aurel_logo_left aurel_border_off aurel_header_solid_style aurel_sticky_menu_on">
             <div class="aurel_main_header_wrapper">
@@ -104,14 +124,6 @@
             </div>
         </footer>
         {% endblock footer %}
-    </div>
-
-    <div class="aurel_preloader_wrapper" aria-hidden="true">
-        <div class="aurel_preloader_content">
-            <img class="aurel_preloader_logo" src="https://cdn.threeoneaviation.com/logo.png" alt="">
-            <div class="aurel_preloader_bar"></div>
-            <p class="aurel_preloader_text">LOADING</p>
-        </div>
     </div>
 
     <script src="{% static 'js/jquery.min.js' %}"></script>
