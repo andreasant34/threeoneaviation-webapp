@@ -1,4 +1,4 @@
-{% load static %}
+{% load static inline_svg %}
 
 <!DOCTYPE html>
 <html lang="en" class="aurel_non_transparent_header">
@@ -13,8 +13,94 @@
     <meta name="google-adsense-account" content="ca-pub-7886748096844050">
 
     <link rel="preconnect" href="https://cdn.threeoneaviation.com" crossorigin>
-    <link rel="preload" href="https://cdn.threeoneaviation.com/logo.png" as="image" fetchpriority="high">
-    <link rel="stylesheet" href="{% static 'css/preloader.css' %}">
+
+    <!-- Critical preloader styles: kept inline so the loader is correctly positioned on first paint. -->
+    <style>
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        .aurel_preloader_wrapper {
+            position: fixed;
+            top: var(--preloader-viewport-top, 0px);
+            left: var(--preloader-viewport-left, 0px);
+            display: grid;
+            place-items: center;
+            box-sizing: border-box;
+            width: var(--preloader-viewport-width, 100%);
+            height: var(--preloader-viewport-height, 100%);
+            z-index: 9999;
+            overflow: hidden;
+            background: #09182e;
+        }
+
+        .aurel_preloader_content {
+            display: block;
+            box-sizing: border-box;
+            width: calc(100% - 32px);
+            max-width: 300px;
+            margin: 0;
+            align-self: center;
+            justify-self: center;
+        }
+
+        .aurel_preloader_logo {
+            display: block;
+            width: clamp(140px, 16vw, 190px);
+            height: auto;
+            aspect-ratio: 190 / 143;
+            margin: 0 auto;
+            filter: brightness(0) invert(1);
+        }
+
+        .aurel_preloader_bar {
+            box-sizing: border-box;
+            width: 100%;
+            height: 6px;
+            margin-top: 40px;
+            border-radius: 3px;
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .aurel_preloader_bar::before {
+            content: "";
+            display: block;
+            width: 100%;
+            height: 6px;
+            border-radius: 3px;
+            background: #fff;
+            transform: scaleX(0);
+            transform-origin: left center;
+            animation: preloader-progress 1500ms linear forwards;
+        }
+
+        @keyframes preloader-progress {
+            from {
+                transform: scaleX(0);
+            }
+
+            to {
+                transform: scaleX(1);
+            }
+        }
+
+        .aurel_preloader_text {
+            width: 100%;
+            margin: 20px 0 0;
+            text-align: center;
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+            line-height: 1.2;
+            letter-spacing: 7px;
+            color: #fff;
+        }
+
+        .aurel_preloader_wrapper.remove_preloader_step02 {
+            display: none;
+        }
+    </style>
 
     <link rel="canonical" href="{% block canonical %}https://threeoneaviation.com{{ request.path }}{% endblock canonical %}">
     <link rel="shortcut icon" type="image/png" href="https://cdn.threeoneaviation.com/favicon.ico">
@@ -31,6 +117,7 @@
     <link rel="preload" href="{% static 'css/theme.css' %}" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <link rel="preload" href="{% static 'css/photoswipe.css' %}" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <link rel="preload" href="{% static 'css/site-content.css' %}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+
     <noscript>
         <link rel="stylesheet" href="{% static 'css/kube.css' %}">
         <link rel="stylesheet" href="{% static 'css/roboto.css' %}">
@@ -46,13 +133,75 @@
 </head>
 
 <body class="aurel_drag_protection">
+    <script>
+        (function () {
+            var root = document.documentElement;
+            var viewport = window.visualViewport;
+
+            function syncPreloaderViewport() {
+                if (!viewport) {
+                    return;
+                }
+
+                root.style.setProperty('--preloader-viewport-top', viewport.offsetTop + 'px');
+                root.style.setProperty('--preloader-viewport-left', viewport.offsetLeft + 'px');
+                root.style.setProperty('--preloader-viewport-width', viewport.width + 'px');
+                root.style.setProperty('--preloader-viewport-height', viewport.height + 'px');
+            }
+
+            syncPreloaderViewport();
+
+            if (viewport) {
+                viewport.addEventListener('resize', syncPreloaderViewport);
+                viewport.addEventListener('scroll', syncPreloaderViewport);
+                window.aurelPreloaderViewportCleanup = function () {
+                    viewport.removeEventListener('resize', syncPreloaderViewport);
+                    viewport.removeEventListener('scroll', syncPreloaderViewport);
+                };
+            }
+        }());
+    </script>
+
     <div class="aurel_preloader_wrapper" aria-hidden="true">
         <div class="aurel_preloader_content">
-            <img class="aurel_preloader_logo" src="https://cdn.threeoneaviation.com/logo.png" alt="">
+            {% inline_svg 'img/logo.svg' 'aurel_preloader_logo' %}
             <div class="aurel_preloader_bar"></div>
             <p class="aurel_preloader_text">LOADING</p>
         </div>
     </div>
+
+    <!-- Critical preloader script: inline to avoid waiting for jQuery and the main theme bundle. -->
+    <script>
+        (function () {
+            var preloader = document.querySelector('.aurel_preloader_wrapper');
+            var preloaderDuration = 1500;
+
+            window.addEventListener('load', function () {
+                window.setTimeout(function () {
+                    var site = document.querySelector('.fadeOnLoad');
+                    if (site) {
+                        site.classList.remove('fadeOnLoad');
+                    }
+                    preloader.classList.add('remove_preloader_step02');
+                }, preloaderDuration);
+
+                window.setTimeout(function () {
+                    var homepage = document.querySelector('.home-page');
+                    if (homepage) {
+                        homepage.classList.add('flight-path-ready');
+                    }
+                }, preloaderDuration + 50);
+
+                window.setTimeout(function () {
+                    preloader.remove();
+                    if (window.aurelPreloaderViewportCleanup) {
+                        window.aurelPreloaderViewportCleanup();
+                        window.aurelPreloaderViewportCleanup = null;
+                    }
+                }, preloaderDuration + 400);
+            }, { once: true });
+        }());
+    </script>
 
     <div class="aurel_site_wrapper static_header_footer fadeOnLoad">
         <header class="aurel_main_header aurel_logo_left aurel_border_off aurel_header_solid_style aurel_sticky_menu_on">
@@ -127,10 +276,13 @@
     </div>
 
     <script src="{% static 'js/jquery.min.js' %}"></script>
+
     <script src="{% static 'js/photoswipe.min.js' %}"></script>
     <script src="{% static 'js/photoswipe-ui-default.min.js' %}"></script>
+
     <script src="{% static 'js/theme.js' %}"></script>
     <script src="{% static 'js/photo_carousel.js' %}"></script>
+
     {% block extra_scripts %}{% endblock extra_scripts %}
 </body>
 </html>

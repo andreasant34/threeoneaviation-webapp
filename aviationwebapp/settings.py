@@ -34,7 +34,12 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': ['aviationwebapp/templates'],
-        'APP_DIRS': True
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'libraries': {
+                'inline_svg': 'aviationwebapp.templatetags.inline_svg',
+            },
+        },
     },
 ]
 

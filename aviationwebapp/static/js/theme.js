@@ -307,14 +307,6 @@ jQuery('#contact_form input[type=submit]').on('click', function () {
 });
 
 jQuery(document).ready(function () {
-	if (jQuery('.fadeOnLoad').length) {
-        if (jQuery('.aurel_preloader_wrapper').length) {
-
-        } else {
-            setTimeout("jQuery('.fadeOnLoad').removeClass('fadeOnLoad')",500);
-        }
-	}
-
 	// Count Down
 	if (jQuery('.aurel_element_countdown').length > 0) {
 		jQuery('html').addClass('aurel_transparent_header');
@@ -619,11 +611,6 @@ jQuery(document).ready(function () {
 		});
 	});
 
-	// Preloader
-	if (jQuery('.aurel_preloader_wrapper').length > 0) {
-		jQuery('.aurel_preloader_wrapper').addClass('run_preloader');
-	}
-
 	// Itemized Links Grid
 	if (jQuery('.aurel_itemized_links_grid').length > 0) {
 		jQuery('.aurel_grid_inner').each(function(){
@@ -875,26 +862,10 @@ jQuery(document).on('click', '.reset_variations', function(){
 });
 
 jQuery(window).on('load', function () {
-	var preloader_duration = 1500;
 	aurel_theme_setup();
 	setTimeout("aurel_window.trigger('resize')",300);
 	setTimeout('aurel_theme_setup()', 300);
 	setTimeout("jQuery('.aurel_coming_soon_page').css('opacity', '1')", 500);
-	// Start the homepage entrance sequence once the global preloader is clearing.
-	if (jQuery('.home-page').length > 0) {
-		var home_motion_delay = jQuery('.aurel_preloader_wrapper').length > 0 ? preloader_duration + 50 : 80;
-		setTimeout(function () {
-			jQuery('.home-page').addClass('home-motion-ready');
-			setTimeout(aurel_home_registration_count, 380);
-		}, home_motion_delay);
-	}
-	// Preloader
-	if (jQuery('.aurel_preloader_wrapper').length > 0) {
-		setTimeout("jQuery('.fadeOnLoad').removeClass('fadeOnLoad')", preloader_duration);
-		setTimeout("jQuery('.aurel_preloader_wrapper').addClass('remove_preloader_step01')", 300);
-		setTimeout("jQuery('.aurel_preloader_wrapper').addClass('remove_preloader_step02')", preloader_duration);
-		setTimeout("jQuery('.aurel_preloader_wrapper').remove()", preloader_duration + 400);
-	}
 	
 	// Header Style
 	if (aurel_header.hasClass('aurel_header_gradient_style')) {
@@ -951,42 +922,6 @@ jQuery(window).on('resize', function () {
 jQuery('a[href="#"]').on('click', function(event){
     event.preventDefault();
 });
-
-function aurel_home_registration_count() {
-	var counter = document.querySelector('.home-page .registration-count');
-	var reduce_motion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-	if (!counter || reduce_motion) {
-		return;
-	}
-
-	var final_count = parseInt(counter.getAttribute('data-count'), 10);
-	if (isNaN(final_count) || final_count < 1) {
-		return;
-	}
-
-	var start_count = Math.min(10, final_count);
-	var duration = 1600;
-	var start_time = null;
-	counter.textContent = start_count.toString();
-
-	function update_count(timestamp) {
-		if (start_time === null) {
-			start_time = timestamp;
-		}
-
-		var progress = Math.min((timestamp - start_time) / duration, 1);
-		counter.textContent = Math.floor(start_count + ((final_count - start_count) * progress)).toString();
-
-		if (progress < 1) {
-			window.requestAnimationFrame(update_count);
-		} else {
-			counter.textContent = final_count.toString();
-		}
-	}
-
-	window.requestAnimationFrame(update_count);
-}
 
 function aurel_theme_setup() {
 	/* Before After Module */
