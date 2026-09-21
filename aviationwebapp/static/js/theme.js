@@ -875,13 +875,14 @@ jQuery(document).on('click', '.reset_variations', function(){
 });
 
 jQuery(window).on('load', function () {
+	var preloader_duration = 1500;
 	aurel_theme_setup();
 	setTimeout("aurel_window.trigger('resize')",300);
 	setTimeout('aurel_theme_setup()', 300);
 	setTimeout("jQuery('.aurel_coming_soon_page').css('opacity', '1')", 500);
 	// Start the homepage entrance sequence once the global preloader is clearing.
 	if (jQuery('.home-page').length > 0) {
-		var home_motion_delay = jQuery('.aurel_preloader_wrapper').length > 0 ? 850 : 80;
+		var home_motion_delay = jQuery('.aurel_preloader_wrapper').length > 0 ? preloader_duration + 50 : 80;
 		setTimeout(function () {
 			jQuery('.home-page').addClass('home-motion-ready');
 			setTimeout(aurel_home_registration_count, 380);
@@ -889,10 +890,10 @@ jQuery(window).on('load', function () {
 	}
 	// Preloader
 	if (jQuery('.aurel_preloader_wrapper').length > 0) {
-		setTimeout("jQuery('.fadeOnLoad').removeClass('fadeOnLoad')",900);
+		setTimeout("jQuery('.fadeOnLoad').removeClass('fadeOnLoad')", preloader_duration);
 		setTimeout("jQuery('.aurel_preloader_wrapper').addClass('remove_preloader_step01')", 300);
-		setTimeout("jQuery('.aurel_preloader_wrapper').addClass('remove_preloader_step02')", 800);
-		setTimeout("jQuery('.aurel_preloader_wrapper').remove()", 1200);
+		setTimeout("jQuery('.aurel_preloader_wrapper').addClass('remove_preloader_step02')", preloader_duration);
+		setTimeout("jQuery('.aurel_preloader_wrapper').remove()", preloader_duration + 400);
 	}
 	
 	// Header Style
