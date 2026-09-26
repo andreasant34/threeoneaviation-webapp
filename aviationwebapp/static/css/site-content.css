@@ -11,6 +11,12 @@ h1, h2 {
     --soft: #f3f5f0;
     --line: #dce1d8;
     --shadow: 0 20px 60px rgba(16, 28, 50, 0.13);
+    --entry-navy: #09182e;
+    --entry-black: #000;
+    --entry-blue: #79b8e5;
+    --entry-panel: #0d2c47;
+    --dark-surface-background: linear-gradient(90deg, #09182e 0%, #09182e 44%, #000 82%, #000 100%);
+    --viewport-below-header-height: calc(100vh - 96px);
 }
 
 html {
@@ -32,7 +38,7 @@ body {
     box-sizing: border-box;
     width: 100%;
     margin: 0;
-    padding: 64px max(48px, calc((100vw - 1440px) / 2));
+    padding: 64px max(150px, calc((100vw - 1440px) / 2)) 64px max(48px, calc((100vw - 1440px) / 2));
     color: var(--ink);
     background:
         radial-gradient(circle at 88% 0%, rgba(71, 117, 44, 0.1), transparent 34rem),
@@ -172,28 +178,25 @@ body {
 }
 
 .home-page {
-    --home-navy: #09182e;
-    --home-black: #000;
     --home-blue-detail: #79b8e5;
     padding: 0 0 32px;
     overflow: hidden;
-    background: var(--home-navy);
+    background: var(--dark-surface-background);
 }
 
 .home-hero {
     --hero-catalogue-drop: clamp(66px, 5.8vw, 96px);
     --hero-wide-anchor-offset: calc(max(150px, calc((100vw - 1440px) / 2)) - 150px);
+    --hero-padding-top: clamp(64px, 7vw, 108px);
+    --hero-padding-bottom: clamp(68px, 7vw, 104px);
     position: relative;
     isolation: isolate;
     box-sizing: border-box;
-    min-height: calc(100vh - 96px);
-    padding: clamp(64px, 7vw, 108px) max(150px, calc((100vw - 1440px) / 2)) clamp(68px, 7vw, 104px) clamp(48px, 4vw, 72px);
+    min-height: var(--viewport-below-header-height);
+    padding: var(--hero-padding-top) max(150px, calc((100vw - 1440px) / 2)) var(--hero-padding-bottom) clamp(48px, 4vw, 72px);
     overflow: hidden;
     color: #fff;
-    background:
-        radial-gradient(circle at 92% 0%, var(--home-black) 0%, rgba(0, 0, 0, 0.72) 14rem, transparent 36rem),
-        radial-gradient(circle at 7% 46%, rgba(67, 132, 181, 0.28), transparent 34rem),
-        linear-gradient(120deg, var(--home-navy) 0%, var(--home-navy) 44%, var(--home-black) 82%, var(--home-black) 100%);
+    background: var(--dark-surface-background);
 }
 
 .hero-flight-path {
@@ -258,7 +261,6 @@ body {
         display: inline;
     }
 }
-
 .home-hero-masthead {
     position: relative;
     z-index: 1;
@@ -266,7 +268,7 @@ body {
     grid-template-columns: minmax(0, 1fr) minmax(330px, 360px) minmax(280px, 390px);
     gap: clamp(24px, 3vw, 44px);
     align-items: end;
-    min-height: calc(100vh - 96px - clamp(132px, 14vw, 212px));
+    min-height: calc(var(--viewport-below-header-height) - var(--hero-padding-top) - var(--hero-padding-bottom));
 }
 
 .home-hero-copy {
@@ -349,6 +351,10 @@ body {
     line-height: 1.5 !important;
 }
 
+.runway-designation {
+    white-space: nowrap;
+}
+
 .home-hero-masthead > .hero-intro {
     position: relative;
     top: var(--hero-catalogue-drop);
@@ -360,23 +366,22 @@ body {
     white-space: nowrap;
 }
 
-.hero-runway-mark {
-    position: absolute;
-    z-index: 0;
-    top: calc(0px - clamp(64px, 7vw, 108px));
-    bottom: calc(0px - var(--hero-catalogue-drop));
-    right: calc(44px - max(150px, calc((100vw - 1440px) / 2)));
+.site-runway-mark {
+    position: fixed;
+    z-index: 999;
+    top: 96px;
+    right: 44px;
     left: auto;
     display: block;
     width: clamp(72px, 6vw, 92px);
-    height: auto;
+    height: calc(100vh - 96px);
     box-sizing: border-box;
     margin: 0;
     overflow: hidden;
     color: rgba(255, 255, 255, 0.94);
     background:
         linear-gradient(180deg, rgba(255, 255, 255, 0.075), transparent 48%),
-        rgba(104, 113, 122, 0.72);
+        rgba(104, 113, 122, 1);
     border: 1px solid rgba(255, 255, 255, 0.27);
     border-radius: 2px;
     box-shadow:
@@ -386,10 +391,11 @@ body {
     font-weight: 800;
     line-height: 1;
     letter-spacing: 3px;
+    pointer-events: none;
 }
 
-.hero-runway-mark::before,
-.hero-runway-mark::after {
+.site-runway-mark::before,
+.site-runway-mark::after {
     position: absolute;
     right: 14px;
     left: 14px;
@@ -403,15 +409,15 @@ body {
     );
 }
 
-.hero-runway-mark::before {
+.site-runway-mark::before {
     top: 66px;
 }
 
-.hero-runway-mark::after {
+.site-runway-mark::after {
     bottom: 66px;
 }
 
-.hero-runway-mark span {
+.site-runway-mark span {
     position: absolute;
     left: 50%;
     z-index: 1;
@@ -420,19 +426,19 @@ body {
     transform-origin: center;
 }
 
-.hero-runway-mark span:first-child {
+.site-runway-mark span:first-child {
     top: 24px;
     transform: translateX(-50%) rotate(180deg);
 }
 
-.hero-runway-mark span:last-child {
+.site-runway-mark span:last-child {
     top: auto;
     right: auto;
     bottom: 24px;
     transform: translateX(-50%);
 }
 
-.hero-runway-mark i {
+.site-runway-mark i {
     position: absolute;
     top: 112px;
     bottom: 112px;
@@ -517,7 +523,7 @@ body {
     position: relative;
     z-index: 1;
     margin-top: 120px;
-    margin-right: calc(44px - max(150px, calc((100vw - 1440px) / 2)));
+    margin-right: 0;
 }
 
 .hero-latest-heading {
@@ -660,7 +666,6 @@ body {
 
 .site-page.home-page > .ad-placement {
     width: auto;
-    margin: 32px 44px 0 clamp(48px, 4vw, 72px);
 }
 
 .content-section {
@@ -669,7 +674,7 @@ body {
 }
 
 .home-page .content-section {
-    padding-right: 0;
+    padding-right: max(150px, calc((100vw - 1440px) / 2));
     padding-left: 0;
 }
 
@@ -1253,15 +1258,8 @@ body {
 /* Featured photography and aircraft entries share the navy, black and white visual language. */
 .featured-page,
 .aircraft-entry-page {
-    --entry-navy: #09182e;
-    --entry-black: #000;
-    --entry-blue: #79b8e5;
-    --entry-panel: #0d2c47;
     color: #fff;
-    background:
-        radial-gradient(circle at 92% 0%, var(--entry-black) 0%, rgba(0, 0, 0, 0.72) 14rem, transparent 36rem),
-        radial-gradient(circle at 7% 46%, rgba(67, 132, 181, 0.28), transparent 34rem),
-        linear-gradient(120deg, var(--entry-navy) 0%, var(--entry-navy) 44%, var(--entry-black) 82%, var(--entry-black) 100%);
+    background: var(--dark-surface-background);
 }
 
 /* A compact curator's label lets the photography remain the page's headline. */
@@ -1793,11 +1791,9 @@ header.aurel_main_header nav.aurel_nav ul.aurel_menu > li.current-menu-item > a 
 
 .ad-placement {
     box-sizing: border-box;
-    width: min(1440px, calc(100% - 96px));
     margin: 32px auto;
     padding: 10px 18px 18px;
     overflow: hidden;
-    background: rgba(255, 255, 255, 0.76);
     border: 1px solid rgba(23, 35, 61, 0.12);
     border-radius: 3px;
 }
@@ -1850,7 +1846,7 @@ footer.aurel_footer.site-footer {
     position: relative !important;
     bottom: auto;
     color: #fff;
-    background: rgba(17, 29, 49, 0.96);
+    background: var(--dark-surface-background);
 }
 
 footer.aurel_footer.site-footer .aurel_footer_inner {
@@ -1894,7 +1890,7 @@ footer.aurel_footer.site-footer .aurel_footer_inner {
     }
 
     .site-page {
-        padding: 48px;
+        padding: 48px 132px 48px 48px;
     }
 
     .home-page {
@@ -1920,21 +1916,17 @@ footer.aurel_footer.site-footer .aurel_footer_inner {
         margin-top: 240px;
     }
 
-    .hero-runway-mark {
-        right: -112px;
-    }
-
-    .hero-latest {
-        margin-right: -112px;
+    .site-runway-mark {
+        right: 20px;
     }
 
     .site-page.home-page > .ad-placement {
-        margin-right: 20px;
+        margin-right: 132px;
         margin-left: 48px;
     }
 
     .home-page .content-section {
-        padding-right: 0;
+        padding-right: 132px;
         padding-left: 0;
     }
 
@@ -1944,9 +1936,14 @@ footer.aurel_footer.site-footer .aurel_footer_inner {
     }
 }
 
-@media (max-width: 960px) {
+@media (max-width: 1023px),
+       (min-width: 1024px) and (max-width: 1100px) and (orientation: portrait) {
     .home-hero {
-        --hero-catalogue-drop: 44px;
+        --hero-catalogue-drop: 0px;
+    }
+
+    .hero-flight-path {
+        display: none;
     }
 
     .site-page {
@@ -1981,14 +1978,23 @@ footer.aurel_footer.site-footer .aurel_footer_inner {
 
     .home-hero-masthead {
         grid-template-columns: 1fr;
-        gap: 48px;
+        grid-template-rows: minmax(auto, 1fr) auto auto;
+        gap: 0;
+        min-height: calc(var(--viewport-below-header-height) - var(--hero-padding-top) - var(--hero-padding-bottom));
+        align-content: normal;
+    }
+
+    .home-hero-copy {
+        align-self: end;
+        margin-bottom: 32px;
     }
 
     .home-hero-masthead > .hero-intro {
         top: 0;
         max-width: 420px;
+        align-self: end;
         justify-self: start;
-        margin-bottom: 0;
+        margin-bottom: 12px;
         text-align: left;
         white-space: normal;
     }
@@ -1996,6 +2002,7 @@ footer.aurel_footer.site-footer .aurel_footer_inner {
     .hero-catalogue {
         width: 100%;
         max-width: none;
+        align-self: end;
         margin-left: 0;
         padding-top: 28px;
         padding-left: 0;
@@ -2015,15 +2022,18 @@ footer.aurel_footer.site-footer .aurel_footer_inner {
     }
 }
 
-@media (max-width: 760px) {
-    .home-hero {
-        --hero-catalogue-drop: 30px;
+@media (min-width: 761px) and (max-width: 1023px),
+       (min-width: 1024px) and (max-width: 1100px) and (orientation: portrait) {
+    .hero-catalogue-action {
+        margin-top: 44px;
     }
+}
 
+@media (max-width: 760px) {
     .site-page {
         width: 100%;
         margin: 0;
-        padding: 30px 22px;
+        padding: 30px 84px 30px 22px;
     }
 
     .home-page {
@@ -2036,6 +2046,8 @@ footer.aurel_footer.site-footer .aurel_footer_inner {
     }
 
     .home-page .home-hero {
+        --hero-padding-top: 52px;
+        --hero-padding-bottom: 64px;
         padding: 52px 84px 64px 22px;
     }
 
@@ -2050,9 +2062,8 @@ footer.aurel_footer.site-footer .aurel_footer_inner {
         margin-top: 120px;
     }
 
-    .hero-runway-mark {
-        top: -52px;
-        right: -76px;
+    .site-runway-mark {
+        right: 8px;
         left: auto;
         width: 56px;
         background:
@@ -2061,24 +2072,20 @@ footer.aurel_footer.site-footer .aurel_footer_inner {
         opacity: 1;
     }
 
-    .hero-latest {
-        margin-right: -76px;
-    }
-
-    .hero-runway-mark::before,
-    .hero-runway-mark::after {
+    .site-runway-mark::before,
+    .site-runway-mark::after {
         right: 9px;
         left: 9px;
     }
 
     .home-page .content-section {
-        padding-right: 0;
+        padding-right: 84px;
         padding-left: 0;
     }
 
     .site-page.home-page > .ad-placement {
         width: auto;
-        margin: 24px 8px 0 22px;
+        margin: 24px 84px 0 22px;
     }
 
     .ad-placement {
@@ -2256,8 +2263,3 @@ footer.aurel_footer.site-footer .aurel_footer_inner {
     }
 }
 
-@media (max-width: 420px) {
-    .hero-catalogue .archive-stats {
-        grid-template-columns: 1fr;
-    }
-}

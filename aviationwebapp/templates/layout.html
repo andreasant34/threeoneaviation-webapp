@@ -114,17 +114,17 @@
     <link rel="preload" href="{% static 'css/kube.css' %}" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <link rel="preload" href="{% static 'css/roboto.css' %}" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <link rel="preload" href="{% static 'css/font-awesome.min.css' %}" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <link rel="preload" href="{% static 'css/theme.css' %}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="{% static 'css/theme.css' %}?v=20260926-3" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <link rel="preload" href="{% static 'css/photoswipe.css' %}" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <link rel="preload" href="{% static 'css/site-content.css' %}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="{% static 'css/site-content.css' %}?v=20260926-19" as="style" onload="this.onload=null;this.rel='stylesheet'">
 
     <noscript>
         <link rel="stylesheet" href="{% static 'css/kube.css' %}">
         <link rel="stylesheet" href="{% static 'css/roboto.css' %}">
         <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
-        <link rel="stylesheet" href="{% static 'css/theme.css' %}">
+        <link rel="stylesheet" href="{% static 'css/theme.css' %}?v=20260926-3">
         <link rel="stylesheet" href="{% static 'css/photoswipe.css' %}">
-        <link rel="stylesheet" href="{% static 'css/site-content.css' %}">
+        <link rel="stylesheet" href="{% static 'css/site-content.css' %}?v=20260926-19">
     </noscript>
 
     {% block adsense %}
@@ -271,6 +271,55 @@
         </footer>
         {% endblock footer %}
     </div>
+
+    <div class="site-runway-mark" aria-hidden="true">
+        <span>1 3</span>
+        <i></i>
+        <span>3 1</span>
+    </div>
+
+    <script>
+        (function () {
+            var runway = document.querySelector('.site-runway-mark');
+            var header = document.querySelector('header.aurel_main_header');
+            var viewport = window.visualViewport;
+            var frame = null;
+
+            function syncRunwayHeight() {
+                var viewportTop = viewport ? viewport.offsetTop : 0;
+                var viewportHeight = viewport ? viewport.height : window.innerHeight;
+                var headerBottom = header ? header.getBoundingClientRect().bottom : 96;
+                var runwayTop = Math.max(viewportTop, headerBottom);
+                var runwayHeight = Math.max(0, viewportHeight - (runwayTop - viewportTop));
+
+                runway.style.top = runwayTop + 'px';
+                runway.style.height = runwayHeight + 'px';
+                document.documentElement.style.setProperty('--viewport-below-header-height', runwayHeight + 'px');
+                frame = null;
+            }
+
+            function scheduleRunwaySync() {
+                if (frame === null) {
+                    frame = window.requestAnimationFrame(syncRunwayHeight);
+                }
+            }
+
+            scheduleRunwaySync();
+            window.addEventListener('load', scheduleRunwaySync, { once: true });
+            window.addEventListener('resize', scheduleRunwaySync);
+            window.addEventListener('orientationchange', scheduleRunwaySync);
+
+            if (viewport) {
+                viewport.addEventListener('resize', scheduleRunwaySync);
+                viewport.addEventListener('scroll', scheduleRunwaySync);
+            }
+
+            if (window.ResizeObserver && header) {
+                window.aurelRunwayResizeObserver = new ResizeObserver(scheduleRunwaySync);
+                window.aurelRunwayResizeObserver.observe(header);
+            }
+        }());
+    </script>
 
     <script src="{% static 'js/jquery.min.js' %}"></script>
 
