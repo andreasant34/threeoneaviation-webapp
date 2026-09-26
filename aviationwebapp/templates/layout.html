@@ -179,18 +179,15 @@
             window.addEventListener('load', function () {
                 window.setTimeout(function () {
                     var site = document.querySelector('.fadeOnLoad');
+                    var homepage = document.querySelector('.home-page');
+                    if (homepage) {
+                        homepage.classList.add('flight-path-ready');
+                    }
                     if (site) {
                         site.classList.remove('fadeOnLoad');
                     }
                     preloader.classList.add('remove_preloader_step02');
                 }, preloaderDuration);
-
-                window.setTimeout(function () {
-                    var homepage = document.querySelector('.home-page');
-                    if (homepage) {
-                        homepage.classList.add('flight-path-ready');
-                    }
-                }, preloaderDuration + 50);
 
                 window.setTimeout(function () {
                     preloader.remove();
