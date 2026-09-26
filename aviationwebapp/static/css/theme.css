@@ -86,7 +86,7 @@ Project: Aurel HTML
 }
 
 .current-menu-ancestor > a{
-	color: darkgreen !important;
+	color: var(--home-blue-detail, #79b8e5) !important;
 }
 
 .cover,
@@ -6865,6 +6865,13 @@ body .aurel-widget-tabs.aurel_prod_tabs .aurel-tabs-wrapper .aurel-tab-title.act
 header.aurel_main_header .aurel_mobile_menu_wrapper nav.aurel_mobile_nav .current-menu-ancestor > a,
 header.aurel_main_header .aurel_mobile_menu_wrapper nav.aurel_mobile_nav .current-menu-item > a {
 	color: darkgreen;
+}
+
+header.aurel_main_header nav.aurel_nav .current-menu-ancestor > a,
+header.aurel_main_header nav.aurel_nav .current-menu-item > a,
+header.aurel_main_header .aurel_mobile_menu_wrapper nav.aurel_mobile_nav .current-menu-ancestor > a,
+header.aurel_main_header .aurel_mobile_menu_wrapper nav.aurel_mobile_nav .current-menu-item > a {
+	color: var(--home-blue-detail, #79b8e5) !important;
 }
 
 header.aurel_main_header nav.aurel_nav ul.sub-menu:before,

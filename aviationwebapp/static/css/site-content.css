@@ -15,6 +15,7 @@ h1, h2 {
     --entry-black: #000;
     --entry-blue: #79b8e5;
     --entry-panel: #0d2c47;
+    --home-blue-detail: #79b8e5;
     --dark-surface-background: linear-gradient(90deg, #09182e 0%, #09182e 44%, #000 82%, #000 100%);
     --viewport-below-header-height: calc(100vh - 96px);
 }
@@ -178,7 +179,6 @@ body {
 }
 
 .home-page {
-    --home-blue-detail: #79b8e5;
     padding: 0 0 32px;
     overflow: hidden;
     background: var(--dark-surface-background);
@@ -1767,7 +1767,7 @@ header.aurel_main_header nav.aurel_nav ul.aurel_menu > li > a {
 header.aurel_main_header nav.aurel_nav ul.aurel_menu > li > a:hover,
 header.aurel_main_header nav.aurel_nav ul.aurel_menu > li.current-menu-ancestor > a,
 header.aurel_main_header nav.aurel_nav ul.aurel_menu > li.current-menu-item > a {
-    color: #cfdae2 !important;
+    color: var(--home-blue-detail) !important;
 }
 
 .header-contact-link {
@@ -1982,7 +1982,7 @@ footer.aurel_footer.site-footer .aurel_footer_inner {
     header.aurel_main_header .aurel_mobile_menu_wrapper nav.aurel_mobile_nav a:hover,
     header.aurel_main_header .aurel_mobile_menu_wrapper nav.aurel_mobile_nav .current-menu-ancestor > a,
     header.aurel_main_header .aurel_mobile_menu_wrapper nav.aurel_mobile_nav .current-menu-item > a {
-        color: #cfdae2;
+        color: var(--home-blue-detail);
     }
 
     span.aurel_mmt_icon span {
