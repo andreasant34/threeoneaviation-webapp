@@ -1847,12 +1847,20 @@ footer.aurel_footer.site-footer {
     bottom: auto;
     color: #fff;
     background: var(--dark-surface-background);
+    border: 0;
+    box-shadow: none;
+}
+
+footer.aurel_footer.site-footer::before,
+footer.aurel_footer.site-footer::after {
+    display: none !important;
+    content: none;
 }
 
 footer.aurel_footer.site-footer .aurel_footer_inner {
     box-sizing: border-box;
-    width: min(1440px, calc(100% - 48px));
-    padding: 28px 0;
+    width: 100%;
+    padding: 28px max(150px, calc((100vw - 1440px) / 2)) 28px max(48px, calc((100vw - 1440px) / 2));
 }
 
 .footer-links {
@@ -1887,6 +1895,11 @@ footer.aurel_footer.site-footer .aurel_footer_inner {
 
     .header-contact-link {
         margin-right: 20px;
+    }
+
+    footer.aurel_footer.site-footer .aurel_footer_inner {
+        padding-right: 132px;
+        padding-left: 48px;
     }
 
     .site-page {
@@ -2030,6 +2043,11 @@ footer.aurel_footer.site-footer .aurel_footer_inner {
 }
 
 @media (max-width: 760px) {
+    footer.aurel_footer.site-footer .aurel_footer_inner {
+        padding-right: 84px;
+        padding-left: 22px;
+    }
+
     .site-page {
         width: 100%;
         margin: 0;
