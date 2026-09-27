@@ -1313,11 +1313,46 @@ body {
 }
 
 .site-page.featured-page {
+    --featured-image-max-height: calc(var(--viewport-below-header-height) - 84px);
     padding-bottom: 0;
 }
 
 .featured-page .featured-slider-section {
     margin-bottom: 0;
+}
+
+.featured-page .photo-carousel-slide {
+    background: transparent;
+    border: 0;
+    box-shadow: none;
+}
+
+.featured-page .photo-carousel-slide a {
+    display: flex;
+    justify-content: center;
+}
+
+.featured-page .photo-carousel-slide img {
+    width: auto;
+    max-width: 100%;
+    max-height: var(--featured-image-max-height);
+    object-fit: contain;
+}
+
+.featured-page .photo-carousel.is-enhanced .photo-carousel-previous,
+.featured-page .photo-carousel.is-enhanced .photo-carousel-counter {
+    left: calc(var(--photo-carousel-image-inset, 0px) + 16px);
+}
+
+.featured-page .photo-carousel.is-enhanced .photo-carousel-next {
+    right: calc(var(--photo-carousel-image-inset, 0px) + 16px);
+}
+
+.featured-page > .catalog-header,
+.featured-page .photo-carousel-thumbnails,
+.featured-page .photo-carousel-details {
+    margin-right: var(--photo-carousel-image-inset, 0px);
+    margin-left: var(--photo-carousel-image-inset, 0px);
 }
 
 .site-page.aircraft-entry-page .aircraft-entry-header {
@@ -1598,12 +1633,13 @@ body {
 }
 
 .photo-carousel .aircraft-facts dl {
-    background: #fff;
+    background: #000;
     border-color: #fff;
 }
 
 .photo-carousel .aircraft-facts dl > div {
     background: #000;
+    outline: 1px solid #fff;
 }
 
 .photo-carousel .aircraft-facts .eyebrow,
@@ -1642,6 +1678,12 @@ body {
     color: #fff;
     background: rgba(8, 32, 53, 0.78);
     border-color: rgba(121, 184, 229, 0.32);
+}
+
+@media (max-width: 768px) {
+    .aircraft-facts dd {
+        font-size: 14px;
+    }
 }
 
 @media (max-width: 760px) {
@@ -1939,6 +1981,10 @@ footer.aurel_footer.site-footer .aurel_footer_inner {
         padding: 48px 132px 48px 48px;
     }
 
+    .site-page.featured-page {
+        --featured-image-max-height: calc(var(--viewport-below-header-height) - 112px);
+    }
+
     .home-page {
         padding: 0 0 32px;
     }
@@ -2101,6 +2147,10 @@ footer.aurel_footer.site-footer .aurel_footer_inner {
         width: 100%;
         margin: 0;
         padding: 30px 84px 30px 22px;
+    }
+
+    .site-page.featured-page {
+        --featured-image-max-height: calc(var(--viewport-below-header-height) - 120px);
     }
 
     .home-page {
