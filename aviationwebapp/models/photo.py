@@ -17,6 +17,7 @@ class Photo:
         name: str,
         capture_time: datetime,
         date_taken: str,
+        time_taken: str,
         width: int,
         height: int,
         camera_model=None,
@@ -30,6 +31,7 @@ class Photo:
 
         self.capture_time = capture_time
         self.date_taken = date_taken
+        self.time_taken = time_taken
         self.name = name
         self.data_size = str(width) + "x" + str(height)
         self.camera_model = camera_model

@@ -45,7 +45,7 @@
                 </div>
                 <div><dt>Aircraft type</dt><dd>{{ item.registration.aircraft.name|default:"Not recorded" }}</dd></div>
                 {% endif %}
-                <div><dt>Date captured</dt><dd>{{ item.date_taken }}</dd></div>
+                <div><dt>Date captured</dt><dd>{{ item.date_taken }} <span class="photo-carousel-capture-time">@ {{ item.time_taken }}</span></dd></div>
                 <div><dt>Camera</dt><dd>{{ item.camera_model|default:"Not recorded" }}</dd></div>
                 {% if item.exposure_time %}<div><dt>Shutter speed</dt><dd>{{ item.exposure_time }}</dd></div>{% endif %}
                 {% if item.aperture %}<div><dt>Aperture</dt><dd>{{ item.aperture }}</dd></div>{% endif %}

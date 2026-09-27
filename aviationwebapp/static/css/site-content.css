@@ -1607,6 +1607,10 @@ body {
     color: #fff;
 }
 
+.photo-carousel-capture-time {
+    white-space: nowrap;
+}
+
 .photo-carousel .aircraft-facts a {
     color: #fff;
     text-decoration: none;
@@ -2039,6 +2043,17 @@ footer.aurel_footer.site-footer .aurel_footer_inner {
        (min-width: 1024px) and (max-width: 1100px) and (orientation: portrait) {
     .hero-catalogue-action {
         margin-top: 44px;
+    }
+}
+
+@media (max-width: 1023px) {
+    .home-hero .aircraft-card .card-copy-meta {
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .home-hero .aircraft-card .card-copy-meta .card-date {
+        text-align: left;
     }
 }
 

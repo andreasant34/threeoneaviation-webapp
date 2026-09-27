@@ -153,11 +153,13 @@ class ContentService:
         capture_time = datetime.strptime(
             metadata.get("time"), "%Y:%m:%d %H:%M:%S"
         )
-        formatted_capture_time = capture_time.strftime("%b %d, %Y") if capture_time else "Date not recorded"
+        formatted_capture_date = capture_time.strftime("%b %d, %Y") if capture_time else "Date not recorded"
+        formatted_capture_time = capture_time.strftime("%I:%M %p") if capture_time else "Time not recorded"
 
         return Photo(
             watermarked_file["id"], watermarked_file["name"],
             capture_time,
+            formatted_capture_date,
             formatted_capture_time,
             metadata.get("width", 0),
             metadata.get("height", 0),
