@@ -41,8 +41,9 @@
             <span class="flight-node-large">&#9992;&#xfe0e;</span>
             <span class="flight-node-large">&#9992;&#xfe0e;</span>
         </div>
-
         <div class="hero-latest" aria-labelledby="latest-title">
+            {% include 'components/ad-unit.html' with ad_slot='4618144653' ad_placement='home-horizontal' ad_format='auto' %}
+
             <div class="hero-latest-heading">
                 <p class="eyebrow" id="latest-title">Recently captured</p>
             </div>
@@ -75,8 +76,6 @@
                 </article>
                 {% endfor %}
             </div>
-
-            {% include 'components/ad-unit.html' with ad_slot='4618144653' ad_placement='home-horizontal' ad_format='auto' %}
         </div>
     </section>
 </div>

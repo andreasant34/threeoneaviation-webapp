@@ -1828,6 +1828,21 @@ header.aurel_main_header nav.aurel_nav ul.aurel_menu > li.current-menu-item > a 
     min-height: 90px;
 }
 
+.ad-placement.ad-placement--layout-horizontal {
+    width: 100%;
+    margin: 0;
+    padding: 32px max(150px, calc((100vw - 1440px) / 2)) 32px max(48px, calc((100vw - 1440px) / 2));
+    color: #fff;
+    background: var(--dark-surface-background);
+    border: 0;
+    border-radius: 0;
+}
+
+.ad-placement--layout-horizontal .adsbygoogle {
+    width: 100%;
+    min-height: 90px;
+}
+
 .catalog-card-grid > .ad-placement--collection-card {
     display: flex;
     width: auto;
@@ -1891,6 +1906,11 @@ footer.aurel_footer.site-footer .aurel_footer_inner {
 }
 
 @media (max-width: 1040px) {
+    .ad-placement.ad-placement--layout-horizontal {
+        padding-right: 132px;
+        padding-left: 48px;
+    }
+
     header.aurel_main_header nav.aurel_nav ul.aurel_menu > li > a {
         padding-right: 9px;
         padding-left: 9px;
@@ -2058,6 +2078,11 @@ footer.aurel_footer.site-footer .aurel_footer_inner {
 }
 
 @media (max-width: 760px) {
+    .ad-placement.ad-placement--layout-horizontal {
+        padding-right: 84px;
+        padding-left: 22px;
+    }
+
     footer.aurel_footer.site-footer .aurel_footer_inner {
         padding-right: 84px;
         padding-left: 22px;
