@@ -1312,6 +1312,14 @@ body {
     padding-top: 12px;
 }
 
+.site-page.featured-page {
+    padding-bottom: 0;
+}
+
+.featured-page .featured-slider-section {
+    margin-bottom: 0;
+}
+
 .site-page.aircraft-entry-page .aircraft-entry-header {
     margin-bottom: 14px;
     padding: 10px;
