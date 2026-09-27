@@ -189,6 +189,7 @@ body {
     --hero-wide-anchor-offset: calc(max(150px, calc((100vw - 1440px) / 2)) - 150px);
     --hero-padding-top: clamp(64px, 7vw, 108px);
     --hero-padding-bottom: 0px;
+    --hero-masthead-bottom-reserve: clamp(68px, 7vw, 104px);
     position: relative;
     isolation: isolate;
     box-sizing: border-box;
@@ -268,7 +269,7 @@ body {
     grid-template-columns: minmax(0, 1fr) minmax(330px, 360px) minmax(280px, 390px);
     gap: clamp(24px, 3vw, 44px);
     align-items: end;
-    min-height: calc(var(--viewport-below-header-height) - var(--hero-padding-top) - var(--hero-padding-bottom));
+    min-height: calc(var(--viewport-below-header-height) - var(--hero-padding-top) - var(--hero-masthead-bottom-reserve));
 }
 
 .home-hero-copy {
@@ -2017,7 +2018,7 @@ footer.aurel_footer.site-footer .aurel_footer_inner {
         grid-template-columns: 1fr;
         grid-template-rows: minmax(auto, 1fr) auto auto;
         gap: 0;
-        min-height: calc(var(--viewport-below-header-height) - var(--hero-padding-top) - var(--hero-padding-bottom));
+        min-height: calc(var(--viewport-below-header-height) - var(--hero-padding-top) - var(--hero-masthead-bottom-reserve));
         align-content: normal;
     }
 
@@ -2106,6 +2107,7 @@ footer.aurel_footer.site-footer .aurel_footer_inner {
     .home-page .home-hero {
         --hero-padding-top: 52px;
         --hero-padding-bottom: 0px;
+        --hero-masthead-bottom-reserve: 64px;
         padding: 52px 84px 0 22px;
     }
 
