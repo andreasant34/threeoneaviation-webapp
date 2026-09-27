@@ -188,7 +188,7 @@ body {
     --hero-catalogue-drop: clamp(66px, 5.8vw, 96px);
     --hero-wide-anchor-offset: calc(max(150px, calc((100vw - 1440px) / 2)) - 150px);
     --hero-padding-top: clamp(64px, 7vw, 108px);
-    --hero-padding-bottom: clamp(68px, 7vw, 104px);
+    --hero-padding-bottom: 0px;
     position: relative;
     isolation: isolate;
     box-sizing: border-box;
@@ -2105,8 +2105,8 @@ footer.aurel_footer.site-footer .aurel_footer_inner {
 
     .home-page .home-hero {
         --hero-padding-top: 52px;
-        --hero-padding-bottom: 64px;
-        padding: 52px 84px 64px 22px;
+        --hero-padding-bottom: 0px;
+        padding: 52px 84px 0 22px;
     }
 
     .hero-flight-path {
