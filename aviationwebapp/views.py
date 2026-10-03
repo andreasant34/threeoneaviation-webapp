@@ -122,7 +122,7 @@ def __render_airline_and_or_registration(request, airline_name:str, registration
 
         return render(request, 'collection/registrations.html', asdict(view_model))
 
-    raise Http404("Airline collection not found")
+    return __render_root_collection(request)
 
 def __render_root_collection(request):
     """Renders the root collection view that lists airlines"""

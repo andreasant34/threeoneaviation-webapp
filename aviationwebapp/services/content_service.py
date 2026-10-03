@@ -65,7 +65,7 @@ class ContentService:
         dic_covers_by_parent_id = self.__to_dictionary(covers, lambda x: x['parents'][0])
 
         watermarked_files = self.client.get_watermarked_files_detailed()
-        lkp_watermarked_files_by_parent_id = self.__to_lookup(watermarked_files, lambda x: x['parents'][0])
+        lkp_watermarked_files_by_parent_id = self.__to_lookup(sorted(watermarked_files, key=lambda x: x['createdTime'], reverse=True), lambda x: x['parents'][0])
 
         all_folders = [f for f in self.client.get_folder_hierarchy() if 'parents' in f]
         lkp_all_folders_by_parent_id = self.__to_lookup(all_folders, lambda x: x['parents'][0])
@@ -126,7 +126,7 @@ class ContentService:
 
         latest_photos = sorted(all_photos, key=lambda x: x.capture_time, reverse=True)[:6]
 
-        core_content = CoreContent(airlines, local_events, featured_photos, latest_photos)
+        core_content = CoreContent(sorted(airlines, key=lambda x: x.short_name), local_events, featured_photos, latest_photos)
         self.cache.set(cache_key, core_content)
         return core_content
 

@@ -29,7 +29,7 @@ class Airline:
 
     @property
     def aircraft_registration_example(self):
-        return next((r.name for a in self.aircrafts for r in (a.registrations or [])), None)
+        return next((r.name for r in self.registrations), None)
 
     @property
     def latest_captured_date(self):
@@ -37,7 +37,7 @@ class Airline:
 
     @property
     def registrations(self):
-        return [registration for aircraft in self.aircrafts for registration in (aircraft.registrations or [])]
+        return sorted([registration for aircraft in self.aircrafts for registration in (aircraft.registrations or [])], key=lambda x: x.short_name)
 
     @property
     def photos(self):
