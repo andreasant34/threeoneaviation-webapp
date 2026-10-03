@@ -30,11 +30,12 @@
                 <a href="{% url 'registration' airline.short_name item.short_name %}">
                     {% if item.cover_url %}<div class="catalog-card-image"><img src="{{ item.cover_url }}" alt="{{ item.name }}, {{ aircraft.name }}, from the {{ airline.name }} aircraft collection" loading="lazy"></div>{% endif %}
                     <div class="card-copy">
-                        <p class="card-kicker card-date">{{ item.latest_captured_date }}</p>
-                        <span>{{ item.name }}</span>
+                        <div class="catalog-card-title-row">
+                            <span class="catalog-card-title">{{ item.name }}</span>
+                        </div>
                         <div class="catalog-card-meta">
                             <span>{{ aircraft.name }}</span>
-                            <span class="catalog-card-arrow" aria-hidden="true">&rarr;</span>
+                            {% if item.latest_captured_date %}<span class="catalog-card-updated">Last updated: {{ item.latest_captured_date }}</span>{% endif %}
                         </div>
                     </div>
                 </a>

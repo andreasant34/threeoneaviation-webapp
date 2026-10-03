@@ -27,6 +27,8 @@ class Photo:
         self.max_image_id = max_image_id
         self.capture_time = capture_time
         self.name = name
+        self.width = width
+        self.height = height
         self.data_size = str(width) + "x" + str(height)
         self.camera_model = camera_model
         self.exposure_time = self.__format_exposure_time(exposure_time)

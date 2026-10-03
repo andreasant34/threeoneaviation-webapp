@@ -5,7 +5,7 @@
             {% for item in photos %}
             <figure class="entry-photo entry-photo-featured photo-carousel-slide{% if forloop.first %} is-active{% endif %}" data-photo-slide="{{ forloop.counter0 }}">
                 <a class="aurel_pswp_slide aurel_grid_blog_image aurel_dp aurel_no_select" href="{{ item.max_image_url }}" data-size="{{ item.data_size }}" data-count="{{ forloop.counter0 }}">
-                    <img src="{{ item.max_image_url }}" alt="{% if item.registration %}{{ item.registration.name }}, {{ item.registration.aircraft.name }}, photographed for the {{ item.registration.aircraft.airline.name }} collection{% else %}{{ fallback_registration_name }}, {{ fallback_aircraft_name }}, photographed for the {{ fallback_airline_name }} collection{% endif %} on {{ item.date_taken }}"{% if not forloop.first %} loading="lazy"{% endif %}>
+                    <img src="{{ item.max_image_url }}"{% if item.width and item.height %} width="{{ item.width }}" height="{{ item.height }}"{% endif %} alt="{% if item.registration %}{{ item.registration.name }}, {{ item.registration.aircraft.name }}, photographed for the {{ item.registration.aircraft.airline.name }} collection{% else %}{{ fallback_registration_name }}, {{ fallback_aircraft_name }}, photographed for the {{ fallback_airline_name }} collection{% endif %} on {{ item.date_taken }}"{% if not forloop.first %} loading="lazy"{% endif %}>
                 </a>
             </figure>
             {% endfor %}

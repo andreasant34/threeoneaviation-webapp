@@ -113,8 +113,17 @@
         Array.prototype.forEach.call(slides, function (slide) {
             var image = slide.querySelector("img");
 
-            if (image && !image.complete) {
-                image.addEventListener("load", scheduleImageInsetSync);
+            if (!image) {
+                return;
+            }
+
+            if (image.complete && image.naturalWidth > 0) {
+                image.classList.add("is-loaded");
+            } else {
+                image.addEventListener("load", function () {
+                    image.classList.add("is-loaded");
+                    scheduleImageInsetSync();
+                }, { once: true });
             }
         });
 
