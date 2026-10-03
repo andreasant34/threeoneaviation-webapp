@@ -15,7 +15,6 @@
             <span>Registration{{ airline.registration_count|pluralize }}</span>
         </div>
         <form method="get" action="{% url 'collection' %}" class="catalog-search collection-search" role="search">
-            <label for="collection-search">Search the full catalogue</label>
             <div class="search-input-row">
                 <input id="collection-search" type="search" name="search" placeholder="{{ airline.aircraft_registration_example }}" autocomplete="off">
                 <button type="submit" class="content-button primary">Search</button>
