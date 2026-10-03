@@ -24,8 +24,7 @@
     </header>
 
     <div class="catalog-card-grid collection-card-grid">
-        {% for aircraft in airline.aircrafts %}
-            {% for item in aircraft.registrations %}
+        {% for item in airline.registrations %}
             <article class="catalog-card">
                 <a href="{% url 'registration' airline.short_name item.short_name %}">
                     {% if item.cover_url %}<div class="catalog-card-image"><img src="{{ item.cover_url }}" alt="{{ item.name }}, {{ aircraft.name }}, from the {{ airline.name }} aircraft collection" loading="lazy"></div>{% endif %}
@@ -40,7 +39,9 @@
                     </div>
                 </a>
             </article>
-            {% endfor %}
+            {% if forloop.counter|add:"1"|divisibleby:"5" %}
+                {% include 'components/ad-unit.html' with ad_slot='2603309691' ad_placement='collection-card' ad_format='fluid' ad_layout_key='-6i+eh+1f-3e+31' %}
+            {% endif %}
         {% empty %}
         <p class="empty-state">No registrations were found for {{ airline.name }}.</p>
         {% endfor %}

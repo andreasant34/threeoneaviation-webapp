@@ -37,6 +37,9 @@
                     </div>
                 </a>
             </article>
+            {% if forloop.counter|add:"1"|divisibleby:"5" %}
+                {% include 'components/ad-unit.html' with ad_slot='2603309691' ad_placement='collection-card' ad_format='fluid' ad_layout_key='-6i+eh+1f-3e+31' %}
+            {% endif %}
             {% empty %}
             <div class="empty-state">
                 <h2>No registration matched that search</h2>
