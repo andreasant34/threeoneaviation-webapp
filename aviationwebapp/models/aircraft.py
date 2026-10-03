@@ -12,7 +12,10 @@ class Aircraft:
     def __init__(self, aircraft_id: str, name: str):
         self.id = aircraft_id
         self.name = name
-        self.short_name = name.lower().replace(" ", "_")
+
+    @property
+    def short_name(self):
+        return self.name.lower().replace(" ", "_")
 
     def set_airline(self, airline: Airline):
         self.airline = airline

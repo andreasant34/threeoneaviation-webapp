@@ -10,7 +10,7 @@ class CoreContent:
     """
     def __init__(self, airlines: list[Airline], local_events: list[LocalEvent], featured_photos: list[Photo], latest_photos: list[Photo]):
         self.airlines = airlines
-        self.registrations = [r for a in airlines for c in a.aircrafts for r in c.registrations]
+        self.registrations = [r for a in airlines for r in a.registrations]
         self.registrations_count = len(self.registrations)
         self.local_events = local_events
         self.featured_photos = featured_photos

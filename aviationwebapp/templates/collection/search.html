@@ -6,36 +6,42 @@
 {% block adsense %}{% endblock adsense %}
 
 {% block content %}
-<div class="site-page catalog-page">
-    <header class="catalog-header">
-        <p class="eyebrow">Search</p>
-        <p class="article-lead">Results for “{{ search_param }}” in a library of {{ registrations_count }} registrations.</p>
-        <form method="get" action="{% url 'collection' %}" class="catalog-search" role="search">
+<div class="site-page catalog-page collection-page collection-search-page">
+    <header class="catalog-header collection-header">
+        <form method="get" action="{% url 'collection' %}" class="catalog-search collection-search" role="search">
+            <label for="collection-search">Find an aircraft registration</label>
             <div class="search-input-row">
-                <input id="result-search" type="search" name="search" value="{{ search_param }}" placeholder="Enter an aircraft registration">
-                <button type="submit" class="content-button primary">Search again</button>
+                <input id="collection-search" type="search" name="search" placeholder="{{ search_param }}" autocomplete="off">
+                <button type="submit" class="content-button primary">Search</button>
             </div>
         </form>
+        <div class="collection-stat" aria-label="Number of search results" style="border-left:none;">
+            <strong>{{ registrations|length }}</strong>
+            <span>result{{ registrations|length|pluralize }}</span>
+        </div>
     </header>
 
-    <section aria-labelledby="results-title">
-        <div class="section-heading-row"><p>{{ registrations|length }} result{{ registrations|length|pluralize }}</p></div>
-        <div class="catalog-card-grid">
+    <section class="collection-listing" aria-labelledby="results-title">
+        <div class="catalog-card-grid collection-card-grid">
             {% for item in registrations %}
             <article class="catalog-card">
                 <a href="{% url 'registration' item.aircraft.airline.short_name item.short_name %}">
-                    {% if item.cover_url %}<img src="{{ item.cover_url }}" alt="{{ item.name }}, {{ item.aircraft.name }}, in the {{ item.aircraft.airline.name }} collection" loading="lazy">{% endif %}
+                    {% if item.cover_url %}<div class="catalog-card-image"><img src="{{ item.cover_url }}" alt="{{ item.name }}, {{ item.aircraft.name }}, in the {{ item.aircraft.airline.name }} collection" loading="lazy"></div>{% endif %}
                     <div class="card-copy">
                         <p class="card-kicker">{{ item.aircraft.airline.name }}</p>
                         <h3>{{ item.name }}</h3>
-                        <p>{{ item.aircraft.name }}</p>
+                        <div class="catalog-card-meta">
+                            <span>{{ item.aircraft.name }}</span>
+                            <span class="catalog-card-arrow" aria-hidden="true">&rarr;</span>
+                        </div>
                     </div>
                 </a>
             </article>
             {% empty %}
             <div class="empty-state">
                 <h2>No registration matched that search</h2>
-                <a class="content-button" href="{% url 'collection' %}">Browse all registrations</a>
+                <p>Check the registration or browse the full airline archive.</p>
+                <a class="content-button" href="{% url 'collection' %}">Browse the catalogue</a>
             </div>
             {% endfor %}
         </div>

@@ -5,39 +5,44 @@
 {% block og_title %}{{ airline.name }} Aircraft Photos | ThreeOne Aviation{% endblock og_title %}
 
 {% block content %}
-<div class="site-page catalog-page">
-    <header class="catalog-header airline-catalog-header">
-        <p class="eyebrow"><a href="{% url 'collection' %}">Airlines</a></p>
-        <h1>{{ airline.name }}</h1>
-        <form method="get" action="{% url 'collection' %}" class="catalog-search" role="search">
+<div class="site-page catalog-page collection-page airline-collection-page">
+    <header class="catalog-header collection-header airline-catalog-header">
+        <div class="collection-heading">
+            <h1>{{ airline.name }}</h1>
+        </div>
+        <div class="collection-stat" aria-label="Aircraft types in this collection">
+            <strong>{{ airline.registration_count }}</strong>
+            <span>Registration{{ airline.registration_count|pluralize }}</span>
+        </div>
+        <form method="get" action="{% url 'collection' %}" class="catalog-search collection-search" role="search">
+            <label for="collection-search">Search the full catalogue</label>
             <div class="search-input-row">
-                <input id="collection-search" type="search" name="search" placeholder="{{airline.aircraft_registration_example}}" autocomplete="off">
+                <input id="collection-search" type="search" name="search" placeholder="{{ airline.aircraft_registration_example }}" autocomplete="off">
                 <button type="submit" class="content-button primary">Search</button>
             </div>
         </form>
     </header>
 
-    {% for aircraft in airline.aircrafts %}
-    <section class="aircraft-type-group" aria-labelledby="aircraft-type-{{ forloop.counter }}">
-        <div class="section-heading-row">
-            <h2 id="aircraft-type-{{ forloop.counter }}">{{ aircraft.name }}</h2>
-            <p>{{ aircraft.registrations|length }} registration{{ aircraft.registrations|length|pluralize }}</p>
-        </div>
-        <div class="catalog-card-grid">
+    <div class="catalog-card-grid collection-card-grid">
+        {% for aircraft in airline.aircrafts %}
             {% for item in aircraft.registrations %}
             <article class="catalog-card">
                 <a href="{% url 'registration' airline.short_name item.short_name %}">
-                    {% if item.cover_url %}<img src="{{ item.cover_url }}" alt="{{ item.name }}, {{ aircraft.name }}, from the {{ airline.name }} aircraft collection" loading="lazy">{% endif %}
-                    <div class="card-copy"><h3>{{ item.name }}</h3><p>{{ aircraft.name }}</p></div>
+                    {% if item.cover_url %}<div class="catalog-card-image"><img src="{{ item.cover_url }}" alt="{{ item.name }}, {{ aircraft.name }}, from the {{ airline.name }} aircraft collection" loading="lazy"></div>{% endif %}
+                    <div class="card-copy">
+                        <p class="card-kicker card-date">{{ item.latest_captured_date }}</p>
+                        <span>{{ item.name }}</span>
+                        <div class="catalog-card-meta">
+                            <span>{{ aircraft.name }}</span>
+                            <span class="catalog-card-arrow" aria-hidden="true">&rarr;</span>
+                        </div>
+                    </div>
                 </a>
             </article>
-            {% empty %}
-            <p class="empty-state">No registrations were found for {{ aircraft.name }}.</p>
             {% endfor %}
-        </div>
-    </section>
-    {% empty %}
-    <p class="empty-state">No registrations were found for {{ airline.name }}.</p>
-    {% endfor %}
+        {% empty %}
+        <p class="empty-state">No registrations were found for {{ airline.name }}.</p>
+        {% endfor %}
+    </div>
 </div>
 {% endblock content %}

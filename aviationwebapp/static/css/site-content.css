@@ -1256,6 +1256,285 @@ body {
     box-shadow: 0 8px 24px rgba(23, 35, 61, 0.07);
 }
 
+/* Collection pages use the same night-sky palette as Home, Featured and Single. */
+.collection-page {
+    min-height: var(--viewport-below-header-height);
+    padding-top: 24px;
+    color: #fff;
+    background: var(--dark-surface-background);
+}
+
+.catalog-page > .collection-header {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 24px 40px;
+    margin-bottom: 62px;
+    padding: 30px 32px;
+    overflow: hidden;
+    color: #fff;
+    background:
+        linear-gradient(90deg, rgba(121, 184, 229, 0.08), transparent 42%),
+        linear-gradient(105deg, #0d2c47, #071b2e 66%, #02080e);
+    border-color: rgba(121, 184, 229, 0.28);
+    box-shadow: none;
+}
+
+.catalog-page > .collection-header::before {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 3px;
+    content: "";
+    background: var(--entry-blue);
+}
+
+.collection-heading {
+    min-width: 0;
+}
+
+.collection-page .collection-heading .eyebrow,
+.collection-page .collection-heading .eyebrow a,
+.collection-page .collection-section-heading .eyebrow {
+    color: var(--entry-blue);
+}
+
+.collection-page .collection-heading .eyebrow a:hover,
+.collection-page .collection-heading .eyebrow a:focus {
+    color: #fff;
+}
+
+.collection-page .collection-heading h1 {
+    max-width: none;
+    margin-bottom: 10px;
+    font-size: clamp(38px, 5vw, 68px);
+    font-weight: 300;
+    line-height: 1;
+}
+
+.collection-page .collection-intro {
+    max-width: 700px;
+    margin: 0;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+.collection-stat {
+    display: flex;
+    min-width: 150px;
+    padding-left: 32px;
+    align-self: stretch;
+    justify-content: center;
+    flex-direction: column;
+    border-left: 1px solid rgba(121, 184, 229, 0.24);
+}
+
+.collection-stat strong,
+.collection-stat span {
+    display: block;
+}
+
+.collection-stat strong {
+    color: #fff;
+    font-size: clamp(30px, 3vw, 44px);
+    font-weight: 300;
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+}
+
+.collection-stat span {
+    margin-top: 7px;
+    color: var(--entry-blue);
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1.6px;
+    text-transform: uppercase;
+}
+
+.catalog-page > .collection-header .collection-search {
+    grid-column: 1 / -1;
+    margin: 0;
+    padding: 18px;
+    background: rgba(121, 184, 229, 0.09);
+    border-color: rgba(121, 184, 229, 0.25);
+}
+
+.collection-index-page > .collection-header .collection-search,
+.collection-search-page > .collection-header .collection-search {
+    grid-column: 1;
+}
+
+.catalog-page > .collection-header .collection-search label {
+    margin-bottom: 8px;
+    color: rgba(255, 255, 255, 0.72);
+    font-size: 11px;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+}
+
+.collection-search .search-input-row input {
+    color: #fff;
+    background: rgba(0, 0, 0, 0.3);
+    border-color: rgba(121, 184, 229, 0.34);
+}
+
+.collection-search .search-input-row input::placeholder {
+    color: rgba(255, 255, 255, 0.48);
+}
+
+.collection-page .collection-search .content-button.primary {
+    color: var(--entry-navy);
+    background: #fff;
+    border-color: #fff;
+}
+
+.collection-page .collection-search .content-button.primary:hover,
+.collection-page .collection-search .content-button.primary:focus {
+    color: #fff;
+    background: #24567c;
+    border-color: var(--entry-blue);
+}
+
+.collection-section-heading {
+    margin-bottom: 26px;
+}
+
+.collection-section-heading h2,
+.collection-section-heading p {
+    margin-bottom: 0;
+}
+
+.collection-page .collection-section-heading h2 {
+    color: #fff;
+    font-size: clamp(26px, 3vw, 38px);
+    font-weight: 300;
+}
+
+.collection-page .section-heading-row.collection-section-heading {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 4px 24px;
+    align-items: end;
+}
+
+.collection-page .section-heading-row.collection-section-heading .eyebrow {
+    grid-column: 1 / -1;
+}
+
+.collection-page .section-heading-row.collection-section-heading > p:last-child {
+    color: #b8d3e6;
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.collection-page .aircraft-type-group + .aircraft-type-group {
+    border-top-color: rgba(121, 184, 229, 0.2);
+}
+
+.collection-page .catalog-card {
+    color: #fff;
+    background: linear-gradient(145deg, rgba(21, 62, 94, 0.72), rgba(8, 32, 53, 0.78));
+    border-color: rgba(121, 184, 229, 0.32);
+    box-shadow: 0 18px 34px rgba(2, 12, 24, 0.24);
+    transition: background 200ms ease, border-color 200ms ease, transform 200ms ease;
+}
+
+.collection-page .catalog-card:hover,
+.collection-page .catalog-card:focus-within {
+    background: linear-gradient(145deg, rgba(29, 82, 122, 0.84), rgba(10, 40, 66, 0.9));
+    border-color: rgba(121, 184, 229, 0.58);
+    transform: translateY(-3px);
+}
+
+.collection-page .catalog-card > a,
+.collection-page .catalog-card > a:hover,
+.collection-page .catalog-card > a:focus,
+.collection-page .catalog-card h3 {
+    color: #fff;
+}
+
+.catalog-card-image {
+    position: relative;
+    overflow: hidden;
+    background: #071521;
+}
+
+.catalog-card-image::after {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 42%;
+    content: "";
+    pointer-events: none;
+    background: linear-gradient(transparent, rgba(3, 15, 26, 0.35));
+}
+
+.collection-page .catalog-card .card-copy {
+    padding: 18px 20px 20px;
+}
+
+.collection-page .catalog-card .card-kicker {
+    color: var(--entry-blue);
+}
+
+.catalog-card-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    color: #b8d3e6;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.catalog-card-arrow {
+    color: var(--entry-blue);
+    font-size: 21px;
+    line-height: 1;
+    transition: transform 200ms ease;
+}
+
+.collection-page .catalog-card:hover .catalog-card-arrow,
+.collection-page .catalog-card:focus-within .catalog-card-arrow {
+    transform: translateX(4px);
+}
+
+.collection-page .empty-state {
+    color: #fff;
+    background: linear-gradient(145deg, rgba(21, 62, 94, 0.72), rgba(8, 32, 53, 0.78));
+    border-color: rgba(121, 184, 229, 0.32);
+}
+
+.collection-page .empty-state p {
+    color: #b8d3e6;
+}
+
+.collection-page .empty-state .content-button {
+    margin-top: 8px;
+    color: #fff;
+    border-color: rgba(255, 255, 255, 0.72);
+}
+
+.collection-page .empty-state .content-button:hover,
+.collection-page .empty-state .content-button:focus {
+    color: var(--entry-navy);
+    background: #fff;
+}
+
+.collection-page .catalog-card-grid > .ad-placement--collection-card {
+    color: #fff;
+    background: rgba(13, 44, 71, 0.68);
+    border-color: rgba(121, 184, 229, 0.25);
+}
+
+.collection-page .ad-placement-label {
+    color: #b8d3e6;
+}
+
 /* Featured photography and aircraft entries share the navy, black and white visual language. */
 .featured-page,
 .aircraft-entry-page {
@@ -2232,6 +2511,39 @@ footer.aurel_footer.site-footer .aurel_footer_inner {
     .featured-page > .catalog-header,
     .aircraft-entry-page .aircraft-entry-header {
         padding: 32px 26px;
+    }
+
+    .catalog-page > .collection-header {
+        grid-template-columns: 1fr;
+        gap: 22px;
+        margin-bottom: 44px;
+        padding: 26px 22px;
+    }
+
+    .collection-stat {
+        min-width: 0;
+        padding: 18px 0 0;
+        border-top: 1px solid rgba(121, 184, 229, 0.24);
+        border-left: 0;
+    }
+
+    .catalog-page > .collection-header .collection-search {
+        grid-column: 1;
+        padding: 14px;
+    }
+
+    .collection-page .section-heading-row.collection-section-heading {
+        grid-template-columns: 1fr;
+        gap: 5px;
+    }
+
+    .collection-page .section-heading-row.collection-section-heading .eyebrow {
+        grid-column: 1;
+    }
+
+    .collection-page .aircraft-type-group + .aircraft-type-group {
+        margin-top: 44px;
+        padding-top: 38px;
     }
 
     .featured-page > .catalog-header {

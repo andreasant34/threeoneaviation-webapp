@@ -12,15 +12,40 @@ class Airline:
     def __init__(self, airline_id: str, name: str):
         self.id = airline_id
         self.name = name
-        self.short_name = name.lower().replace(" ", "_")
 
     def set_aircrafts(self, aircrafts: list[Aircraft]):
         self.aircrafts = aircrafts
-        self.aircraft_registration_example = next((r.name for a in self.aircrafts for r in (a.registrations or [])),None)
 
     def set_cover(self, cover_file: dict):
         self.cover_id = cover_file['id']
-        self.cover_url = settings.CDN_URL + self.cover_id + ".jpg" if self.cover_id else None
+
+    @property
+    def short_name(self):
+        return self.name.lower().replace(" ", "_")
+
+    @property
+    def cover_url(self):
+        return settings.CDN_URL + self.cover_id + ".jpg" if self.cover_id else None
+
+    @property
+    def aircraft_registration_example(self):
+        return next((r.name for a in self.aircrafts for r in (a.registrations or [])), None)
+
+    @property
+    def latest_captured_date(self):
+        return sorted(self.photos, key=lambda x: x.capture_time, reverse=True)[:1][0].date_taken
+
+    @property
+    def registrations(self):
+        return [registration for aircraft in self.aircrafts for registration in (aircraft.registrations or [])]
+
+    @property
+    def photos(self):
+        return [photo for aircraft in self.aircrafts for registration in (aircraft.registrations or []) for photo in registration.photos]
+
+    @property
+    def registration_count(self):
+        return len(self.registrations)
 
     def find_registration(self, registration_name: str):
-        return next((r for a in self.aircrafts for r in (a.registrations or []) if r.name.lower() == registration_name.lower()),None)
+        return next((registration for registration in (self.registrations or []) if registration.name.casefold() == registration_name.casefold()), None)

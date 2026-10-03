@@ -16,8 +16,6 @@ class Photo:
         max_image_id: str,
         name: str,
         capture_time: datetime,
-        date_taken: str,
-        time_taken: str,
         width: int,
         height: int,
         camera_model=None,
@@ -27,11 +25,7 @@ class Photo:
         iso_speed=None
     ):
         self.max_image_id = max_image_id
-        self.max_image_url = settings.CDN_URL + max_image_id + ".jpg"
-
         self.capture_time = capture_time
-        self.date_taken = date_taken
-        self.time_taken = time_taken
         self.name = name
         self.data_size = str(width) + "x" + str(height)
         self.camera_model = camera_model
@@ -39,6 +33,23 @@ class Photo:
         self.aperture = self.__format_number(aperture, "f/")
         self.focal_length = self.__format_number(focal_length, suffix=" mm")
         self.iso_speed = str(iso_speed) if iso_speed not in (None, "") else ""
+
+    @property
+    def date_taken(self):
+        return self.capture_time.strftime("%b %d, %Y") if self.capture_time else "Date not recorded"
+
+    @property
+    def time_taken(self):
+        return self.capture_time.strftime("%I:%M %p") if self.capture_time else "Time not recorded"
+
+    @property
+    def max_image_url(self):
+        return settings.CDN_URL + self.max_image_id + ".jpg"
+
+    @property
+    def min_image_url(self):
+        return self.max_image_url if self.min_image_id == self.max_image_id \
+            else settings.CDN_URL + self.min_image_id + ".jpg"
 
     def set_registration(self, registration: Registration):
         self.registration = registration
@@ -49,8 +60,6 @@ class Photo:
     def set_min_image(self, min_image_id: str):
         """Sets the respective minimized image of this photo"""
         self.min_image_id = min_image_id
-        self.min_image_url = self.max_image_url if min_image_id == self.max_image_id \
-            else settings.CDN_URL + min_image_id + ".jpg"
 
     @staticmethod
     def __format_number(value, prefix="", suffix="") -> str:

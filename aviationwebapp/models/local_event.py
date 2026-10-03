@@ -10,11 +10,17 @@ class LocalEvent:
     def __init__(self, local_event_id:str, name: str):
         self.id = local_event_id
         self.name = name
-        self.short_name = name.lower().replace(" ", "_")
+
+    @property
+    def short_name(self):
+        return self.name.lower().replace(" ", "_")
+
+    @property
+    def cover_url(self):
+        return settings.CDN_URL + self.cover_id + ".jpg" if self.cover_id else None
 
     def set_cover(self, cover_file: dict):
         self.cover_id = cover_file['id']
-        self.cover_url = settings.CDN_URL + self.cover_id + ".jpg" if self.cover_id else None
 
     def set_photos(self, photos: list[Photo]):
         self.photos = photos

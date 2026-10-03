@@ -5,28 +5,34 @@
 {% block og_title %}Aircraft Photo Collection | ThreeOne Aviation{% endblock og_title %}
 
 {% block content %}
-<div class="site-page catalog-page">
-    <header class="catalog-header">
-        <p class="eyebrow">Catalogue</p>
-        <h1>Browse the entire collection of aircraft photographs</h1>
-        <form method="get" action="{% url 'collection' %}" class="catalog-search" role="search">
-            <label for="collection-search">Search by aircraft registration</label>
+<div class="site-page catalog-page collection-page collection-index-page">
+    <header class="catalog-header collection-header">
+        <form method="get" action="{% url 'collection' %}" class="catalog-search collection-search" role="search">
+            <label for="collection-search">Find an aircraft registration</label>
             <div class="search-input-row">
                 <input id="collection-search" type="search" name="search" placeholder="D-ATOP" autocomplete="off">
-                <button type="submit" class="content-button primary">Search {{ registrations_count }} registrations</button>
+                <button type="submit" class="content-button primary">Search</button>
             </div>
         </form>
+        <div class="collection-stat" aria-label="Catalogue size" style="border-left:none;">
+            <strong>{{ registrations_count }}</strong>
+            <span>registrations</span>
+        </div>
     </header>
 
-    <section aria-labelledby="airlines-title">
-        <div class="catalog-card-grid">
+    <section class="collection-listing" aria-labelledby="airlines-title">
+        <div class="catalog-card-grid collection-card-grid">
             {% for item in airlines %}
             <article class="catalog-card">
                 <a href="{% url 'airline' item.short_name %}">
-                    {% if item.cover_url %}<img src="{{ item.cover_url }}" alt="Aircraft from the {{ item.name }} photo collection" loading="lazy">{% endif %}
+                    {% if item.cover_url %}<div class="catalog-card-image"><img src="{{ item.cover_url }}" alt="Aircraft from the {{ item.name }} photo collection" loading="lazy"></div>{% endif %}
                     <div class="card-copy">
+                        <p class="card-kicker">{{item.latest_captured_date}}</p>
                         <h3>{{ item.name }}</h3>
-                        <p>{{ item.aircrafts|length }} aircraft type{{ item.aircrafts|length|pluralize }}</p>
+                        <div class="catalog-card-meta">
+                            <span>{{ item.registration_count }} registration{{ registration_count|pluralize }}</span>
+                            <span class="catalog-card-arrow" aria-hidden="true">&rarr;</span>
+                        </div>
                     </div>
                 </a>
             </article>
