@@ -1564,9 +1564,20 @@ body {
 }
 
 .collection-page .catalog-card-grid > .ad-placement--collection-card {
+    min-height: 0;
+    height: auto;
+    max-height: 100%;
+    align-self: stretch;
+    contain: size;
+    contain-intrinsic-size: 0 260px;
     color: #fff;
     background: rgba(13, 44, 71, 0.68);
     border-color: rgba(121, 184, 229, 0.25);
+}
+
+.collection-page .ad-placement--collection-card .adsbygoogle {
+    min-height: 0;
+    max-height: 100%;
 }
 
 .collection-page .ad-placement-label {
@@ -2663,6 +2674,17 @@ footer.aurel_footer.site-footer .aurel_footer_inner {
 }
 
 @media (max-width: 520px) {
+    .collection-page .catalog-card-grid > .ad-placement--collection-card {
+        min-height: 260px;
+        max-height: none;
+        contain: none;
+    }
+
+    .collection-page .ad-placement--collection-card .adsbygoogle {
+        min-height: 220px;
+        max-height: none;
+    }
+
     .site-page h1 {
         font-size: 36px;
         letter-spacing: 0;
