@@ -1307,6 +1307,10 @@ body {
     line-height: 1.5;
 }
 
+.featured-curator-note-nowrap {
+    white-space: nowrap;
+}
+
 .site-page.featured-page,
 .site-page.aircraft-entry-page {
     padding-top: 12px;

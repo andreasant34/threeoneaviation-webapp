@@ -9,7 +9,7 @@
     <header class="catalog-header">
         <p class="eyebrow">FEATURED</p>
         <h1 class="sr-only">Featured aircraft photography</h1>
-        <p class="featured-curator-note">THE BEST SHOTS THROUGHOUT THE YEARS</p>
+        <p class="featured-curator-note">THE BEST SHOTS <span class="featured-curator-note-nowrap">THROUGHOUT THE YEARS</span></p>
     </header>
 
     {% include 'components/photo_carousel.html' with photos=featured_photos gallery_id='featured' carousel_label='Featured aircraft photographs' component_class='featured-slider-section' show_identity=True only %}
