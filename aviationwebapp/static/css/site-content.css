@@ -1996,18 +1996,21 @@ body {
     white-space: nowrap;
 }
 
-.photo-carousel-capture-location {
-    display: block;
-    margin-top: 5px;
-    color: #b8d3e6;
-    font-size: 0.82em;
-    font-weight: 500;
-    line-height: 1.35;
-}
-
 .photo-carousel-capture-location .fa {
     margin-right: 7px;
     color: var(--photo-carousel-accent);
+}
+
+.photo-carousel-capture-location
+{
+    float:right;
+    color: var(--photo-carousel-accent);
+}
+
+@media (min-width: 1378px) {
+    .photo-carousel-capture {
+        position: relative;
+    }
 }
 
 .photo-carousel .aircraft-facts a {

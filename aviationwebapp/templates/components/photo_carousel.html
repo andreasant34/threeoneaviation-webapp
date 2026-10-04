@@ -50,11 +50,13 @@
                 {% if item.aperture %}<div><dt>Aperture</dt><dd>{{ item.aperture }}</dd></div>{% endif %}
                 {% if item.focal_length %}<div><dt>Focal length</dt><dd>{{ item.focal_length }}</dd></div>{% endif %}
                 {% if item.iso_speed %}<div><dt>Sensitivity</dt><dd>ISO {{ item.iso_speed }}</dd></div>{% endif %}
-                <div>
-                    <dt>Captured</dt>
+                <div class="photo-carousel-capture">
+                    <dt>
+                        Captured
+                        {% if item.location %}<span class="photo-carousel-capture-location"><i class="fa fa-map-marker" aria-hidden="true"></i> {{ item.location }}</span>{% endif %}
+                    </dt>
                     <dd>
                         {{ item.date_taken }} <span class="photo-carousel-capture-time">@ {{ item.time_taken }}</span>
-                        {% if item.location %}<span class="photo-carousel-capture-location"><i class="fa fa-map-marker" aria-hidden="true"></i> {{ item.location }}</span>{% endif %}
                     </dd>
                 </div>
             </dl>
