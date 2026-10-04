@@ -1,7 +1,7 @@
 {% extends 'layout.html' %}
 
 {% block title %}{{ registration_name }} — {{ aircraft.name }} Photo{% endblock title %}
-{% block meta_description %}An original photograph of {{ registration_name }} in the {{ airline.name }} collection, with capture dates and camera details.{% endblock meta_description %}
+{% block meta_description %}An original photograph of {{ registration_name }}{% if registration_photos.0.location %} at {{ registration_photos.0.location }}{% endif %} in the {{ airline.name }} collection, with capture dates and camera details.{% endblock meta_description %}
 {% block og_title %}{{ registration_name }} — {{ aircraft.name }} | ThreeOne Aviation{% endblock og_title %}
 {% block og_description %}View an original photograph of {{ registration_name }} from the Malta-based ThreeOne Aviation catalogue.{% endblock og_description %}
 

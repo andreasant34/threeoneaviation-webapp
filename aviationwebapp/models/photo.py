@@ -22,7 +22,8 @@ class Photo:
         exposure_time=None,
         aperture=None,
         focal_length=None,
-        iso_speed=None
+        iso_speed=None,
+        location="Malta International Airport"
     ):
         self.max_image_id = max_image_id
         self.capture_time = capture_time
@@ -35,6 +36,7 @@ class Photo:
         self.aperture = self.__format_number(aperture, "f/")
         self.focal_length = self.__format_number(focal_length, suffix=" mm")
         self.iso_speed = str(iso_speed) if iso_speed not in (None, "") else ""
+        self.location = location
 
     @property
     def date_taken(self):
